@@ -4,11 +4,9 @@
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   // pnpm feature removed due to GHCR resolution issues; using node feature + corepack pnpm
   "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "22",
-      "nodeGypDependencies": true,
-      "packageManager": "pnpm"
-    }
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/copilot-cli:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "customizations": {
     "vscode": {

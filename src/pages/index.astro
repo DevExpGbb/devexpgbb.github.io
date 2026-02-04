@@ -1,119 +1,137 @@
 ---
-import { getCollection } from 'astro:content';
+import RepoCard from '../components/RepoCard.astro';
+import Layout from '../layouts/Layout.astro';
+import { CATEGORIES, categorizeRepositories, groupByCategory, type RepoCategory, type Repository } from '../utils/categorize';
 
-const items = (await getCollection('ip', ({ data }) => data.published)).sort(
-	(a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0)
-);
+// Import repository data
+// This file is updated via GitHub Actions workflow
+import repositoriesData from '../data/repositories.json';
+
+const repositories = repositoriesData as Repository[];
+const categorizedRepos = categorizeRepositories(repositories);
+
+// Filter out archived repos by default and sort by updated date
+const activeRepos = categorizedRepos
+  .filter(repo => !repo.isArchived)
+  .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+
+const archivedRepos = categorizedRepos.filter(repo => repo.isArchived);
+
+// Group for stats
+const grouped = groupByCategory(categorizedRepos);
+
+// Calculate stats
+const stats = {
+  total: repositories.length,
+  active: activeRepos.length,
+  archived: archivedRepos.length,
+  byCategory: Object.entries(grouped)
+    .filter(([_, repos]) => repos.length > 0)
+    .map(([category, repos]) => ({
+      category: CATEGORIES[category as RepoCategory],
+      count: repos.length,
+      activeCount: repos.filter(r => !r.isArchived).length,
+    }))
+    .sort((a, b) => b.count - a.count),
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>IP Atlas</title>
-	</head>
-	<body>
-		<main>
-			<header class="hero">
-				<h1>IP Atlas</h1>
-				<p>Catálogo de contenidos y material generado por el equipo.</p>
-			</header>
-			<section class="grid">
-				{items.length === 0 ? (
-					<p class="empty">No hay contenidos publicados todavía.</p>
-				) : (
-					items.map((item) => (
-						<a class="card" href={`/ip/${item.slug}/`}>
-							<h2>{item.data.title}</h2>
-							<p>{item.data.summary}</p>
-							<div class="meta">
-								<span class="category">{item.data.category}</span>
-								{item.data.date && (
-									<time datetime={item.data.date.toISOString()}>
-										{item.data.date.toLocaleDateString('es-ES')}
-									</time>
-								)}
-								{item.data.tags.length > 0 && <span>{item.data.tags.join(' · ')}</span>}
-							</div>
-						</a>
-					))
-				)}
-			</section>
-		</main>
-	</body>
-</html>
+<Layout title="IP Atlas - DevExpGbb">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    {/* Hero Section */}
+    <header class="text-center mb-12">
+      <h1 class="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+        IP Atlas
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+        Catálogo de repositorios y material generado por el equipo <strong class="text-gray-800">DevExpGbb</strong>.
+        Explora demos, workshops, herramientas y más.
+      </p>
+      
+      {/* Stats */}
+      <div class="flex flex-wrap justify-center gap-4 text-sm">
+        <div class="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
+          <span class="font-bold text-gray-900">{stats.total}</span>
+          <span class="text-gray-500 ml-1">repositorios</span>
+        </div>
+        <div class="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
+          <span class="font-bold text-green-600">{stats.active}</span>
+          <span class="text-gray-500 ml-1">activos</span>
+        </div>
+        {stats.archived > 0 && (
+          <div class="bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
+            <span class="font-bold text-gray-400">{stats.archived}</span>
+            <span class="text-gray-500 ml-1">archivados</span>
+          </div>
+        )}
+      </div>
+    </header>
 
-<style>
-	:root {
-		color-scheme: only light;
-	}
-	body {
-		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-		margin: 0;
-		background: #f6f6f9;
-		color: #1b1b1f;
-	}
-	main {
-		max-width: 1100px;
-		margin: 0 auto;
-		padding: 3rem 1.5rem 4rem;
-	}
-	.hero {
-		margin-bottom: 2.5rem;
-	}
-	.hero h1 {
-		margin: 0 0 0.5rem;
-		font-size: clamp(2.2rem, 5vw, 3rem);
-	}
-	.hero p {
-		margin: 0;
-		font-size: 1.1rem;
-		color: #555;
-	}
-	.grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-		gap: 1.5rem;
-	}
-	.card {
-		background: white;
-		padding: 1.75rem;
-		border-radius: 1.25rem;
-		box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
-		text-decoration: none;
-		color: inherit;
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
-	}
-	.card:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 24px 50px rgba(15, 23, 42, 0.12);
-	}
-	.card h2 {
-		margin: 0;
-		font-size: 1.3rem;
-	}
-	.card p {
-		margin: 0;
-		color: #444;
-	}
-	.meta {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-		font-size: 0.85rem;
-		color: #555;
-	}
-	.category {
-		font-weight: 600;
-	}
-	.empty {
-		color: #666;
-		font-size: 1.05rem;
-	}
-</style>
+    {/* Category Summary */}
+    <section class="mb-10">
+      <div class="flex flex-wrap justify-center gap-2">
+        {stats.byCategory.map(({ category, activeCount }) => (
+          activeCount > 0 && (
+            <div class={`flex items-center gap-2 px-3 py-1.5 rounded-full ${category.bgColor} ${category.color}`}>
+              <span class="font-semibold">{category.label}</span>
+              <span class="text-xs opacity-75">({activeCount})</span>
+            </div>
+          )
+        ))}
+      </div>
+    </section>
+
+    {/* Repository Grid */}
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+        Active Repositories
+      </h2>
+      
+      {activeRepos.length === 0 ? (
+        <p class="text-gray-500 text-center py-12">No hay repositorios activos.</p>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {activeRepos.map(repo => (
+            <RepoCard repo={repo} />
+          ))}
+        </div>
+      )}
+    </section>
+
+    {/* Archived Repos (collapsed) */}
+    {archivedRepos.length > 0 && (
+      <section class="border-t border-gray-200 pt-10">
+        <details class="group">
+          <summary class="cursor-pointer text-lg font-semibold text-gray-500 hover:text-gray-700 flex items-center gap-2 mb-6">
+            <svg class="w-5 h-5 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            Archived Repositories ({archivedRepos.length})
+          </summary>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {archivedRepos.map(repo => (
+              <RepoCard repo={repo} />
+            ))}
+          </div>
+        </details>
+      </section>
+    )}
+
+    {/* Footer */}
+    <footer class="mt-16 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
+      <p>
+        Datos actualizados automáticamente desde
+        <a href="https://github.com/DevExpGbb" class="text-blue-500 hover:underline ml-1" target="_blank" rel="noopener">
+          github.com/DevExpGbb
+        </a>
+      </p>
+      <p class="mt-2 text-xs">
+        {/* Command for GitHub Actions: gh repo list DevExpGbb --json name,description,url,owner,isArchived,repositoryTopics,languages,primaryLanguage,createdAt,updatedAt,stargazerCount --limit 100 */}
+        Última actualización: {new Date().toLocaleDateString('es-ES')}
+      </p>
+    </footer>
+  </main>
+</Layout>

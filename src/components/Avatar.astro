@@ -1,0 +1,28 @@
+---
+interface Props {
+  login: string;
+  size?: 'sm' | 'md' | 'lg';
+  showName?: boolean;
+}
+
+const { login, size = 'sm', showName = false } = Astro.props;
+
+const sizeClasses = {
+  sm: 'w-6 h-6',
+  md: 'w-8 h-8',
+  lg: 'w-10 h-10',
+};
+
+// GitHub avatar URL
+const avatarUrl = `https://github.com/${login}.png?size=64`;
+---
+
+<div class="flex items-center gap-1.5" title={login}>
+  <img
+    src={avatarUrl}
+    alt={`${login}'s avatar`}
+    class={`${sizeClasses[size]} rounded-full ring-2 ring-white shadow-sm`}
+    loading="lazy"
+  />
+  {showName && <span class="text-sm text-gray-600">{login}</span>}
+</div>

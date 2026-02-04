@@ -1,0 +1,36 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+
+// Language color mapping (subset of GitHub's language colors)
+const languageColors: Record<string, string> = {
+  'TypeScript': 'bg-blue-500',
+  'JavaScript': 'bg-yellow-400',
+  'Python': 'bg-blue-400',
+  'C#': 'bg-green-600',
+  'Java': 'bg-orange-600',
+  'Go': 'bg-cyan-500',
+  'Rust': 'bg-orange-500',
+  'Ruby': 'bg-red-500',
+  'PHP': 'bg-indigo-400',
+  'HTML': 'bg-orange-400',
+  'CSS': 'bg-purple-500',
+  'Shell': 'bg-green-500',
+  'PowerShell': 'bg-blue-600',
+  'HCL': 'bg-purple-400',
+  'Bicep': 'bg-sky-500',
+  'Dockerfile': 'bg-blue-300',
+  'Jupyter Notebook': 'bg-orange-300',
+  'ASP.NET': 'bg-purple-600',
+};
+
+const color = languageColors[name] || 'bg-gray-400';
+---
+
+<div class="flex items-center gap-1.5 text-xs text-gray-600">
+  <span class={`w-2.5 h-2.5 rounded-full ${color}`}></span>
+  <span>{name}</span>
+</div>

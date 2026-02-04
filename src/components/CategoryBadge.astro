@@ -1,0 +1,19 @@
+---
+import type { CategoryInfo } from '../utils/categorize';
+
+interface Props {
+  category: CategoryInfo;
+  size?: 'sm' | 'md';
+}
+
+const { category, size = 'sm' } = Astro.props;
+
+const sizeClasses = {
+  sm: 'text-xs px-2 py-0.5',
+  md: 'text-sm px-3 py-1',
+};
+---
+
+<span class={`inline-flex items-center font-semibold rounded-full ${category.bgColor} ${category.color} ${sizeClasses[size]}`}>
+  {category.label}
+</span>
