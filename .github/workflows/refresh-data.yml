@@ -3,7 +3,7 @@ name: 🔄 Refresh Repository Data
 on:
   schedule:
     # Runs at 8:00 AM and 6:00 PM UTC
-    - cron: '0 8,18 * * *'
+    - cron: "0 8,18 * * *"
   workflow_dispatch:
 
 permissions:
@@ -22,15 +22,15 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "📦 Fetching repository list..."
-          
+
           # Fetch all repos with basic info
           gh repo list DevExpGbb \
             --json name,description,url,owner,isArchived,repositoryTopics,languages,primaryLanguage,createdAt,updatedAt,stargazerCount \
             --limit 200 \
             > /tmp/repos_basic.json
-          
+
           echo "👥 Fetching top contributors for each repository..."
-          
+
           # Process each repo to add top contributor
           jq -c '.[]' /tmp/repos_basic.json | while read -r repo; do
             repo_name=$(echo "$repo" | jq -r '.name')
@@ -43,14 +43,14 @@ jobs:
             # Add topContributor to repo object
             echo "$repo" | jq --argjson tc "$top_contributor" '. + {topContributor: $tc}'
           done | jq -s '.' > src/data/repositories.json
-          
+
           echo "✅ Generated repositories.json with $(jq length src/data/repositories.json) repositories"
 
       - name: 📝 Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           if git diff --quiet src/data/repositories.json; then
             echo "📭 No changes detected"
           else
