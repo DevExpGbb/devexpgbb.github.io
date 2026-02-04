@@ -113,19 +113,16 @@ jobs:
             
             # Create a prompt file for Copilot CLI
             PROMPT_FILE="${TEMP_DIR}/prompt_${repo_name}.txt"
-            cat > "$PROMPT_FILE" << 'PROMPT_EOF'
-Analyze this repository and generate a SHORT description (maximum 100 characters) for its GitHub "About" section.
-
-Requirements:
-- Start with 1-2 relevant emojis
-- Be concise and descriptive
-- Focus on what the project does
-- Only output the description text, nothing else
-
-PROMPT_EOF
+            echo "Analyze this repository and generate a SHORT description (maximum 100 characters) for its GitHub About section." > "$PROMPT_FILE"
+            echo "" >> "$PROMPT_FILE"
+            echo "Requirements:" >> "$PROMPT_FILE"
+            echo "- Start with 1-2 relevant emojis" >> "$PROMPT_FILE"
+            echo "- Be concise and descriptive" >> "$PROMPT_FILE"
+            echo "- Focus on what the project does" >> "$PROMPT_FILE"
+            echo "- Only output the description text, nothing else" >> "$PROMPT_FILE"
+            echo "" >> "$PROMPT_FILE"
             
             # Add context to prompt
-            echo "" >> "$PROMPT_FILE"
             echo "Repository name: $repo_name" >> "$PROMPT_FILE"
             echo "Primary language: $language" >> "$PROMPT_FILE"
             [ -n "$topics" ] && echo "Topics: $topics" >> "$PROMPT_FILE"
