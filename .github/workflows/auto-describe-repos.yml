@@ -1,0 +1,305 @@
+name: 🤖 Auto-describe Empty Repos
+
+on:
+  schedule:
+    # Runs weekly on Mondays at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  describe-repos:
+    name: 📝 Generate Descriptions
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 📦 Install GitHub Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: 🔍 Find repos without description and generate descriptions
+        env:
+          GH_TOKEN: ${{ secrets.GHCP_CLI_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GHCP_CLI_PAT }}
+        run: |
+          set -e
+          
+          echo "🔍 Fetching all repositories from DevExpGbb org..."
+          
+          # Get all repos without description (null or empty)
+          repos_without_desc=$(gh repo list DevExpGbb \
+            --json name,description,url,isArchived \
+            --limit 200 \
+            --jq '.[] | select(.description == null or .description == "") | select(.isArchived == false) | .name')
+          
+          if [ -z "$repos_without_desc" ]; then
+            echo "✅ All repositories already have descriptions!"
+            exit 0
+          fi
+          
+          echo "📋 Found repos without description:"
+          echo "$repos_without_desc"
+          echo ""
+          
+          # Create temp directory for cloning
+          TEMP_DIR=$(mktemp -d)
+          echo "📁 Using temp directory: $TEMP_DIR"
+          
+          # Process each repo
+          for repo_name in $repos_without_desc; do
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "🔎 Analyzing: $repo_name"
+            
+            # Skip special repos
+            if [[ "$repo_name" == ".github" || "$repo_name" == ".github-private" || "$repo_name" == "DevExpGbb" ]]; then
+              echo "⏭️ Skipping special repository: $repo_name"
+              continue
+            fi
+            
+            # Clone the repo temporarily (shallow clone for speed)
+            REPO_DIR="${TEMP_DIR}/${repo_name}"
+            echo "  📥 Cloning repository..."
+            gh repo clone "DevExpGbb/${repo_name}" "$REPO_DIR" -- --depth 1 --quiet 2>/dev/null || {
+              echo "  ⚠️ Failed to clone, skipping..."
+              continue
+            }
+            
+            cd "$REPO_DIR"
+            
+            # Gather context about the repo
+            echo "  📊 Gathering repository context..."
+            
+            # Get language from GitHub API
+            language=$(gh api "repos/DevExpGbb/${repo_name}" --jq '.language // "unknown"' 2>/dev/null || echo "unknown")
+            
+            # Get topics
+            topics=$(gh api "repos/DevExpGbb/${repo_name}/topics" --jq '.names | join(", ")' 2>/dev/null || echo "")
+            
+            # List files in root
+            files=$(ls -1 2>/dev/null | head -20 | tr '\n' ', ')
+            
+            # Get README content if exists
+            readme_content=""
+            for readme_file in README.md README.rst README.txt README; do
+              if [ -f "$readme_file" ]; then
+                readme_content=$(head -c 3000 "$readme_file" 2>/dev/null || echo "")
+                break
+              fi
+            done
+            
+            # Get package.json info if exists
+            package_info=""
+            if [ -f "package.json" ]; then
+              package_info=$(jq -r '.description // empty' package.json 2>/dev/null || echo "")
+            fi
+            
+            # Get pyproject.toml or setup.py description
+            if [ -f "pyproject.toml" ]; then
+              package_info=$(grep -E "^description\s*=" pyproject.toml 2>/dev/null | head -1 | sed 's/.*=\s*"//;s/"$//' || echo "")
+            fi
+            
+            echo "  📊 Language: $language"
+            echo "  🏷️ Topics: ${topics:-none}"
+            echo "  📁 Files: $files"
+            
+            # Create a prompt file for Copilot CLI
+            PROMPT_FILE="${TEMP_DIR}/prompt_${repo_name}.txt"
+            cat > "$PROMPT_FILE" << 'PROMPT_EOF'
+Analyze this repository and generate a SHORT description (maximum 100 characters) for its GitHub "About" section.
+
+Requirements:
+- Start with 1-2 relevant emojis
+- Be concise and descriptive
+- Focus on what the project does
+- Only output the description text, nothing else
+
+PROMPT_EOF
+            
+            # Add context to prompt
+            echo "" >> "$PROMPT_FILE"
+            echo "Repository name: $repo_name" >> "$PROMPT_FILE"
+            echo "Primary language: $language" >> "$PROMPT_FILE"
+            [ -n "$topics" ] && echo "Topics: $topics" >> "$PROMPT_FILE"
+            [ -n "$package_info" ] && echo "Package description: $package_info" >> "$PROMPT_FILE"
+            echo "Root files: $files" >> "$PROMPT_FILE"
+            [ -n "$readme_content" ] && echo -e "\nREADME excerpt:\n${readme_content:0:2000}" >> "$PROMPT_FILE"
+            
+            # Try to use Copilot CLI to generate description
+            echo "  🤖 Generating description with GitHub Copilot CLI..."
+            
+            # Run copilot with the prompt using expect-like interaction
+            description=""
+            if command -v copilot &> /dev/null; then
+              # Use timeout and pipe approach for non-interactive use
+              description=$(timeout 60s bash -c '
+                cd "'"$REPO_DIR"'"
+                echo "Analyze this repository. Generate a SHORT description (max 100 chars) for GitHub About section. Start with 1-2 emojis. Only output the description, nothing else." | copilot --no-banner 2>/dev/null | tail -5 | head -1
+              ' 2>/dev/null || echo "")
+            fi
+            
+            # Fallback: generate description based on gathered context
+            if [ -z "$description" ] || [ ${#description} -gt 150 ] || [[ "$description" == *"error"* ]] || [[ "$description" == *"Error"* ]]; then
+              echo "  ⚠️ Using intelligent fallback generation..."
+              
+              # Emoji based on language
+              case "$language" in
+                "Python") emoji="🐍" ;;
+                "JavaScript") emoji="⚡" ;;
+                "TypeScript") emoji="💎" ;;
+                "Java") emoji="☕" ;;
+                "C#") emoji="🔷" ;;
+                "Go") emoji="🔵" ;;
+                "Shell"|"Bash") emoji="🐚" ;;
+                "HCL") emoji="🏗️" ;;
+                "Dockerfile") emoji="🐳" ;;
+                "Jupyter Notebook") emoji="📊" ;;
+                "COBOL") emoji="🏛️" ;;
+                "PowerShell") emoji="💻" ;;
+                *) emoji="📦" ;;
+              esac
+              
+              # Use package description if available
+              if [ -n "$package_info" ] && [ ${#package_info} -lt 90 ]; then
+                description="${emoji} ${package_info}"
+              # Generate based on repo name patterns
+              elif [[ "$repo_name" == *"demo"* ]]; then
+                description="${emoji} Demo showcasing ${language:-various} technologies"
+              elif [[ "$repo_name" == *"workshop"* ]] || [[ "$repo_name" == *"lab"* ]]; then
+                description="🎓 Hands-on ${language:-development} workshop"
+              elif [[ "$repo_name" == *"template"* ]] || [[ "$repo_name" == *"starter"* ]]; then
+                description="📋 Starter template for ${language:-projects}"
+              elif [[ "$repo_name" == *"tool"* ]] || [[ "$repo_name" == *"cli"* ]]; then
+                description="🛠️ Developer tool built with ${language:-various technologies}"
+              elif [[ "$repo_name" == *"infra"* ]] || [[ "$repo_name" == *"terraform"* ]] || [[ "$repo_name" == *"bicep"* ]]; then
+                description="🏗️ Infrastructure as Code for Azure"
+              elif [[ "$repo_name" == *"ghas"* ]] || [[ "$repo_name" == *"security"* ]]; then
+                description="🔒 GitHub Advanced Security demo & resources"
+              elif [[ "$repo_name" == *"copilot"* ]] || [[ "$repo_name" == *"ghcp"* ]]; then
+                description="🤖 GitHub Copilot integration & examples"
+              elif [[ "$repo_name" == *"action"* ]] || [[ "$repo_name" == *"workflow"* ]]; then
+                description="⚙️ GitHub Actions workflow automation"
+              elif [[ "$repo_name" == *"api"* ]]; then
+                description="${emoji} API service built with ${language:-modern stack}"
+              elif [[ "$repo_name" == *"bot"* ]] || [[ "$repo_name" == *"agent"* ]]; then
+                description="🤖 Automated bot/agent for developer workflows"
+              elif [[ "$repo_name" == *"platform"* ]]; then
+                description="🏗️ Platform engineering resources & tools"
+              else
+                # Generic but informative
+                clean_name=$(echo "$repo_name" | tr '-' ' ' | tr '_' ' ')
+                description="${emoji} ${clean_name} - DevExpGbb project"
+              fi
+            fi
+            
+            # Clean up description
+            description=$(echo "$description" | tr -d '"' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | head -1)
+            
+            # Ensure it's not too long (GitHub limit is 350, we aim for ~100)
+            if [ ${#description} -gt 120 ]; then
+              description="${description:0:117}..."
+            fi
+            
+            echo "  📝 Generated: $description"
+            
+            # Determine category and topics based on repo name patterns
+            category=""
+            new_topics=""
+            
+            if [[ "$repo_name" == *"workshop"* ]] || [[ "$repo_name" == *"lab"* ]] || [[ "$repo_name" == *"hands-on"* ]] || [[ "$repo_name" == *"training"* ]]; then
+              category="workshop"
+              new_topics="workshop,hands-on,learning"
+            elif [[ "$repo_name" == *"demo"* ]] || [[ "$repo_name" == *"showcase"* ]] || [[ "$repo_name" == *"poc"* ]]; then
+              category="demo"
+              new_topics="demo,showcase"
+            elif [[ "$repo_name" == *"template"* ]] || [[ "$repo_name" == *"starter"* ]] || [[ "$repo_name" == *"boilerplate"* ]] || [[ "$repo_name" == *"scaffold"* ]]; then
+              category="template"
+              new_topics="template,starter-kit"
+            elif [[ "$repo_name" == *"lib"* ]] || [[ "$repo_name" == *"sdk"* ]] || [[ "$repo_name" == *"common-"* ]]; then
+              category="library"
+              new_topics="library"
+            elif [[ "$repo_name" == *"tool"* ]] || [[ "$repo_name" == *"cli"* ]] || [[ "$repo_name" == *"util"* ]] || [[ "$repo_name" == *"bot"* ]] || [[ "$repo_name" == *"automation"* ]] || [[ "$repo_name" == *"action"* ]] || [[ "$repo_name" == *"runner"* ]]; then
+              category="tool"
+              new_topics="tool,automation"
+            elif [[ "$repo_name" == *"infra"* ]] || [[ "$repo_name" == *"terraform"* ]] || [[ "$repo_name" == *"bicep"* ]] || [[ "$repo_name" == *"iac"* ]] || [[ "$repo_name" == *"platform"* ]] || [[ "$repo_name" == *"devcenter"* ]]; then
+              category="infrastructure"
+              new_topics="infrastructure,iac,platform-engineering"
+            elif [[ "$repo_name" == *"sample"* ]] || [[ "$repo_name" == *"example"* ]]; then
+              category="sample"
+              new_topics="sample,example"
+            fi
+            
+            # Add technology-specific topics based on language
+            case "$language" in
+              "Python") new_topics="${new_topics},python" ;;
+              "JavaScript") new_topics="${new_topics},javascript" ;;
+              "TypeScript") new_topics="${new_topics},typescript" ;;
+              "Java") new_topics="${new_topics},java" ;;
+              "C#") new_topics="${new_topics},csharp,dotnet" ;;
+              "Go") new_topics="${new_topics},golang" ;;
+              "Shell"|"Bash") new_topics="${new_topics},shell,bash" ;;
+              "HCL") new_topics="${new_topics},terraform,hcl" ;;
+              "PowerShell") new_topics="${new_topics},powershell" ;;
+              "COBOL") new_topics="${new_topics},cobol,mainframe" ;;
+            esac
+            
+            # Add common topics based on repo name keywords
+            [[ "$repo_name" == *"copilot"* ]] || [[ "$repo_name" == *"ghcp"* ]] && new_topics="${new_topics},github-copilot,ai"
+            [[ "$repo_name" == *"ghas"* ]] || [[ "$repo_name" == *"security"* ]] && new_topics="${new_topics},github-advanced-security,security"
+            [[ "$repo_name" == *"azure"* ]] && new_topics="${new_topics},azure"
+            [[ "$repo_name" == *"openai"* ]] && new_topics="${new_topics},openai,ai"
+            [[ "$repo_name" == *"agent"* ]] || [[ "$repo_name" == *"agentic"* ]] && new_topics="${new_topics},ai-agents,agentic"
+            [[ "$repo_name" == *"devops"* ]] && new_topics="${new_topics},devops"
+            [[ "$repo_name" == *"gitops"* ]] && new_topics="${new_topics},gitops"
+            
+            # Always add devexpgbb topic
+            new_topics="${new_topics},devexpgbb"
+            
+            # Clean up topics (remove leading comma, duplicates)
+            new_topics=$(echo "$new_topics" | sed 's/^,//' | tr ',' '\n' | sort -u | tr '\n' ',' | sed 's/,$//')
+            
+            # Update repo description
+            echo "  ⬆️ Updating repository..."
+            gh repo edit "DevExpGbb/${repo_name}" --description "$description" && {
+              echo "  ✅ Description updated!"
+            } || {
+              echo "  ❌ Failed to update description"
+            }
+            
+            # Add topics if we detected any
+            if [ -n "$new_topics" ]; then
+              echo "  🏷️ Adding topics: $new_topics"
+              
+              # Convert comma-separated to space-separated for gh command
+              topics_args=$(echo "$new_topics" | tr ',' ' ')
+              
+              # Add each topic
+              for topic in $topics_args; do
+                gh repo edit "DevExpGbb/${repo_name}" --add-topic "$topic" 2>/dev/null || true
+              done
+              
+              echo "  ✅ Topics added!"
+            fi
+            
+            # Cleanup
+            cd "$TEMP_DIR"
+            rm -rf "$REPO_DIR"
+            
+            # Rate limiting protection
+            sleep 3
+          done
+          
+          # Final cleanup
+          rm -rf "$TEMP_DIR"
+          
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "🎉 Finished processing all repositories!"
