@@ -49,11 +49,13 @@ jobs:
             
             # Fetch top contributor (first one from contributors list)
             # If the API call fails or returns empty, use null
-            top_contributor=$(gh api "repos/DevExpGbb/${repo_name}/contributors" \
-              --jq '.[0] | select(. != null) | {login: .login, avatarUrl: .avatar_url}' 2>/dev/null || echo null)
-            
-            # If top_contributor is empty, set it to null
-            if [ -z "$top_contributor" ]; then
+            if top_contributor_raw=$(gh api "repos/DevExpGbb/${repo_name}/contributors" 2>/dev/null) && \
+               [ -n "$top_contributor_raw" ] && \
+               top_contributor=$(echo "$top_contributor_raw" | jq -e 'if length == 0 then null else .[0] | {login: .login, avatarUrl: .avatar_url} end' 2>/dev/null); then
+              # Successfully got contributor data
+              :
+            else
+              # API failed, returned empty, or invalid data - use null
               top_contributor=null
             fi
             
