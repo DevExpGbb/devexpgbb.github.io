@@ -21,11 +21,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "📦 Fetching repository list..."
+          echo "📦 Fetching public repository list..."
 
-          # Fetch all repos with basic info
+          # Fetch only PUBLIC repos with basic info
           gh repo list DevExpGbb \
             --json name,description,url,owner,isArchived,repositoryTopics,languages,primaryLanguage,createdAt,updatedAt,stargazerCount \
+            --visibility public \
             --limit 200 \
             > /tmp/repos_basic.json
 
