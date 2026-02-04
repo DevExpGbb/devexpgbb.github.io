@@ -49,18 +49,16 @@ jobs:
             
             # Fetch top contributor (first one from contributors list)
             # If the API call fails or returns empty, use null
-            if top_contributor_raw=$(gh api "repos/DevExpGbb/${repo_name}/contributors" 2>/dev/null) && \
-               [ -n "$top_contributor_raw" ] && \
+            top_contributor_raw=$(gh api "repos/DevExpGbb/${repo_name}/contributors" 2>/dev/null) || true
+            
+            if [ -n "$top_contributor_raw" ] && \
                top_contributor=$(echo "$top_contributor_raw" | jq -e 'if length == 0 then null else .[0] | {login: .login, avatarUrl: .avatar_url} end' 2>/dev/null); then
-              # Successfully got contributor data
-              :
+              # Successfully got valid contributor data, use it
+              echo "$repo" | jq --argjson tc "$top_contributor" '. + {topContributor: $tc}'
             else
               # API failed, returned empty, or invalid data - use null
-              top_contributor=null
+              echo "$repo" | jq '. + {topContributor: null}'
             fi
-            
-            # Add topContributor to repo object
-            echo "$repo" | jq --argjson tc "$top_contributor" '. + {topContributor: $tc}'
           done | jq -s '.' > src/data/repositories.json
 
           echo "✅ Generated repositories.json with $(jq length src/data/repositories.json) repositories"
