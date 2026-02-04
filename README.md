@@ -1,43 +1,48 @@
-# Astro Starter Kit: Minimal
+# IP Atlas
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+Sitio Astro para catalogar y compartir contenidos de propiedad intelectual del equipo.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Stack
+- Astro ^5
+- Node.js 22 + pnpm
+- Dev Container: `.devcontainer/devcontainer.json`
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
+## 📂 Estructura clave
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+  content/
+    config.ts         # esquema colección `ip`
+    ip/*.md           # contenidos
+  pages/
+    index.astro       # listado de contenidos
+    ip/[slug].astro   # página de detalle
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🧩 Contenido (`collections.ip`)
+Frontmatter recomendado:
+```yaml
+---
+title: "Título"
+summary: "Resumen breve (<=280 caracteres)"
+category: "Categoría"
+tags: ["tag1", "tag2"]
+published: true
+date: 2026-02-04
+author: "Equipo"
+link: "https://enlace-opcional"
+---
+```
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🧞 Comandos
+| Comando              | Acción                               |
+| -------------------- | ------------------------------------ |
+| `pnpm dev`           | Levanta servidor en `localhost:4321` |
+| `pnpm astro check`   | Valida tipos y contenido             |
+| `pnpm build`         | Genera `dist/` estático              |
+| `pnpm preview`       | Previsualiza build                   |
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 💡 Notas
+- Añade nuevos `.md` en `src/content/ip/` y Astro los publicará automáticamente.
+- Usa `pnpm astro check` para validar el esquema de contenido.
+- En Codespaces/Dev Container, el entorno queda listo con Node 22 y pnpm.
+- Si el Dev Container falla resolviendo `ghcr.io/devcontainers/features/pnpm:1`, reconstruye; usamos `packageManager: pnpm` + `corepack` en `postCreateCommand`.

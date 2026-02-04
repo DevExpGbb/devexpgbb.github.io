@@ -1,0 +1,39 @@
+{
+  "name": "⚡️ Astro Node 22 🌌",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  // pnpm feature removed due to GHCR resolution issues; using node feature + corepack pnpm
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22",
+      "nodeGypDependencies": true,
+      "packageManager": "pnpm"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "astro-build.astro-vscode",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "github.copilot"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+        },
+        "npm.packageManager": "pnpm"
+      }
+    }
+  },
+  "forwardPorts": [4321],
+  "portsAttributes": {
+    "4321": {
+      "label": "⚡ Astro Dev Server",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "corepack enable && corepack prepare pnpm@latest --activate && if [ -f package.json ]; then pnpm install; else echo 'ℹ️ package.json not found, skipping pnpm install'; fi",
+  "remoteUser": "node"
+}
