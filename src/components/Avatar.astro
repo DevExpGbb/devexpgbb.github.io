@@ -17,12 +17,16 @@ const sizeClasses = {
 const avatarUrl = `https://github.com/${login}.png?size=64`;
 ---
 
-<div class="flex items-center gap-1.5" title={login}>
+<div class="flex items-center gap-2" title={login}>
   <img
     src={avatarUrl}
     alt={`${login}'s avatar`}
-    class={`${sizeClasses[size]} rounded-full ring-2 ring-white shadow-sm`}
+    class={`${sizeClasses[size]} rounded-full ring-2 ring-white shadow-sm hover:ring-blue-200 transition-all`}
     loading="lazy"
   />
-  {showName && <span class="text-sm text-gray-600">{login}</span>}
+  {showName && (
+    <span class="text-xs text-gray-500 font-medium truncate max-w-[80px]">
+      @{login}
+    </span>
+  )}
 </div>

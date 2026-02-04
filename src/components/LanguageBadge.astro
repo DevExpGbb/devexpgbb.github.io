@@ -6,31 +6,32 @@ interface Props {
 const { name } = Astro.props;
 
 // Language color mapping (subset of GitHub's language colors)
-const languageColors: Record<string, string> = {
-  'TypeScript': 'bg-blue-500',
-  'JavaScript': 'bg-yellow-400',
-  'Python': 'bg-blue-400',
-  'C#': 'bg-green-600',
-  'Java': 'bg-orange-600',
-  'Go': 'bg-cyan-500',
-  'Rust': 'bg-orange-500',
-  'Ruby': 'bg-red-500',
-  'PHP': 'bg-indigo-400',
-  'HTML': 'bg-orange-400',
-  'CSS': 'bg-purple-500',
-  'Shell': 'bg-green-500',
-  'PowerShell': 'bg-blue-600',
-  'HCL': 'bg-purple-400',
-  'Bicep': 'bg-sky-500',
-  'Dockerfile': 'bg-blue-300',
-  'Jupyter Notebook': 'bg-orange-300',
-  'ASP.NET': 'bg-purple-600',
+const languageColors: Record<string, { bg: string; ring: string }> = {
+  'TypeScript': { bg: 'bg-blue-500', ring: 'ring-blue-200' },
+  'JavaScript': { bg: 'bg-yellow-400', ring: 'ring-yellow-200' },
+  'Python': { bg: 'bg-blue-400', ring: 'ring-blue-200' },
+  'C#': { bg: 'bg-green-600', ring: 'ring-green-200' },
+  'Java': { bg: 'bg-orange-600', ring: 'ring-orange-200' },
+  'Go': { bg: 'bg-cyan-500', ring: 'ring-cyan-200' },
+  'Rust': { bg: 'bg-orange-500', ring: 'ring-orange-200' },
+  'Ruby': { bg: 'bg-red-500', ring: 'ring-red-200' },
+  'PHP': { bg: 'bg-indigo-400', ring: 'ring-indigo-200' },
+  'HTML': { bg: 'bg-orange-400', ring: 'ring-orange-200' },
+  'CSS': { bg: 'bg-purple-500', ring: 'ring-purple-200' },
+  'Shell': { bg: 'bg-green-500', ring: 'ring-green-200' },
+  'PowerShell': { bg: 'bg-blue-600', ring: 'ring-blue-200' },
+  'HCL': { bg: 'bg-purple-400', ring: 'ring-purple-200' },
+  'Bicep': { bg: 'bg-sky-500', ring: 'ring-sky-200' },
+  'Dockerfile': { bg: 'bg-blue-300', ring: 'ring-blue-200' },
+  'Jupyter Notebook': { bg: 'bg-orange-300', ring: 'ring-orange-200' },
+  'ASP.NET': { bg: 'bg-purple-600', ring: 'ring-purple-200' },
+  'COBOL': { bg: 'bg-indigo-600', ring: 'ring-indigo-200' },
 };
 
-const color = languageColors[name] || 'bg-gray-400';
+const colors = languageColors[name] || { bg: 'bg-gray-400', ring: 'ring-gray-200' };
 ---
 
-<div class="flex items-center gap-1.5 text-xs text-gray-600">
-  <span class={`w-2.5 h-2.5 rounded-full ${color}`}></span>
-  <span>{name}</span>
+<div class="inline-flex items-center gap-1.5 text-xs text-gray-600 px-2 py-1 bg-gray-50 rounded-md">
+  <span class={`w-2.5 h-2.5 rounded-full ${colors.bg} ring-2 ${colors.ring}`}></span>
+  <span class="font-medium">{name}</span>
 </div>

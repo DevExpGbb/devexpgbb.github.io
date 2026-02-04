@@ -16,6 +16,7 @@ export interface CategoryInfo {
   label: string;
   color: string;
   bgColor: string;
+  emoji: string;
 }
 
 export const CATEGORIES: Record<RepoCategory, CategoryInfo> = {
@@ -24,48 +25,56 @@ export const CATEGORIES: Record<RepoCategory, CategoryInfo> = {
     label: "Workshop",
     color: "text-blue-700",
     bgColor: "bg-blue-100",
+    emoji: "🎓",
   },
   demo: {
     name: "demo",
     label: "Demo",
     color: "text-green-700",
     bgColor: "bg-green-100",
+    emoji: "🎪",
   },
   template: {
     name: "template",
     label: "Template",
     color: "text-purple-700",
     bgColor: "bg-purple-100",
+    emoji: "📋",
   },
   library: {
     name: "library",
     label: "Library",
     color: "text-orange-700",
     bgColor: "bg-orange-100",
+    emoji: "📚",
   },
   tool: {
     name: "tool",
     label: "Tool",
     color: "text-cyan-700",
     bgColor: "bg-cyan-100",
+    emoji: "🛠️",
   },
   infrastructure: {
     name: "infrastructure",
     label: "Infrastructure",
     color: "text-slate-700",
     bgColor: "bg-slate-100",
+    emoji: "🏗️",
   },
   sample: {
     name: "sample",
     label: "Sample",
     color: "text-pink-700",
     bgColor: "bg-pink-100",
+    emoji: "🧪",
   },
   other: {
     name: "other",
     label: "Other",
     color: "text-gray-700",
     bgColor: "bg-gray-100",
+    emoji: "📦",
   },
 };
 
