@@ -1,6 +1,19 @@
-# IP Atlas
+# 🗺️ IP Atlas
 
-Astro site for cataloging and sharing team intellectual property content.
+> **Repository catalog and content hub for the [DevExpGbb](https://github.com/DevExpGbb) team**
+
+[![Deploy to GitHub Pages](https://github.com/DevExpGbb/devexpgbb.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/DevExpGbb/devexpgbb.github.io/actions/workflows/deploy.yml)
+
+🌐 **Live site:** [devexpgbb.github.io](https://devexpgbb.github.io)
+
+## 🎯 Purpose
+
+IP Atlas is a centralized catalog that automatically aggregates and displays all repositories from the DevExpGbb organization. It helps team members and the community discover:
+
+- 🎪 **Demos** — Showcase applications and proof of concepts
+- 🎓 **Workshops** — Hands-on learning materials
+- 🛠️ **Tools** — Utilities and developer tools
+- 📚 **Documentation** — Guides and reference materials
 
 ## 🚀 Stack
 
