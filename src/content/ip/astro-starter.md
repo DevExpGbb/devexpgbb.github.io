@@ -1,21 +1,21 @@
 ---
 title: "Starter kit Astro + IP Atlas"
-summary: "Guía inicial para publicar contenidos de propiedad intelectual en IP Atlas."
-category: "Guías"
+summary: "Getting started guide for publishing intellectual property content in IP Atlas."
+category: "Guides"
 tags:
   - astro
-  - contenido
-  - guía
+  - content
+  - guide
 published: true
 date: 2026-02-04
-author: "Equipo IP Atlas"
+author: "IP Atlas Team"
 link: "https://astro.build/"
 ---
 
-Bienvenido a **IP Atlas**. Este starter te muestra cómo estructurar y publicar material del equipo:
+Welcome to **IP Atlas**. This starter shows you how to structure and publish team materials:
 
-- Crea archivos Markdown en `src/content/ip/`
-- Define metadatos en el frontmatter (título, resumen, tags)
-- Usa el campo `link` para referenciar recursos externos
+- Create Markdown files in `src/content/ip/`
+- Define metadata in the frontmatter (title, summary, tags)
+- Use the `link` field to reference external resources
 
-> Consejo: Usa `pnpm astro check` para validar el esquema de contenido.
+> Tip: Use `pnpm astro check` to validate the content schema.

@@ -16,7 +16,7 @@ const { Content } = await entry.render();
 const { data } = entry;
 ---
 
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -24,7 +24,7 @@ const { data } = entry;
   </head>
   <body>
     <main>
-      <a href="/">← Volver</a>
+      <a href="/">← Back</a>
       <article>
         <header>
           <h1>{data.title}</h1>
@@ -33,7 +33,7 @@ const { data } = entry;
             <span class="category">{data.category}</span>
             {data.date && (
               <time datetime={data.date.toISOString()}>
-                {data.date.toLocaleDateString('es-ES')}
+                {data.date.toLocaleDateString('en-US')}
               </time>
             )}
             {data.tags.length > 0 && <span>{data.tags.join(' · ')}</span>}
@@ -42,7 +42,7 @@ const { data } = entry;
         <Content content={entry} />
         {data.link && (
           <p class="external">
-            🔗 Enlace: <a href={data.link} target="_blank" rel="noreferrer">{data.link}</a>
+            🔗 Link: <a href={data.link} target="_blank" rel="noreferrer">{data.link}</a>
           </p>
         )}
       </article>

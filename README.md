@@ -1,48 +1,54 @@
 # IP Atlas
 
-Sitio Astro para catalogar y compartir contenidos de propiedad intelectual del equipo.
+Astro site for cataloging and sharing team intellectual property content.
 
 ## 🚀 Stack
+
 - Astro ^5
 - Node.js 22 + pnpm
 - Dev Container: `.devcontainer/devcontainer.json`
 
-## 📂 Estructura clave
+## 📂 Key Structure
+
 ```text
 src/
   content/
-    config.ts         # esquema colección `ip`
-    ip/*.md           # contenidos
+    config.ts         # `ip` collection schema
+    ip/*.md           # content files
   pages/
-    index.astro       # listado de contenidos
-    ip/[slug].astro   # página de detalle
+    index.astro       # content listing
+    ip/[slug].astro   # detail page
 ```
 
-## 🧩 Contenido (`collections.ip`)
-Frontmatter recomendado:
+## 🧩 Content (`collections.ip`)
+
+Recommended frontmatter:
+
 ```yaml
 ---
-title: "Título"
-summary: "Resumen breve (<=280 caracteres)"
-category: "Categoría"
+title: "Title"
+summary: "Brief summary (<=280 characters)"
+category: "Category"
 tags: ["tag1", "tag2"]
 published: true
 date: 2026-02-04
-author: "Equipo"
-link: "https://enlace-opcional"
+author: "Team"
+link: "https://optional-link"
 ---
 ```
 
-## 🧞 Comandos
-| Comando              | Acción                               |
-| -------------------- | ------------------------------------ |
-| `pnpm dev`           | Levanta servidor en `localhost:4321` |
-| `pnpm astro check`   | Valida tipos y contenido             |
-| `pnpm build`         | Genera `dist/` estático              |
-| `pnpm preview`       | Previsualiza build                   |
+## 🧞 Commands
 
-## 💡 Notas
-- Añade nuevos `.md` en `src/content/ip/` y Astro los publicará automáticamente.
-- Usa `pnpm astro check` para validar el esquema de contenido.
-- En Codespaces/Dev Container, el entorno queda listo con Node 22 y pnpm.
-- Si el Dev Container falla resolviendo `ghcr.io/devcontainers/features/pnpm:1`, reconstruye; usamos `packageManager: pnpm` + `corepack` en `postCreateCommand`.
+| Command            | Action                           |
+| ------------------ | -------------------------------- |
+| `pnpm dev`         | Start server at `localhost:4321` |
+| `pnpm astro check` | Validate types and content       |
+| `pnpm build`       | Generate static `dist/`          |
+| `pnpm preview`     | Preview build                    |
+
+## 💡 Notes
+
+- Add new `.md` files in `src/content/ip/` and Astro will publish them automatically.
+- Use `pnpm astro check` to validate the content schema.
+- In Codespaces/Dev Container, the environment is ready with Node 22 and pnpm.
+- If the Dev Container fails resolving `ghcr.io/devcontainers/features/pnpm:1`, rebuild; we use `packageManager: pnpm` + `corepack` in `postCreateCommand`.

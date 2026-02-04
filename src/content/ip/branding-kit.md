@@ -1,20 +1,20 @@
 ---
 title: "Branding Kit 2026"
-summary: "Recursos gráficos oficiales, logos y lineamientos de marca."
+summary: "Official graphic resources, logos, and brand guidelines."
 category: "Branding"
 tags:
   - branding
-  - diseño
+  - design
 published: true
 date: 2026-01-15
 author: "Design Team"
 link: "https://example.com/branding-kit"
 ---
 
-Incluye:
+Includes:
 
-- Logos en formatos SVG/PNG
-- Paleta de colores y tipografías
-- Guía rápida de uso
+- Logos in SVG/PNG formats
+- Color palette and typography
+- Quick usage guide
 
-Consulta el enlace para descargar el paquete completo.
+Visit the link to download the complete package.
