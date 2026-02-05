@@ -81,7 +81,7 @@ jobs:
                 decoded_readme=$(echo "$readme_content" | base64 --decode 2>/dev/null || echo "")
                 if [ -n "$decoded_readme" ]; then
                   # Extract first # heading (supports # Title or #Title formats)
-                  title=$(echo "$decoded_readme" | grep -m 1 -E '^#[[:space:]]+' | sed -E 's/^#+[[:space:]]+//' | sed 's/[[:space:]]*$//' || echo "")
+                  title=$(echo "$decoded_readme" | grep -m 1 -E '^#[[:space:]]*' | sed -E 's/^#+[[:space:]]*//' | sed 's/[[:space:]]*$//' || echo "")
                   if [ -n "$title" ]; then
                     # Escape the title for JSON
                     readme_title=$(echo "$title" | jq -Rs '.')
