@@ -1,0 +1,91 @@
+{
+  "lastUpdated": "2026-02-05T11:40:00Z",
+  "totalRepositories": 2,
+  "totalContributors": 2,
+  "repositories": {
+    "devexpgbb.github.io": {
+      "fullName": "DevExpGbb/devexpgbb.github.io",
+      "contributorCount": 2,
+      "contributors": [
+        {
+          "login": "0GiS0",
+          "id": 175379,
+          "contributions": 127,
+          "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
+          "profileUrl": "https://github.com/0GiS0",
+          "profile": {
+            "name": "Gisela Torres",
+            "bio": "Cloud Developer Advocate @ Microsoft",
+            "company": "@microsoft",
+            "location": "Madrid, Spain",
+            "email": null,
+            "twitterUsername": "gi_torres",
+            "websiteUrl": "https://giselatores.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "sha": "ba2ec1a",
+              "message": "Add link to Internal IP Atlas companion site on home page",
+              "date": "2026-02-04T22:25:15Z",
+              "url": "https://github.com/DevExpGbb/devexpgbb.github.io/commit/ba2ec1a"
+            }
+          }
+        },
+        {
+          "login": "contributor-example",
+          "id": 234567,
+          "contributions": 45,
+          "avatarUrl": "https://avatars.githubusercontent.com/u/234567?v=4",
+          "profileUrl": "https://github.com/contributor-example",
+          "profile": {
+            "name": "Example Contributor",
+            "bio": "Software Developer",
+            "company": null,
+            "location": "Seattle, WA",
+            "email": null,
+            "twitterUsername": null,
+            "websiteUrl": null
+          },
+          "activity": {
+            "lastCommit": {
+              "sha": "abc1234",
+              "message": "Update documentation",
+              "date": "2026-02-03T10:15:00Z",
+              "url": "https://github.com/DevExpGbb/example-repo/commit/abc1234"
+            }
+          }
+        }
+      ]
+    },
+    "example-repo": {
+      "fullName": "DevExpGbb/example-repo",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "login": "0GiS0",
+          "id": 175379,
+          "contributions": 89,
+          "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
+          "profileUrl": "https://github.com/0GiS0",
+          "profile": {
+            "name": "Gisela Torres",
+            "bio": "Cloud Developer Advocate @ Microsoft",
+            "company": "@microsoft",
+            "location": "Madrid, Spain",
+            "email": null,
+            "twitterUsername": "gi_torres",
+            "websiteUrl": "https://giselatores.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "sha": "def5678",
+              "message": "Add new feature implementation",
+              "date": "2026-02-05T09:30:00Z",
+              "url": "https://github.com/DevExpGbb/example-repo/commit/def5678"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
