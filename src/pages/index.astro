@@ -88,15 +88,30 @@ const stats = {
       </div>
     </header>
 
-    {/* Category Summary */}
+    {/* Filters Section */}
     <section class="mb-10">
+      {/* Category Filters */}
       <div class="flex flex-wrap justify-center gap-2 mb-4">
+        <button
+          class="category-filter flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 border-2 border-transparent hover:border-gray-300 transition-all cursor-pointer font-semibold"
+          data-category="all"
+          data-active="true"
+        >
+          <span>All</span>
+          <span class="text-xs opacity-75">({stats.active})</span>
+        </button>
         {stats.byCategory.map(({ category, activeCount }) => (
           activeCount > 0 && (
-            <div class={`flex items-center gap-2 px-3 py-1.5 rounded-full ${category.bgColor} ${category.color}`}>
+            <button
+              class={`category-filter flex items-center gap-2 px-3 py-1.5 rounded-full border-2 border-transparent hover:border-current transition-all cursor-pointer ${category.bgColor} ${category.color}`}
+              data-category={category.name}
+              data-active="false"
+              data-bg={category.bgColor}
+              data-text={category.color}
+            >
               <span class="font-semibold">{category.label}</span>
               <span class="text-xs opacity-75">({activeCount})</span>
-            </div>
+            </button>
           )
         ))}
       </div>
@@ -133,12 +148,15 @@ const stats = {
       ) : (
         <div id="repos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {activeRepos.map(repo => (
-            <div class="repo-item" data-fork={repo.isFork ? "true" : "false"}>
+            <div class="repo-item" data-fork={repo.isFork ? "true" : "false"} data-category={repo.category}>
               <RepoCard repo={repo} />
             </div>
           ))}
         </div>
       )}
+      
+      {/* No results message */}
+      <p id="no-results" class="text-gray-500 text-center py-12 hidden">No repositories match the current filters.</p>
     </section>
 
     {/* Archived Repos (collapsed) */}
@@ -176,18 +194,70 @@ const stats = {
   </main>
 
   <script>
-    const forkFilter = document.getElementById('fork-filter');
-    const repoItems = document.querySelectorAll('.repo-item');
+    // Filter state
+    let activeCategory = 'all';
+    let showOnlyForks = false;
     
+    const forkFilter = document.getElementById('fork-filter');
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const repoItems = document.querySelectorAll('.repo-item');
+    const noResults = document.getElementById('no-results');
+    
+    // Apply all filters
+    function applyFilters() {
+      let visibleCount = 0;
+      
+      repoItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        const isFork = item.getAttribute('data-fork') === 'true';
+        
+        const matchesCategory = activeCategory === 'all' || itemCategory === activeCategory;
+        const matchesFork = !showOnlyForks || isFork;
+        
+        if (matchesCategory && matchesFork) {
+          (item as HTMLElement).style.display = '';
+          visibleCount++;
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+      
+      // Show/hide no results message
+      if (noResults) {
+        noResults.classList.toggle('hidden', visibleCount > 0);
+      }
+    }
+    
+    // Category filter click handlers
+    categoryFilters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category')!;
+        activeCategory = category;
+        
+        // Update button styles
+        categoryFilters.forEach(b => {
+          const isActive = b.getAttribute('data-category') === category;
+          b.setAttribute('data-active', String(isActive));
+          
+          if (isActive) {
+            b.classList.add('ring-2', 'ring-offset-2', 'ring-gray-400');
+          } else {
+            b.classList.remove('ring-2', 'ring-offset-2', 'ring-gray-400');
+          }
+        });
+        
+        applyFilters();
+      });
+    });
+    
+    // Fork filter click handler
     if (forkFilter) {
       forkFilter.addEventListener('click', () => {
-        const isActive = forkFilter.getAttribute('data-active') === 'true';
-        const newState = !isActive;
-        
-        forkFilter.setAttribute('data-active', String(newState));
+        showOnlyForks = !showOnlyForks;
+        forkFilter.setAttribute('data-active', String(showOnlyForks));
         
         // Update button style
-        if (newState) {
+        if (showOnlyForks) {
           forkFilter.classList.remove('border-violet-200', 'text-violet-600', 'hover:bg-violet-50');
           forkFilter.classList.add('bg-violet-500', 'text-white', 'border-violet-500');
           forkFilter.querySelector('span')!.textContent = 'Showing forks only';
@@ -197,16 +267,14 @@ const stats = {
           forkFilter.querySelector('span')!.textContent = 'Show only forks';
         }
         
-        // Filter repos
-        repoItems.forEach(item => {
-          const isFork = item.getAttribute('data-fork') === 'true';
-          if (newState && !isFork) {
-            (item as HTMLElement).style.display = 'none';
-          } else {
-            (item as HTMLElement).style.display = '';
-          }
-        });
+        applyFilters();
       });
+    }
+    
+    // Initialize: mark "All" as active
+    const allBtn = document.querySelector('.category-filter[data-category="all"]');
+    if (allBtn) {
+      allBtn.classList.add('ring-2', 'ring-offset-2', 'ring-gray-400');
     }
   </script>
 </Layout>
