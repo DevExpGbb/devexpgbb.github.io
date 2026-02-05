@@ -3,6 +3,12 @@ name: 🚀 Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_run:
+    workflows: ["👥 Fetch Contributors Data"]
+    types:
+      - completed
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -18,9 +24,14 @@ jobs:
   build:
     name: 🔨 Build
     runs-on: ubuntu-latest
+    # Run on push, manual trigger, or when fetch-contributors completes successfully
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v4
+        with:
+          # Important: fetch the latest from main (in case fetch-contributors just pushed)
+          ref: main
 
       - name: 📦 Setup pnpm
         uses: pnpm/action-setup@v4
