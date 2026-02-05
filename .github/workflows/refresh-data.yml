@@ -79,15 +79,27 @@ jobs:
           echo "✅ Generated repositories.json with $(jq length src/data/repositories.json) repositories"
 
       - name: 📝 Commit and push if changed
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           if git diff --quiet src/data/repositories.json; then
             echo "📭 No changes detected"
+            echo "changes=false" >> $GITHUB_OUTPUT
           else
             git add src/data/repositories.json
             git commit -m "🔄 Refresh repository data [skip ci]"
             git push
             echo "📬 Changes committed and pushed"
+            echo "changes=true" >> $GITHUB_OUTPUT
           fi
+
+      - name: 🚀 Trigger deployment
+        if: steps.commit.outputs.changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🔄 Triggering deployment workflow..."
+          gh workflow run deploy.yml
+          echo "✅ Deployment triggered"
