@@ -26,7 +26,7 @@ jobs:
 
           # Fetch only PUBLIC repos with basic info
           gh repo list DevExpGbb \
-            --json name,description,url,owner,isArchived,repositoryTopics,languages,primaryLanguage,createdAt,updatedAt,stargazerCount \
+            --json name,description,url,owner,isArchived,isFork,repositoryTopics,languages,primaryLanguage,createdAt,updatedAt,stargazerCount \
             --visibility public \
             --limit 200 \
             > /tmp/repos_basic.json

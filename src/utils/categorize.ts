@@ -101,6 +101,7 @@ export interface Repository {
   url: string;
   owner: { id: string; login: string };
   isArchived: boolean;
+  isFork: boolean;
   repositoryTopics: { name: string }[] | null;
   languages: { size: number; node: { name: string } }[];
   primaryLanguage: { name: string } | null;
