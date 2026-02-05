@@ -9,7 +9,7 @@ const { contributor } = Astro.props;
 
 // Format commit date
 const formatCommitDate = (date: string) => {
-  return new Date(date).toLocaleDateString('es-ES', {
+  return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric'
@@ -130,6 +130,6 @@ const formatCommitDate = (date: string) => {
     rel="noopener noreferrer"
     class="mt-4 block text-center py-2 px-4 bg-gray-50 hover:bg-blue-50 text-gray-700 hover:text-blue-600 rounded-lg transition-colors text-sm font-medium"
   >
-    Ver perfil en GitHub →
+    View GitHub profile →
   </a>
 </div>
