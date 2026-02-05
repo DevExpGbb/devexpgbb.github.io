@@ -1,5 +1,19 @@
 [
   {
+    "source": "returngis",
+    "title": "🔌 MCP Server como Proxy de otro MCP Server",
+    "url": "https://www.returngis.net/2026/02/%f0%9f%94%8c-mcp-server-como-proxy-de-otro-mcp-server/",
+    "date": "2026-02-02T14:48:52+00:00",
+    "author": "Gisela Torres",
+    "categories": [
+      "IA",
+      "ia",
+      "MCP Servers",
+      "Model Context Protocol"
+    ],
+    "description": "<p>¡Hola developer 👋🏻! Si llevas un tiempo trabajando con MCP Servers, seguro que te has encontrado con este escenario: el servidor funciona bien, el caso de uso es potente… pero en cuanto intentas usarlo en equipo, desde varios agentes, en una compañía o en remoto, todo empieza a complicarse. Y no, el problema no es solo stdio. En este artículo te voy a enseñar un... </p>\n<p class=\"more\"><a class=\"more-link\" href=\"https://www.returngis.net/2026/02/%f0%9f%94%8c-mcp-server-como-proxy-de-otro-mcp-server/\">Leer</a></p>\n<p>La entrada <a href=\"https://www.returngis.net/2026/02/%f0%9f%94%8c-mcp-server-como-proxy-de-otro-mcp-server/\">🔌 MCP Server como Proxy de otro MCP Server</a> se publicó primero en <a href=\"https://www.returngis.net\">return(GiS);</a>.</p>"
+  },
+  {
     "source": "all-things-azure",
     "title": "The Realities of Application Modernization with Agentic AI (Early 2026)",
     "url": "https://devblogs.microsoft.com/all-things-azure/the-realities-of-application-modernization-with-agentic-ai-early-2026/",

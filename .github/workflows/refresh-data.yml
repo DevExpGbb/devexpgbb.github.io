@@ -95,10 +95,10 @@ jobs:
 
       - name: 📰 Fetch blog posts
         run: |
-          echo "📰 Fetching blog posts from All Things Azure..."
+          echo "📰 Fetching blog posts from configured sources..."
+          pip install pyyaml --quiet
           python3 scripts/fetch-blog-posts.py \
-            --url "https://devblogs.microsoft.com/all-things-azure/feed/" \
-            --author "jkordick" \
+            --config "src/data/blogs.yaml" \
             --out "src/data/blog-posts.json"
 
       - name: 📝 Commit and push if changed

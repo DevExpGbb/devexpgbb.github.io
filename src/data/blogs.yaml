@@ -1,0 +1,14 @@
+# Blog sources configuration
+# Each blog can have multiple authors to filter by, or none to fetch all posts
+
+blogs:
+  - id: all-things-azure
+    name: All Things Azure
+    url: https://devblogs.microsoft.com/all-things-azure/feed/
+    authors:
+      - jkordick
+
+  - id: returngis
+    name: ReturnGis
+    url: https://www.returngis.net/feed/
+    limit: 1  # Solo el último post (hay miles de artículos)
