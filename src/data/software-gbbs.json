@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-05T13:06:27Z",
+  "lastUpdated": "2026-02-05T14:08:32Z",
   "teamName": "Software GBBs",
   "teamSlug": "software-gbbs",
   "memberCount": 23,
@@ -44,6 +44,28 @@
       "repositoryCount": 22
     },
     {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
+      "id": 175379,
+      "login": "0GiS0",
+      "profile": {
+        "bio": "Sr. Software Global Blackbelt at Microsoft\r\n",
+        "company": "Microsoft",
+        "location": "Spain",
+        "name": "Gisela Torres",
+        "twitterUsername": "0gis0",
+        "websiteUrl": "https://hachyderm.io/@0gis0"
+      },
+      "totalContributions": 213,
+      "repositoriesContributed": [
+        "devexpgbb.github.io",
+        "GHES_CodingAgent",
+        "ado-github-copilot-extension",
+        "azure-dev-center-demos",
+        "rk-testing-gh-copilot-azure-agent-on-codespaces"
+      ],
+      "repositoryCount": 5
+    },
+    {
       "avatarUrl": "https://avatars.githubusercontent.com/u/47673516?v=4",
       "id": 47673516,
       "login": "paulanunes85",
@@ -62,25 +84,23 @@
       "repositoryCount": 1
     },
     {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
-      "id": 175379,
-      "login": "0GiS0",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/136561768?v=4",
+      "id": 136561768,
+      "login": "benleane83",
       "profile": {
-        "bio": "Sr. Software Global Blackbelt at Microsoft\r\n",
+        "bio": "Hello! I'm a software developer, consultant and tech leader with focus on cloud, AI and app development within the Microsoft ecosystem.",
         "company": "Microsoft",
-        "location": "Spain",
-        "name": "Gisela Torres",
-        "twitterUsername": "0gis0",
-        "websiteUrl": "https://hachyderm.io/@0gis0"
+        "location": "Dubai, UAE",
+        "name": "Ben Leane",
+        "twitterUsername": null,
+        "websiteUrl": "https://benleane83.github.io"
       },
-      "totalContributions": 156,
+      "totalContributions": 68,
       "repositoriesContributed": [
-        "devexpgbb.github.io",
-        "ado-github-copilot-extension",
-        "azure-dev-center-demos",
-        "rk-testing-gh-copilot-azure-agent-on-codespaces"
+        "GHES_CodingAgent",
+        "ghec-sso-setup"
       ],
-      "repositoryCount": 4
+      "repositoryCount": 2
     },
     {
       "avatarUrl": "https://avatars.githubusercontent.com/u/10506023?v=4",
@@ -391,22 +411,6 @@
         "name": "Somnath Banerjee",
         "twitterUsername": "Somnath2301",
         "websiteUrl": "sombaner@github.com"
-      },
-      "totalContributions": 0,
-      "repositoriesContributed": [],
-      "repositoryCount": 0
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/136561768?v=4",
-      "id": 136561768,
-      "login": "benleane83",
-      "profile": {
-        "bio": "Hello! I'm a software developer, consultant and tech leader with focus on cloud, AI and app development within the Microsoft ecosystem.",
-        "company": "Microsoft",
-        "location": "Dubai, UAE",
-        "name": "Ben Leane",
-        "twitterUsername": null,
-        "websiteUrl": "https://benleane83.github.io"
       },
       "totalContributions": 0,
       "repositoriesContributed": [],
