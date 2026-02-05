@@ -71,7 +71,7 @@ jobs:
           > /tmp/repos_data.json
 
           for repo_name in $repos; do
-            ((processed_repos++))
+            ((++processed_repos))
             echo ""
             echo "[$processed_repos/$repo_count] 🔍 Processing: $repo_name"
 
@@ -95,7 +95,7 @@ jobs:
             contributors_json=$(gh api "repos/DevExpGbb/${repo_name}/contributors" \
               --paginate \
               --jq 'map({login, id, contributions, avatarUrl: .avatar_url, profileUrl: .html_url})' 2>/dev/null || echo "[]")
-            ((request_count++))
+            ((++request_count)) || true
 
             contributor_count=$(echo "$contributors_json" | jq 'length')
 
@@ -114,7 +114,7 @@ jobs:
             contributor_index=0
 
             for contributor_login in $(echo "$top_contributors" | jq -r '.[].login'); do
-              ((contributor_index++))
+              ((++contributor_index))
               echo "    [$contributor_index/5] 👤 Fetching details for: $contributor_login"
 
               # Check if profile is cached
@@ -126,7 +126,7 @@ jobs:
                 profile_data=$(gh api "users/${contributor_login}" \
                   --jq '{name, bio, company, location, email, twitterUsername: .twitter_username, websiteUrl: .blog}' \
                   2>/dev/null || echo '{"name":null,"bio":null,"company":null,"location":null,"email":null,"twitterUsername":null,"websiteUrl":null}')
-                ((request_count++))
+                ((++request_count)) || true
                 profile_cache[$contributor_login]="$profile_data"
                 echo "      📝 Profile fetched"
                 sleep 0.3
@@ -136,8 +136,7 @@ jobs:
               last_commit=$(gh api "repos/DevExpGbb/${repo_name}/commits?author=${contributor_login}&per_page=1" \
                 --jq 'if length > 0 then .[0] | {sha: .sha[0:7], message: .commit.message | split("\n")[0], date: .commit.author.date, url: .html_url} else null end' \
                 2>/dev/null || echo 'null')
-              ((request_count++))
-
+              ((++request_count)) || true
               # Get contributor base info from the list
               contributor_base=$(echo "$top_contributors" | jq --arg login "$contributor_login" '.[] | select(.login == $login)')
 
