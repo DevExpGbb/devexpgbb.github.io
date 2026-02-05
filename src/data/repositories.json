@@ -38,8 +38,8 @@
       "name": "Astro"
     },
     "repositoryTopics": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-02-04T22:49:15Z",
+    "stargazerCount": 1,
+    "updatedAt": "2026-02-05T09:11:51Z",
     "url": "https://github.com/DevExpGbb/devexpgbb.github.io",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
@@ -48,7 +48,7 @@
   },
   {
     "createdAt": "2026-01-26T17:40:23Z",
-    "description": "",
+    "description": "🤖 Automated bot/agent for developer workflows",
     "isArchived": false,
     "languages": [
       {
@@ -66,9 +66,34 @@
     "primaryLanguage": {
       "name": "Shell"
     },
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "agentic"
+      },
+      {
+        "name": "ai-agents"
+      },
+      {
+        "name": "bash"
+      },
+      {
+        "name": "devexpgbb"
+      },
+      {
+        "name": "iac"
+      },
+      {
+        "name": "infrastructure"
+      },
+      {
+        "name": "platform-engineering"
+      },
+      {
+        "name": "shell"
+      }
+    ],
     "stargazerCount": 0,
-    "updatedAt": "2026-02-04T21:30:01Z",
+    "updatedAt": "2026-02-05T05:08:44Z",
     "url": "https://github.com/DevExpGbb/agentic-platform-engineering",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/3240777?v=4",
@@ -238,7 +263,7 @@
   },
   {
     "createdAt": "2025-12-10T17:38:30Z",
-    "description": "",
+    "description": "🐚 three horizons v1.2 - DevExpGbb project",
     "isArchived": false,
     "languages": [
       {
@@ -298,9 +323,19 @@
     "primaryLanguage": {
       "name": "Shell"
     },
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "bash"
+      },
+      {
+        "name": "devexpgbb"
+      },
+      {
+        "name": "shell"
+      }
+    ],
     "stargazerCount": 0,
-    "updatedAt": "2025-12-10T17:52:13Z",
+    "updatedAt": "2026-02-04T23:00:30Z",
     "url": "https://github.com/DevExpGbb/three-horizons-v1.2",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/47673516?v=4",
@@ -309,7 +344,7 @@
   },
   {
     "createdAt": "2025-10-06T19:03:11Z",
-    "description": "",
+    "description": "📋 Starter template for unknown",
     "isArchived": false,
     "languages": [],
     "name": "vscode-ghcp-starter-kit",
@@ -318,9 +353,25 @@
       "login": "DevExpGbb"
     },
     "primaryLanguage": null,
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "ai"
+      },
+      {
+        "name": "devexpgbb"
+      },
+      {
+        "name": "github-copilot"
+      },
+      {
+        "name": "starter-kit"
+      },
+      {
+        "name": "template"
+      }
+    ],
     "stargazerCount": 4,
-    "updatedAt": "2025-12-04T06:48:17Z",
+    "updatedAt": "2026-02-04T23:01:18Z",
     "url": "https://github.com/DevExpGbb/vscode-ghcp-starter-kit",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
@@ -369,7 +420,7 @@
   },
   {
     "createdAt": "2025-08-07T01:54:37Z",
-    "description": "",
+    "description": "🤖 GitHub Copilot integration & examples",
     "isArchived": false,
     "languages": [],
     "name": "github-copilot-office-hours",
@@ -378,9 +429,19 @@
       "login": "DevExpGbb"
     },
     "primaryLanguage": null,
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "ai"
+      },
+      {
+        "name": "devexpgbb"
+      },
+      {
+        "name": "github-copilot"
+      }
+    ],
     "stargazerCount": 3,
-    "updatedAt": "2025-10-17T14:16:41Z",
+    "updatedAt": "2026-02-04T23:01:58Z",
     "url": "https://github.com/DevExpGbb/github-copilot-office-hours",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
@@ -526,7 +587,7 @@
   },
   {
     "createdAt": "2025-02-13T04:04:28Z",
-    "description": "",
+    "description": "📦 Demo showcasing unknown technologies",
     "isArchived": false,
     "languages": [],
     "name": "dependency-review-demo",
@@ -535,9 +596,19 @@
       "login": "DevExpGbb"
     },
     "primaryLanguage": null,
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "demo"
+      },
+      {
+        "name": "devexpgbb"
+      },
+      {
+        "name": "showcase"
+      }
+    ],
     "stargazerCount": 0,
-    "updatedAt": "2025-02-13T04:09:45Z",
+    "updatedAt": "2026-02-04T23:03:32Z",
     "url": "https://github.com/DevExpGbb/dependency-review-demo",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
@@ -546,7 +617,7 @@
   },
   {
     "createdAt": "2024-12-14T02:17:22Z",
-    "description": "",
+    "description": "💻 devcenter catalog - DevExpGbb project",
     "isArchived": false,
     "languages": [
       {
@@ -570,9 +641,25 @@
     "primaryLanguage": {
       "name": "PowerShell"
     },
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "devexpgbb"
+      },
+      {
+        "name": "iac"
+      },
+      {
+        "name": "infrastructure"
+      },
+      {
+        "name": "platform-engineering"
+      },
+      {
+        "name": "powershell"
+      }
+    ],
     "stargazerCount": 0,
-    "updatedAt": "2025-01-31T03:30:01Z",
+    "updatedAt": "2026-02-04T23:04:01Z",
     "url": "https://github.com/DevExpGbb/devcenter-catalog",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/950290?v=4",
@@ -581,7 +668,7 @@
   },
   {
     "createdAt": "2024-12-10T15:27:51Z",
-    "description": "",
+    "description": "💻 Demo showcasing PowerShell technologies",
     "isArchived": false,
     "languages": [
       {
@@ -623,9 +710,25 @@
     "primaryLanguage": {
       "name": "PowerShell"
     },
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "azure"
+      },
+      {
+        "name": "demo"
+      },
+      {
+        "name": "devexpgbb"
+      },
+      {
+        "name": "powershell"
+      },
+      {
+        "name": "showcase"
+      }
+    ],
     "stargazerCount": 0,
-    "updatedAt": "2024-12-10T22:58:15Z",
+    "updatedAt": "2026-02-04T23:04:26Z",
     "url": "https://github.com/DevExpGbb/azure-dev-center-demos",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
@@ -669,7 +772,7 @@
   },
   {
     "createdAt": "2024-10-01T02:38:31Z",
-    "description": "",
+    "description": "📋 Starter template for HCL",
     "isArchived": false,
     "languages": [
       {
@@ -687,9 +790,25 @@
     "primaryLanguage": {
       "name": "HCL"
     },
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "devexpgbb"
+      },
+      {
+        "name": "hcl"
+      },
+      {
+        "name": "starter-kit"
+      },
+      {
+        "name": "template"
+      },
+      {
+        "name": "terraform"
+      }
+    ],
     "stargazerCount": 0,
-    "updatedAt": "2024-10-12T01:03:06Z",
+    "updatedAt": "2026-02-04T23:04:39Z",
     "url": "https://github.com/DevExpGbb/project-protomatter-bootstrap-template-repo",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
@@ -727,7 +846,7 @@
   },
   {
     "createdAt": "2024-06-25T10:32:26Z",
-    "description": "",
+    "description": "📦 Demo showcasing unknown technologies",
     "isArchived": false,
     "languages": [],
     "name": "rk-github-demo",
@@ -736,9 +855,19 @@
       "login": "DevExpGbb"
     },
     "primaryLanguage": null,
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "demo"
+      },
+      {
+        "name": "devexpgbb"
+      },
+      {
+        "name": "showcase"
+      }
+    ],
     "stargazerCount": 0,
-    "updatedAt": "2024-06-25T12:55:58Z",
+    "updatedAt": "2026-02-04T23:05:18Z",
     "url": "https://github.com/DevExpGbb/rk-github-demo",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
@@ -747,7 +876,7 @@
   },
   {
     "createdAt": "2024-06-21T12:58:33Z",
-    "description": "",
+    "description": "🤖 GitHub Copilot integration & examples",
     "isArchived": false,
     "languages": [
       {
@@ -765,9 +894,28 @@
     "primaryLanguage": {
       "name": "Shell"
     },
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "agentic"
+      },
+      {
+        "name": "ai"
+      },
+      {
+        "name": "ai-agents"
+      },
+      {
+        "name": "azure"
+      },
+      {
+        "name": "devexpgbb"
+      },
+      {
+        "name": "github-copilot"
+      }
+    ],
     "stargazerCount": 0,
-    "updatedAt": "2024-06-21T12:58:33Z",
+    "updatedAt": "2026-02-04T23:05:34Z",
     "url": "https://github.com/DevExpGbb/rk-testing-gh-copilot-azure-agent-on-codespaces",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
@@ -805,7 +953,7 @@
   },
   {
     "createdAt": "2024-02-13T22:13:05Z",
-    "description": "",
+    "description": "🐳 mlflow codespaces - DevExpGbb project",
     "isArchived": false,
     "languages": [
       {
@@ -823,9 +971,13 @@
     "primaryLanguage": {
       "name": "Dockerfile"
     },
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "devexpgbb"
+      }
+    ],
     "stargazerCount": 0,
-    "updatedAt": "2024-05-10T16:35:22Z",
+    "updatedAt": "2026-02-04T23:05:56Z",
     "url": "https://github.com/DevExpGbb/mlflow-codespaces",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
@@ -892,7 +1044,7 @@
   },
   {
     "createdAt": "2024-03-11T23:17:20Z",
-    "description": "",
+    "description": "🐳 streamlit codespaces - DevExpGbb project",
     "isArchived": false,
     "languages": [
       {
@@ -910,9 +1062,13 @@
     "primaryLanguage": {
       "name": "Dockerfile"
     },
-    "repositoryTopics": null,
+    "repositoryTopics": [
+      {
+        "name": "devexpgbb"
+      }
+    ],
     "stargazerCount": 0,
-    "updatedAt": "2024-03-11T23:27:32Z",
+    "updatedAt": "2026-02-04T23:06:30Z",
     "url": "https://github.com/DevExpGbb/streamlit-codespaces",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
