@@ -73,6 +73,23 @@ jobs:
               fi
             fi
             
+            # Fetch README title (first H1 heading)
+            readme_title="null"
+            if readme_content=$(gh api "repos/DevExpGbb/${repo_name}/readme" --jq '.content' 2>/dev/null); then
+              if [ -n "$readme_content" ] && [ "$readme_content" != "null" ]; then
+                # Decode base64 content and extract first H1 heading
+                decoded_readme=$(echo "$readme_content" | base64 --decode 2>/dev/null || echo "")
+                if [ -n "$decoded_readme" ]; then
+                  # Extract first # heading (supports # Title or #Title formats)
+                  title=$(echo "$decoded_readme" | grep -m 1 -E '^#[[:space:]]+' | sed -E 's/^#+[[:space:]]+//' | sed 's/[[:space:]]*$//' || echo "")
+                  if [ -n "$title" ]; then
+                    # Escape the title for JSON
+                    readme_title=$(echo "$title" | jq -Rs '.')
+                  fi
+                fi
+              fi
+            fi
+            
             # Add comma separator for all but first
             if [ "$first" = true ]; then
               first=false
@@ -80,9 +97,9 @@ jobs:
               echo "," >> /tmp/repos_with_contributors.json
             fi
             
-            # Add repo with contributor
-            echo "$repo_json" | jq --argjson tc "$top_contributor" --argjson topics "$topics_data" '
-              . + { topContributor: $tc, topics: $topics } 
+            # Add repo with contributor and readme title
+            echo "$repo_json" | jq --argjson tc "$top_contributor" --argjson topics "$topics_data" --argjson rt "$readme_title" '
+              . + { topContributor: $tc, topics: $topics, readmeTitle: $rt } 
             ' >> /tmp/repos_with_contributors.json
           done
 

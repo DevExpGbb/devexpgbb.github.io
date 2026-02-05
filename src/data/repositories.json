@@ -68,7 +68,8 @@
     "topics": [
       "github-platform",
       "code"
-    ]
+    ],
+    "readmeTitle": "IP Atlas - Repository Catalog"
   },
   {
     "createdAt": "2026-02-05T12:55:35Z",
@@ -100,7 +101,8 @@
     "topics": [
       "ghas",
       "code"
-    ]
+    ],
+    "readmeTitle": "Security Check Agent"
   },
   {
     "createdAt": "2026-01-26T17:40:23Z",
@@ -173,7 +175,8 @@
       "shell",
       "github-platform",
       "demo-deployable"
-    ]
+    ],
+    "readmeTitle": "Automated Bot for Developer Workflows"
   },
   {
     "createdAt": "2026-02-05T14:27:46Z",
@@ -204,7 +207,8 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/18750956?v=4",
       "login": "Frank802"
     },
-    "topics": []
+    "topics": [],
+    "readmeTitle": "Azure DevCenter Demos"
   },
   {
     "createdAt": "2026-01-29T15:13:57Z",
@@ -281,7 +285,8 @@
     "topics": [
       "github-copilot",
       "demo-deployable"
-    ]
+    ],
+    "readmeTitle": "Common Terraform Modules"
   },
   {
     "createdAt": "2024-11-12T20:09:00Z",
