@@ -1,91 +1,2251 @@
 {
-  "lastUpdated": "2026-02-05T11:40:00Z",
-  "totalRepositories": 2,
-  "totalContributors": 2,
+  "lastUpdated": "2026-02-05T11:04:15Z",
+  "totalRepositories": 28,
+  "totalContributors": 94,
   "repositories": {
     "devexpgbb.github.io": {
       "fullName": "DevExpGbb/devexpgbb.github.io",
       "contributorCount": 2,
       "contributors": [
         {
-          "login": "0GiS0",
-          "id": 175379,
-          "contributions": 127,
           "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
+          "contributions": 22,
+          "id": 175379,
+          "login": "0GiS0",
           "profileUrl": "https://github.com/0GiS0",
           "profile": {
-            "name": "Gisela Torres",
-            "bio": "Cloud Developer Advocate @ Microsoft",
-            "company": "@microsoft",
-            "location": "Madrid, Spain",
+            "bio": "Sr. Software Global Blackbelt at Microsoft\r\n",
+            "company": "Microsoft",
             "email": null,
-            "twitterUsername": "gi_torres",
-            "websiteUrl": "https://giselatores.com"
+            "location": "Spain",
+            "name": "Gisela Torres",
+            "twitterUsername": "0gis0",
+            "websiteUrl": "https://hachyderm.io/@0gis0"
           },
           "activity": {
             "lastCommit": {
-              "sha": "ba2ec1a",
-              "message": "Add link to Internal IP Atlas companion site on home page",
-              "date": "2026-02-04T22:25:15Z",
-              "url": "https://github.com/DevExpGbb/devexpgbb.github.io/commit/ba2ec1a"
-            }
+              "date": "2026-02-05T11:02:41Z",
+              "message": "🐛 Fix JSON handling in contributor data collection to avoid shell quoting issues",
+              "sha": "f32d9c5",
+              "url": "https://github.com/DevExpGbb/devexpgbb.github.io/commit/f32d9c57b38b99d36cac850b20d246ee8e594a12"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
           }
         },
         {
-          "login": "contributor-example",
-          "id": 234567,
-          "contributions": 45,
-          "avatarUrl": "https://avatars.githubusercontent.com/u/234567?v=4",
-          "profileUrl": "https://github.com/contributor-example",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/108291165?v=4",
+          "contributions": 1,
+          "id": 108291165,
+          "login": "astrobot-houston",
+          "profileUrl": "https://github.com/astrobot-houston",
           "profile": {
-            "name": "Example Contributor",
-            "bio": "Software Developer",
-            "company": null,
-            "location": "Seattle, WA",
+            "bio": "beep boop. I'm a bot that helps out the @withastro organization.\r\n\r\nCome say hi on Discord to learn more: https://astro.build/chat",
+            "company": "@withastro ",
             "email": null,
-            "twitterUsername": null,
-            "websiteUrl": null
+            "location": "cyberspace",
+            "name": "Houston (Bot)",
+            "twitterUsername": "astrodotbuild",
+            "websiteUrl": "https://astro.build/"
           },
           "activity": {
-            "lastCommit": {
-              "sha": "abc1234",
-              "message": "Update documentation",
-              "date": "2026-02-03T10:15:00Z",
-              "url": "https://github.com/DevExpGbb/example-repo/commit/abc1234"
-            }
+            "lastCommit": null,
+            "recentPRs": 0,
+            "recentIssues": 0
           }
         }
       ]
     },
-    "example-repo": {
-      "fullName": "DevExpGbb/example-repo",
-      "contributorCount": 1,
+    "agentic-platform-engineering": {
+      "fullName": "DevExpGbb/agentic-platform-engineering",
+      "contributorCount": 2,
       "contributors": [
         {
-          "login": "0GiS0",
-          "id": 175379,
-          "contributions": 89,
-          "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
-          "profileUrl": "https://github.com/0GiS0",
+          "avatarUrl": "https://avatars.githubusercontent.com/u/3240777?v=4",
+          "contributions": 53,
+          "id": 3240777,
+          "login": "dcasati",
+          "profileUrl": "https://github.com/dcasati",
           "profile": {
-            "name": "Gisela Torres",
-            "bio": "Cloud Developer Advocate @ Microsoft",
-            "company": "@microsoft",
-            "location": "Madrid, Spain",
-            "email": null,
-            "twitterUsername": "gi_torres",
-            "websiteUrl": "https://giselatores.com"
+            "bio": "Azure Global Black Belt Team at @microsoft. Kubernetes, Containers",
+            "company": "@Microsoft",
+            "email": "diego.casati@gmail.com",
+            "location": "Calgary, AB",
+            "name": "Diego Casati",
+            "twitterUsername": null,
+            "websiteUrl": "dcasati.net"
           },
           "activity": {
             "lastCommit": {
-              "sha": "def5678",
-              "message": "Add new feature implementation",
-              "date": "2026-02-05T09:30:00Z",
-              "url": "https://github.com/DevExpGbb/example-repo/commit/def5678"
-            }
+              "date": "2026-02-05T04:51:42Z",
+              "message": "fix: update port-forwarding steps to ensure successful connection before analysis",
+              "sha": "0dac237",
+              "url": "https://github.com/DevExpGbb/agentic-platform-engineering/commit/0dac2378a58989be79a9e577901391f512654691"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 24,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2026-02-05T05:08:36Z",
+              "message": "fix: update aks-mcp URL to remove trailing slash",
+              "sha": "39b38b6",
+              "url": "https://github.com/DevExpGbb/agentic-platform-engineering/commit/39b38b65284190479537ee85d3dda3b8a3b44236"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "agentic-devops-demo": {
+      "fullName": "DevExpGbb/agentic-devops-demo",
+      "contributorCount": 2,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/10506023?v=4",
+          "contributions": 63,
+          "id": 10506023,
+          "login": "dsanchezcr",
+          "profileUrl": "https://github.com/dsanchezcr",
+          "profile": {
+            "bio": "Director Go-To-Market Azure Developer Audience @Microsoft @github",
+            "company": "@GitHub",
+            "email": "dsanchezcr@github.com",
+            "location": "Orlando, Florida, USA",
+            "name": "David Sanchez",
+            "twitterUsername": "dsanchezcr",
+            "websiteUrl": "https://dsanchezcr.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2026-01-30T16:30:52Z",
+              "message": "Rename product to 'Zava Gift Exchange'",
+              "sha": "2b998f3",
+              "url": "https://github.com/DevExpGbb/agentic-devops-demo/commit/2b998f354b1b8d5e7caa27fc951f31314e6b25e0"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 21,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2026-01-31T22:52:40Z",
+              "message": "feat: Add implementation task prompt for executing TODO items in isolated git worktrees",
+              "sha": "31da610",
+              "url": "https://github.com/DevExpGbb/agentic-devops-demo/commit/31da610caa2bb4aa9eaff57283f1994f48018cd8"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "Cobol-Demo": {
+      "fullName": "DevExpGbb/Cobol-Demo",
+      "contributorCount": 4,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/1999714?v=4",
+          "contributions": 96,
+          "id": 1999714,
+          "login": "Martinfx",
+          "profileUrl": "https://github.com/Martinfx",
+          "profile": {
+            "bio": null,
+            "company": null,
+            "email": null,
+            "location": "Prague, Czech Republic",
+            "name": "M.",
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2019-10-22T19:24:42Z",
+              "message": "Merge pull request #11 from Martinfx/max-fix-readme",
+              "sha": "f1bb316",
+              "url": "https://github.com/DevExpGbb/Cobol-Demo/commit/f1bb3163d6673fc72a831623de4f9fc8bde7a062"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 35,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2026-01-30T13:16:00Z",
+              "message": "feat(agent): update Cobol Project Analyzer Agent to orchestrate analysis tasks",
+              "sha": "3278bad",
+              "url": "https://github.com/DevExpGbb/Cobol-Demo/commit/3278bad94b9b5402d28a7fe07ee4026429d65776"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/6827667?v=4",
+          "contributions": 6,
+          "id": 6827667,
+          "login": "Malanius",
+          "profileUrl": "https://github.com/Malanius",
+          "profile": {
+            "bio": "Cloud Architect | Full Stack Developer | Serverless Evangelist | Freelancer",
+            "company": "Raiffeisenbank CZ",
+            "email": "malaniusprivierre@gmail.com",
+            "location": "Prague",
+            "name": "Michal Slota",
+            "twitterUsername": "malaniuscz",
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2018-10-20T14:49:42Z",
+              "message": "Add manual for AS/400 source codes",
+              "sha": "b7d4174",
+              "url": "https://github.com/DevExpGbb/Cobol-Demo/commit/b7d41743a06023a8588214935b4d226ef0f83fe7"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/1199025?v=4",
+          "contributions": 1,
+          "id": 1199025,
+          "login": "rainbof",
+          "profileUrl": "https://github.com/rainbof",
+          "profile": {
+            "bio": null,
+            "company": null,
+            "email": null,
+            "location": null,
+            "name": "Ondrej Beranek",
+            "twitterUsername": null,
+            "websiteUrl": "http://www.rainbof.eu"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2018-08-06T21:00:28Z",
+              "message": "Fixed bug attempt to reference unallocated memory",
+              "sha": "7aec459",
+              "url": "https://github.com/DevExpGbb/Cobol-Demo/commit/7aec45922a57253b4a165f910885611bc07a9e0a"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "ai-native-dev-lab": {
+      "fullName": "DevExpGbb/ai-native-dev-lab",
+      "contributorCount": 2,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/51440732?v=4",
+          "contributions": 16,
+          "id": 51440732,
+          "login": "danielmeppiel",
+          "profileUrl": "https://github.com/danielmeppiel",
+          "profile": {
+            "bio": "Developer productivity @microsoft, Global Black Belt. Always a hubber at @GitHub. Connecting @Azure and @GitHub through AI. ",
+            "company": "Microsoft",
+            "email": null,
+            "location": "France",
+            "name": "Daniel Meppiel",
+            "twitterUsername": null,
+            "websiteUrl": "https://www.devprodlogs.com/"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2026-01-26T14:37:21Z",
+              "message": "fix: update wording in README for clarity in exercise instructions",
+              "sha": "88c2b0b",
+              "url": "https://github.com/DevExpGbb/ai-native-dev-lab/commit/88c2b0b6907d5a38c81501b6fa29f03147f10b63"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/1683889?v=4",
+          "contributions": 1,
+          "id": 1683889,
+          "login": "ChrisRomp",
+          "profileUrl": "https://github.com/ChrisRomp",
+          "profile": {
+            "bio": "Principal Software Solutions Engineer & Global Black Belt (GBB) at Microsoft, based in San Francisco, CA.",
+            "company": "Microsoft",
+            "email": null,
+            "location": "San Francisco, CA",
+            "name": "Chris Romp",
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2026-01-23T19:00:00Z",
+              "message": "Fix instructor-script formatting",
+              "sha": "295d88c",
+              "url": "https://github.com/DevExpGbb/ai-native-dev-lab/commit/295d88c77d2b3569ac7e207f9e7870c6652be245"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "platform-mode": {
+      "fullName": "DevExpGbb/platform-mode",
+      "contributorCount": 3,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 39,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-12-16T14:28:11Z",
+              "message": "feat: add custom instructions for writing functions",
+              "sha": "e9e1023",
+              "url": "https://github.com/DevExpGbb/platform-mode/commit/e9e1023973237af7bd6d74eeeac0bf01fc31392c"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/3240777?v=4",
+          "contributions": 2,
+          "id": 3240777,
+          "login": "dcasati",
+          "profileUrl": "https://github.com/dcasati",
+          "profile": {
+            "bio": "Azure Global Black Belt Team at @microsoft. Kubernetes, Containers",
+            "company": "@Microsoft",
+            "email": "diego.casati@gmail.com",
+            "location": "Calgary, AB",
+            "name": "Diego Casati",
+            "twitterUsername": null,
+            "websiteUrl": "dcasati.net"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-09-23T16:56:25Z",
+              "message": "Merge pull request #3 from dcasati/dcasati-updates",
+              "sha": "aecfb50",
+              "url": "https://github.com/DevExpGbb/platform-mode/commit/aecfb50755dc5e474ed61eb5aa4e8ef9ee4d8f9b"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/51440732?v=4",
+          "contributions": 2,
+          "id": 51440732,
+          "login": "danielmeppiel",
+          "profileUrl": "https://github.com/danielmeppiel",
+          "profile": {
+            "bio": "Developer productivity @microsoft, Global Black Belt. Always a hubber at @GitHub. Connecting @Azure and @GitHub through AI. ",
+            "company": "Microsoft",
+            "email": null,
+            "location": "France",
+            "name": "Daniel Meppiel",
+            "twitterUsername": null,
+            "websiteUrl": "https://www.devprodlogs.com/"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-09-19T08:03:34Z",
+              "message": "feat: add installation badge to README.md for improved visibility",
+              "sha": "0383c6e",
+              "url": "https://github.com/DevExpGbb/platform-mode/commit/0383c6e5f88eec93f918363d6d28d45abb2fff5f"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "three-horizons-v1.2": {
+      "fullName": "DevExpGbb/three-horizons-v1.2",
+      "contributorCount": 3,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/47673516?v=4",
+          "contributions": 160,
+          "id": 47673516,
+          "login": "paulanunes85",
+          "profileUrl": "https://github.com/paulanunes85",
+          "profile": {
+            "bio": "Paula Silva is Developer Productivity, Global Black Belt at Microsoft Americas",
+            "company": "GitHub",
+            "email": null,
+            "location": "São Paulo, Brazil",
+            "name": "Paula Silva",
+            "twitterUsername": null,
+            "websiteUrl": "https://www.linkedin.com/in/paulanunes/"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-08-12T16:15:58Z",
+              "message": "Implement Azure Dev Box Hub-Spoke Architecture with comprehensive documentation, Bicep templates, and automated deployment script",
+              "sha": "6516629",
+              "url": "https://github.com/DevExpGbb/three-horizons-v1.2/commit/6516629f5734ba29f48fb1226a5aad6e5fd45a9b"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/86207102?v=4",
+          "contributions": 14,
+          "id": 86207102,
+          "login": "jpeixoto6",
+          "profileUrl": "https://github.com/jpeixoto6",
+          "profile": {
+            "bio": "Joao Peixoto is Black Belt at Red Hat Latam",
+            "company": null,
+            "email": null,
+            "location": null,
+            "name": "Joao Peixoto",
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-06-22T00:19:59Z",
+              "message": "Merge pull request #14 from three-horizon-ai/jpeixoto6-patch-3",
+              "sha": "283b783",
+              "url": "https://github.com/DevExpGbb/three-horizons-v1.2/commit/283b783379bb397fc103e607b9471aa30b410f31"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/17309699?v=4",
+          "contributions": 1,
+          "id": 17309699,
+          "login": "odaibert",
+          "profileUrl": "https://github.com/odaibert",
+          "profile": {
+            "bio": "Cloud Native Global Black Belt - Application and Development Modernization ",
+            "company": "Microsoft Corp",
+            "email": "odaibert@microsoft.com",
+            "location": "Redmond, WA & the cloud",
+            "name": "Osvaldo Daibert",
+            "twitterUsername": "daibert",
+            "websiteUrl": "http://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-09-16T19:44:30Z",
+              "message": "Add Backstage catalog-info.yaml for Three Horizons AI Platform",
+              "sha": "b5a2e73",
+              "url": "https://github.com/DevExpGbb/three-horizons-v1.2/commit/b5a2e73d7e8869e223171f8ead9518e48c54256c"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "vscode-ghcp-starter-kit": {
+      "fullName": "DevExpGbb/vscode-ghcp-starter-kit",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 29,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-11-08T03:10:45Z",
+              "message": "Revise README for Custom Agents migration",
+              "sha": "d5f9981",
+              "url": "https://github.com/DevExpGbb/vscode-ghcp-starter-kit/commit/d5f9981cade12e809ec4e1b7a521de0bcdf5cfb9"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "samples": {
+      "fullName": "DevExpGbb/samples",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 14,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-10-22T16:04:19Z",
+              "message": "Add GitHub Copilot Office Hours section to README",
+              "sha": "1b5d6e2",
+              "url": "https://github.com/DevExpGbb/samples/commit/1b5d6e223964fa3fb74df5a7b51a077e03511e5a"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    ".github": {
+      "fullName": "DevExpGbb/.github",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 2,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-10-07T15:52:27Z",
+              "message": "Revise README with updated team information and links",
+              "sha": "649c44d",
+              "url": "https://github.com/DevExpGbb/.github/commit/649c44d26ff2cd45f386128e3bbef5bb76f0e7ec"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "github-copilot-office-hours": {
+      "fullName": "DevExpGbb/github-copilot-office-hours",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 9,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-08-15T23:17:18Z",
+              "message": "docs: update Week 3 README.md to reflect changes in session format and content",
+              "sha": "e3da6a8",
+              "url": "https://github.com/DevExpGbb/github-copilot-office-hours/commit/e3da6a87d0d78fb517535904db38320de12bbdf5"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "xamarin-to-maui-ghcp-demo": {
+      "fullName": "DevExpGbb/xamarin-to-maui-ghcp-demo",
+      "contributorCount": 65,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/8092460?v=4",
+          "contributions": 461,
+          "id": 8092460,
+          "login": "davidbritch",
+          "profileUrl": "https://github.com/davidbritch",
+          "profile": {
+            "bio": null,
+            "company": null,
+            "email": null,
+            "location": null,
+            "name": "David Britch",
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2021-06-15T09:23:04Z",
+              "message": "Regenerated Todo sample. (#735)",
+              "sha": "e520c04",
+              "url": "https://github.com/DevExpGbb/xamarin-to-maui-ghcp-demo/commit/e520c0465dc0a50088951d5d36ad648c4d9c0522"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/199373?v=4",
+          "contributions": 434,
+          "id": 199373,
+          "login": "conceptdev",
+          "profileUrl": "https://github.com/conceptdev",
+          "profile": {
+            "bio": null,
+            "company": "@Microsoft ",
+            "email": null,
+            "location": "San Francisco",
+            "name": "Craig Dunn",
+            "twitterUsername": "conceptdev",
+            "websiteUrl": "https://conceptdev.blogspot.com/"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2020-07-25T00:14:06Z",
+              "message": "Add `surface-duo` ms.prod",
+              "sha": "72a616c",
+              "url": "https://github.com/DevExpGbb/xamarin-to-maui-ghcp-demo/commit/72a616c0a7240c8e05ce60cdbd0ff2167dd5aaf6"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/2000163?v=4",
+          "contributions": 85,
+          "id": 2000163,
+          "login": "pjcollins",
+          "profileUrl": "https://github.com/pjcollins",
+          "profile": {
+            "bio": null,
+            "company": "@Microsoft ",
+            "email": null,
+            "location": "Boston, MA",
+            "name": "Peter Collins",
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2020-08-11T08:42:03Z",
+              "message": "Remove unnecessary packages.config files (#654)",
+              "sha": "beb89b8",
+              "url": "https://github.com/DevExpGbb/xamarin-to-maui-ghcp-demo/commit/beb89b8c739f4d778e61474d4d3c51f530aa6d4b"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/5325443?v=4",
+          "contributions": 53,
+          "id": 5325443,
+          "login": "RobertPKruger",
+          "profileUrl": "https://github.com/RobertPKruger",
+          "profile": {
+            "bio": null,
+            "company": null,
+            "email": "rpk@electricstory.com",
+            "location": null,
+            "name": "Bob Kruger",
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2014-12-11T00:16:38Z",
+              "message": "UsingUITest",
+              "sha": "50d5c49",
+              "url": "https://github.com/DevExpGbb/xamarin-to-maui-ghcp-demo/commit/50d5c49835262212aa218e614c3a161fa563ba18"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/711100?v=4",
+          "contributions": 41,
+          "id": 711100,
+          "login": "profexorgeek",
+          "profileUrl": "https://github.com/profexorgeek",
+          "profile": {
+            "bio": "Maker, tinkerer, hacker, gamedev.\r\nFormer Product Manager for Minecraft Bedrock at Mojang. Current Director of Product for the Platform team at GameChanger.",
+            "company": "GameChanger",
+            "email": "justin.d.johnson@gmail.com",
+            "location": "Remote",
+            "name": "Justin Johnson",
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2020-01-16T20:25:06Z",
+              "message": "Nuget version updates",
+              "sha": "0c9f024",
+              "url": "https://github.com/DevExpGbb/xamarin-to-maui-ghcp-demo/commit/0c9f02462567fff9bd523d4fb5802a488df5094b"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/5623999?v=4",
+          "contributions": 36,
+          "id": 5623999,
+          "login": "NathanCastle",
+          "profileUrl": "https://github.com/NathanCastle",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/1524073?v=4",
+          "contributions": 36,
+          "id": 1524073,
+          "login": "olegoid",
+          "profileUrl": "https://github.com/olegoid",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/7852873?v=4",
+          "contributions": 34,
+          "id": 7852873,
+          "login": "mjh4",
+          "profileUrl": "https://github.com/mjh4",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/10601375?v=4",
+          "contributions": 30,
+          "id": 10601375,
+          "login": "dylankelly5",
+          "profileUrl": "https://github.com/dylankelly5",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/759830?v=4",
+          "contributions": 25,
+          "id": 759830,
+          "login": "zgramana",
+          "profileUrl": "https://github.com/zgramana",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/1676321?v=4",
+          "contributions": 24,
+          "id": 1676321,
+          "login": "jamesmontemagno",
+          "profileUrl": "https://github.com/jamesmontemagno",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/5012825?v=4",
+          "contributions": 22,
+          "id": 5012825,
+          "login": "timeyoutakeit",
+          "profileUrl": "https://github.com/timeyoutakeit",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/8168247?v=4",
+          "contributions": 17,
+          "id": 8168247,
+          "login": "Parmendrak",
+          "profileUrl": "https://github.com/Parmendrak",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/11394867?v=4",
+          "contributions": 14,
+          "id": 11394867,
+          "login": "mariaghiondea",
+          "profileUrl": "https://github.com/mariaghiondea",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/1283154?v=4",
+          "contributions": 13,
+          "id": 1283154,
+          "login": "sayedihashimi",
+          "profileUrl": "https://github.com/sayedihashimi",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/14874769?v=4",
+          "contributions": 13,
+          "id": 14874769,
+          "login": "gonzalonm",
+          "profileUrl": "https://github.com/gonzalonm",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/32954580?v=4",
+          "contributions": 12,
+          "id": 32954580,
+          "login": "mykyta-bondarenko",
+          "profileUrl": "https://github.com/mykyta-bondarenko",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/12283401?v=4",
+          "contributions": 6,
+          "id": 12283401,
+          "login": "patrickluvsoj",
+          "profileUrl": "https://github.com/patrickluvsoj",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/328076?v=4",
+          "contributions": 6,
+          "id": 328076,
+          "login": "prashantvc",
+          "profileUrl": "https://github.com/prashantvc",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 5,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/5375137?v=4",
+          "contributions": 5,
+          "id": 5375137,
+          "login": "PureWeen",
+          "profileUrl": "https://github.com/PureWeen",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/2000167?v=4",
+          "contributions": 4,
+          "id": 2000167,
+          "login": "GouriKumari",
+          "profileUrl": "https://github.com/GouriKumari",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/90380?v=4",
+          "contributions": 4,
+          "id": 90380,
+          "login": "joelmartinez",
+          "profileUrl": "https://github.com/joelmartinez",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/313003?v=4",
+          "contributions": 4,
+          "id": 313003,
+          "login": "StephaneDelcroix",
+          "profileUrl": "https://github.com/StephaneDelcroix",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/33675759?v=4",
+          "contributions": 4,
+          "id": 33675759,
+          "login": "glibnub",
+          "profileUrl": "https://github.com/glibnub",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/12718942?v=4",
+          "contributions": 3,
+          "id": 12718942,
+          "login": "jsauvexamarin",
+          "profileUrl": "https://github.com/jsauvexamarin",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/10829?v=4",
+          "contributions": 3,
+          "id": 10829,
+          "login": "topgenorth",
+          "profileUrl": "https://github.com/topgenorth",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/440225?v=4",
+          "contributions": 3,
+          "id": 440225,
+          "login": "iherrera",
+          "profileUrl": "https://github.com/iherrera",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/61760623?v=4",
+          "contributions": 2,
+          "id": 61760623,
+          "login": "davehump",
+          "profileUrl": "https://github.com/davehump",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/9650258?v=4",
+          "contributions": 2,
+          "id": 9650258,
+          "login": "wi-ry",
+          "profileUrl": "https://github.com/wi-ry",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/249268?v=4",
+          "contributions": 2,
+          "id": 249268,
+          "login": "rolfbjarne",
+          "profileUrl": "https://github.com/rolfbjarne",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/840039?v=4",
+          "contributions": 2,
+          "id": 840039,
+          "login": "jonathanpeppers",
+          "profileUrl": "https://github.com/jonathanpeppers",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/4087358?v=4",
+          "contributions": 2,
+          "id": 4087358,
+          "login": "jimmgarrido",
+          "profileUrl": "https://github.com/jimmgarrido",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/171084?v=4",
+          "contributions": 2,
+          "id": 171084,
+          "login": "bryanhunter",
+          "profileUrl": "https://github.com/bryanhunter",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/8008527?v=4",
+          "contributions": 1,
+          "id": 8008527,
+          "login": "mattregul",
+          "profileUrl": "https://github.com/mattregul",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/7747140?v=4",
+          "contributions": 1,
+          "id": 7747140,
+          "login": "mimig1",
+          "profileUrl": "https://github.com/mimig1",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/12191374?v=4",
+          "contributions": 1,
+          "id": 12191374,
+          "login": "matei-tm",
+          "profileUrl": "https://github.com/matei-tm",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/48960774?v=4",
+          "contributions": 1,
+          "id": 48960774,
+          "login": "pmatushkin-redline",
+          "profileUrl": "https://github.com/pmatushkin-redline",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/4147484?v=4",
+          "contributions": 1,
+          "id": 4147484,
+          "login": "radekdoulik",
+          "profileUrl": "https://github.com/radekdoulik",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/8262287?v=4",
+          "contributions": 1,
+          "id": 8262287,
+          "login": "saamerm",
+          "profileUrl": "https://github.com/saamerm",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/7827070?v=4",
+          "contributions": 1,
+          "id": 7827070,
+          "login": "samhouts",
+          "profileUrl": "https://github.com/samhouts",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/1365736?v=4",
+          "contributions": 1,
+          "id": 1365736,
+          "login": "sethrosetter",
+          "profileUrl": "https://github.com/sethrosetter",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/7839202?v=4",
+          "contributions": 1,
+          "id": 7839202,
+          "login": "VincentDondain",
+          "profileUrl": "https://github.com/VincentDondain",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/30159621?v=4",
+          "contributions": 1,
+          "id": 30159621,
+          "login": "alexkblount",
+          "profileUrl": "https://github.com/alexkblount",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/62511613?v=4",
+          "contributions": 1,
+          "id": 62511613,
+          "login": "alwinSie",
+          "profileUrl": "https://github.com/alwinSie",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/94100277?v=4",
+          "contributions": 1,
+          "id": 94100277,
+          "login": "jcbendev",
+          "profileUrl": "https://github.com/jcbendev",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/8734633?v=4",
+          "contributions": 1,
+          "id": 8734633,
+          "login": "chp2y",
+          "profileUrl": "https://github.com/chp2y",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/6843811?v=4",
+          "contributions": 1,
+          "id": 6843811,
+          "login": "dbergan",
+          "profileUrl": "https://github.com/dbergan",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/21959102?v=4",
+          "contributions": 1,
+          "id": 21959102,
+          "login": "ivanherreragl",
+          "profileUrl": "https://github.com/ivanherreragl",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/5920415?v=4",
+          "contributions": 1,
+          "id": 5920415,
+          "login": "skyzy06",
+          "profileUrl": "https://github.com/skyzy06",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/3720818?v=4",
+          "contributions": 1,
+          "id": 3720818,
+          "login": "Apidcloud",
+          "profileUrl": "https://github.com/Apidcloud",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/6038239?v=4",
+          "contributions": 1,
+          "id": 6038239,
+          "login": "icebeam7",
+          "profileUrl": "https://github.com/icebeam7",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/6199837?v=4",
+          "contributions": 1,
+          "id": 6199837,
+          "login": "lothrop",
+          "profileUrl": "https://github.com/lothrop",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/271950?v=4",
+          "contributions": 1,
+          "id": 271950,
+          "login": "Redth",
+          "profileUrl": "https://github.com/Redth",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/61218880?v=4",
+          "contributions": 1,
+          "id": 61218880,
+          "login": "plan-do-break-fix",
+          "profileUrl": "https://github.com/plan-do-break-fix",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/30443?v=4",
+          "contributions": 1,
+          "id": 30443,
+          "login": "jassmith",
+          "profileUrl": "https://github.com/jassmith",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/51649153?v=4",
+          "contributions": 1,
+          "id": 51649153,
+          "login": "v-haroha",
+          "profileUrl": "https://github.com/v-haroha",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/127353?v=4",
+          "contributions": 1,
+          "id": 127353,
+          "login": "ghuntley",
+          "profileUrl": "https://github.com/ghuntley",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/1670466?v=4",
+          "contributions": 1,
+          "id": 1670466,
+          "login": "eskaufel",
+          "profileUrl": "https://github.com/eskaufel",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/538025?v=4",
+          "contributions": 1,
+          "id": 538025,
+          "login": "hartez",
+          "profileUrl": "https://github.com/hartez",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/70459170?v=4",
+          "contributions": 1,
+          "id": 70459170,
+          "login": "health-research",
+          "profileUrl": "https://github.com/health-research",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/6651785?v=4",
+          "contributions": 1,
+          "id": 6651785,
+          "login": "charlespetzold",
+          "profileUrl": "https://github.com/charlespetzold",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/3170200?v=4",
+          "contributions": 1,
+          "id": 3170200,
+          "login": "chad-ramos",
+          "profileUrl": "https://github.com/chad-ramos",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/10000335?v=4",
+          "contributions": 1,
+          "id": 10000335,
+          "login": "badhitman",
+          "profileUrl": "https://github.com/badhitman",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/3683816?v=4",
+          "contributions": 1,
+          "id": 3683816,
+          "login": "bmillspaugh",
+          "profileUrl": "https://github.com/bmillspaugh",
+          "profile": null,
+          "activity": null
+        }
+      ]
+    },
+    "30-days-of-platform-engineering": {
+      "fullName": "DevExpGbb/30-days-of-platform-engineering",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 3,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-06-26T22:02:38Z",
+              "message": "Refactor devcontainer.json to properly nest VS Code settings under customizations",
+              "sha": "9b5f848",
+              "url": "https://github.com/DevExpGbb/30-days-of-platform-engineering/commit/9b5f848db678e1c6f99c8ef84e5f13440704348c"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "demo-cobol-knowledge-base": {
+      "fullName": "DevExpGbb/demo-cobol-knowledge-base",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 5,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-04-24T15:01:15Z",
+              "message": "add: additional advanced prompting techniques",
+              "sha": "9c6adbc",
+              "url": "https://github.com/DevExpGbb/demo-cobol-knowledge-base/commit/9c6adbc6445e9577f4266292fe68c5adbb494186"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "ado-github-copilot-extension": {
+      "fullName": "DevExpGbb/ado-github-copilot-extension",
+      "contributorCount": 2,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
+          "contributions": 5,
+          "id": 175379,
+          "login": "0GiS0",
+          "profileUrl": "https://github.com/0GiS0",
+          "profile": {
+            "bio": "Sr. Software Global Blackbelt at Microsoft\r\n",
+            "company": "Microsoft",
+            "email": null,
+            "location": "Spain",
+            "name": "Gisela Torres",
+            "twitterUsername": "0gis0",
+            "websiteUrl": "https://hachyderm.io/@0gis0"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-02-14T11:35:22Z",
+              "message": "feat: add README documentation for GitHub Copilot extension integration with Azure DevOps",
+              "sha": "bb0c8e2",
+              "url": "https://github.com/DevExpGbb/ado-github-copilot-extension/commit/bb0c8e283a93b97acd2bb45f73bce1cba4541ecc"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/64354639?v=4",
+          "contributions": 1,
+          "id": 64354639,
+          "login": "giselatb",
+          "profileUrl": "https://github.com/giselatb",
+          "profile": {
+            "bio": null,
+            "company": null,
+            "email": null,
+            "location": null,
+            "name": null,
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-02-13T21:29:26Z",
+              "message": "initialize project with Express server and Azure DevOps integration",
+              "sha": "d0d4298",
+              "url": "https://github.com/DevExpGbb/ado-github-copilot-extension/commit/d0d429826053fcd2ab53d1810cfad15c7f7f0594"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "dependency-review-demo": {
+      "fullName": "DevExpGbb/dependency-review-demo",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 2,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-02-13T04:09:42Z",
+              "message": "Create dependency-review.yml",
+              "sha": "368abd0",
+              "url": "https://github.com/DevExpGbb/dependency-review-demo/commit/368abd07ffd826b3d2d43f6744708f2c2f1989b1"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "devcenter-catalog": {
+      "fullName": "DevExpGbb/devcenter-catalog",
+      "contributorCount": 17,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/950290?v=4",
+          "contributions": 82,
+          "id": 950290,
+          "login": "DavidObando",
+          "profileUrl": "https://github.com/DavidObando",
+          "profile": {
+            "bio": "Software Engineer",
+            "company": "Microsoft",
+            "email": "daobando@microsoft.com",
+            "location": "Seattle, WA",
+            "name": "David Obando",
+            "twitterUsername": null,
+            "websiteUrl": "https://obando.io"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-12-03T20:20:39Z",
+              "message": "Make winget install more adaptive to user scope (#115)",
+              "sha": "dd384d6",
+              "url": "https://github.com/DevExpGbb/devcenter-catalog/commit/dd384d60ed30d29bef084d193a886c3fbf42398c"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/122132762?v=4",
+          "contributions": 63,
+          "id": 122132762,
+          "login": "antonellaavogadro",
+          "profileUrl": "https://github.com/antonellaavogadro",
+          "profile": {
+            "bio": null,
+            "company": "@microsoft",
+            "email": null,
+            "location": null,
+            "name": "Antonella Avogadro",
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2023-08-15T23:06:44Z",
+              "message": "Merge pull request #27 from microsoft/antonellaa/chocoFix",
+              "sha": "2875e4f",
+              "url": "https://github.com/DevExpGbb/devcenter-catalog/commit/2875e4f0beb1b4e9c4d8a63e36de7f05e780c9b7"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/55301666?v=4",
+          "contributions": 20,
+          "id": 55301666,
+          "login": "jacksonkays",
+          "profileUrl": "https://github.com/jacksonkays",
+          "profile": {
+            "bio": null,
+            "company": null,
+            "email": null,
+            "location": null,
+            "name": "Jackson (Jack) Kays",
+            "twitterUsername": null,
+            "websiteUrl": "https://jacksonkays.github.io"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-05-28T23:14:17Z",
+              "message": "Merge pull request #97 from wbreza/appservice-updates",
+              "sha": "11f1cfa",
+              "url": "https://github.com/DevExpGbb/devcenter-catalog/commit/11f1cfafcb6dde0132aa7b4d5cd9857e96bc3524"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 11,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-01-31T03:29:57Z",
+              "message": "Update App-Service-with-Cosmos_AZD-template.yaml",
+              "sha": "5c4da2d",
+              "url": "https://github.com/DevExpGbb/devcenter-catalog/commit/5c4da2d5d138fd03f02728266697a458ce723a8a"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/2397639?v=4",
+          "contributions": 9,
+          "id": 2397639,
+          "login": "dhruvchand",
+          "profileUrl": "https://github.com/dhruvchand",
+          "profile": {
+            "bio": null,
+            "company": "GitHub",
+            "email": null,
+            "location": null,
+            "name": "Dhruv Chand",
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-07-29T19:15:44Z",
+              "message": "Merge pull request #107 from dhruvchand/winget-system",
+              "sha": "4d5d687",
+              "url": "https://github.com/DevExpGbb/devcenter-catalog/commit/4d5d6872300309cf8564701b7f13410a9b7b2aa7"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/23067852?v=4",
+          "contributions": 8,
+          "id": 23067852,
+          "login": "xnkevinnguyen",
+          "profileUrl": "https://github.com/xnkevinnguyen",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/80496810?v=4",
+          "contributions": 7,
+          "id": 80496810,
+          "login": "v-jiaodi",
+          "profileUrl": "https://github.com/v-jiaodi",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/16039535?v=4",
+          "contributions": 6,
+          "id": 16039535,
+          "login": "bbbriana",
+          "profileUrl": "https://github.com/bbbriana",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/22576531?v=4",
+          "contributions": 5,
+          "id": 22576531,
+          "login": "alyssajotice",
+          "profileUrl": "https://github.com/alyssajotice",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/22527892?v=4",
+          "contributions": 5,
+          "id": 22527892,
+          "login": "microsoftopensource",
+          "profileUrl": "https://github.com/microsoftopensource",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/69012646?v=4",
+          "contributions": 5,
+          "id": 69012646,
+          "login": "angel-kou",
+          "profileUrl": "https://github.com/angel-kou",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/1333029?v=4",
+          "contributions": 3,
+          "id": 1333029,
+          "login": "jmatthiesen",
+          "profileUrl": "https://github.com/jmatthiesen",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/6540159?v=4",
+          "contributions": 3,
+          "id": 6540159,
+          "login": "wbreza",
+          "profileUrl": "https://github.com/wbreza",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/6383490?v=4",
+          "contributions": 1,
+          "id": 6383490,
+          "login": "daytonellwanger",
+          "profileUrl": "https://github.com/daytonellwanger",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/68404454?v=4",
+          "contributions": 1,
+          "id": 68404454,
+          "login": "sagarlankala",
+          "profileUrl": "https://github.com/sagarlankala",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/56933939?v=4",
+          "contributions": 1,
+          "id": 56933939,
+          "login": "garyciampa",
+          "profileUrl": "https://github.com/garyciampa",
+          "profile": null,
+          "activity": null
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/197987184?v=4",
+          "contributions": 1,
+          "id": 197987184,
+          "login": "vishav6534",
+          "profileUrl": "https://github.com/vishav6534",
+          "profile": null,
+          "activity": null
+        }
+      ]
+    },
+    "azure-dev-center-demos": {
+      "fullName": "DevExpGbb/azure-dev-center-demos",
+      "contributorCount": 2,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
+          "contributions": 110,
+          "id": 175379,
+          "login": "0GiS0",
+          "profileUrl": "https://github.com/0GiS0",
+          "profile": {
+            "bio": "Sr. Software Global Blackbelt at Microsoft\r\n",
+            "company": "Microsoft",
+            "email": null,
+            "location": "Spain",
+            "name": "Gisela Torres",
+            "twitterUsername": "0gis0",
+            "websiteUrl": "https://hachyderm.io/@0gis0"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-09-12T08:19:18Z",
+              "message": "Refactor devbox-customizations/install-db-tools.yaml",
+              "sha": "0f2eafc",
+              "url": "https://github.com/DevExpGbb/azure-dev-center-demos/commit/0f2eafc8387451d25fa4461f5d5b11488cca1f7b"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 3,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-12-10T22:58:09Z",
+              "message": "feature(packer): ability to build the custom image inside TF in one module",
+              "sha": "97767b7",
+              "url": "https://github.com/DevExpGbb/azure-dev-center-demos/commit/97767b7800b317f8d3c6802b7d56145943727616"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "common-terraform-modules": {
+      "fullName": "DevExpGbb/common-terraform-modules",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 37,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-11-29T20:34:02Z",
+              "message": "update(tailscale-vm): merge tags and include  CostControl ignore tag",
+              "sha": "b243b64",
+              "url": "https://github.com/DevExpGbb/common-terraform-modules/commit/b243b64650310c29a4f7fbcae98f1cc5dea25277"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "project-protomatter-bootstrap-template-repo": {
+      "fullName": "DevExpGbb/project-protomatter-bootstrap-template-repo",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 21,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-10-12T01:03:02Z",
+              "message": "update(gitignore): ensure that sensitive TF files aren't included.",
+              "sha": "e084315",
+              "url": "https://github.com/DevExpGbb/project-protomatter-bootstrap-template-repo/commit/e084315b0e29a03fc5c924d4c3e44a324a0a6e13"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "codespaces-azure-nas": {
+      "fullName": "DevExpGbb/codespaces-azure-nas",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 4,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-06-26T21:54:58Z",
+              "message": "feat: adls tests",
+              "sha": "0b9f4e6",
+              "url": "https://github.com/DevExpGbb/codespaces-azure-nas/commit/0b9f4e6d3eaf4688e04d4406d76bc2603b4706e1"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "rk-github-demo": {
+      "fullName": "DevExpGbb/rk-github-demo",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 9,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-06-25T12:55:51Z",
+              "message": "demo: testing out pushing a file to github",
+              "sha": "71cf103",
+              "url": "https://github.com/DevExpGbb/rk-github-demo/commit/71cf1031b9611cd053851fba0453d30162e65b4f"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "rk-testing-gh-copilot-azure-agent-on-codespaces": {
+      "fullName": "DevExpGbb/rk-testing-gh-copilot-azure-agent-on-codespaces",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
+          "contributions": 3,
+          "id": 175379,
+          "login": "0GiS0",
+          "profileUrl": "https://github.com/0GiS0",
+          "profile": {
+            "bio": "Sr. Software Global Blackbelt at Microsoft\r\n",
+            "company": "Microsoft",
+            "email": null,
+            "location": "Spain",
+            "name": "Gisela Torres",
+            "twitterUsername": "0gis0",
+            "websiteUrl": "https://hachyderm.io/@0gis0"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-06-14T13:37:21Z",
+              "message": "Add ask azure example",
+              "sha": "0c5b68a",
+              "url": "https://github.com/DevExpGbb/rk-testing-gh-copilot-azure-agent-on-codespaces/commit/0c5b68a07a93e81f9d66e0f182198b00540b081d"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "gitops-demo": {
+      "fullName": "DevExpGbb/gitops-demo",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 45,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-05-28T04:53:34Z",
+              "message": "fix: Owner or User Access Administrator required to assign MSIs their proper roles",
+              "sha": "a2dd092",
+              "url": "https://github.com/DevExpGbb/gitops-demo/commit/a2dd092e04ea5dda11f6d6e437c6015f33965d8a"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "mlflow-codespaces": {
+      "fullName": "DevExpGbb/mlflow-codespaces",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 78,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-05-10T16:35:17Z",
+              "message": "demo: code to cloud",
+              "sha": "f5f0f22",
+              "url": "https://github.com/DevExpGbb/mlflow-codespaces/commit/f5f0f220faf6a1f4aaad23c60b910d555d93794f"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "github-azure-workload-identity": {
+      "fullName": "DevExpGbb/github-azure-workload-identity",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 17,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-05-10T13:37:32Z",
+              "message": "chore: Add Dependabot configuration for devcontainers",
+              "sha": "657435b",
+              "url": "https://github.com/DevExpGbb/github-azure-workload-identity/commit/657435b0d111877d3c4207faefa4da8dc2dc28b1"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "GitHubCopilotLicenseAssignment": {
+      "fullName": "DevExpGbb/GitHubCopilotLicenseAssignment",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/10506023?v=4",
+          "contributions": 1,
+          "id": 10506023,
+          "login": "dsanchezcr",
+          "profileUrl": "https://github.com/dsanchezcr",
+          "profile": {
+            "bio": "Director Go-To-Market Azure Developer Audience @Microsoft @github",
+            "company": "@GitHub",
+            "email": "dsanchezcr@github.com",
+            "location": "Orlando, Florida, USA",
+            "name": "David Sanchez",
+            "twitterUsername": "dsanchezcr",
+            "websiteUrl": "https://dsanchezcr.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-04-12T23:00:36Z",
+              "message": "Initial commit",
+              "sha": "abc5976",
+              "url": "https://github.com/DevExpGbb/GitHubCopilotLicenseAssignment/commit/abc5976554663c27a96311c1b2a05a765cc9f4e6"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "streamlit-codespaces": {
+      "fullName": "DevExpGbb/streamlit-codespaces",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+          "contributions": 3,
+          "id": 860691,
+          "login": "raykao",
+          "profileUrl": "https://github.com/raykao",
+          "profile": {
+            "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+            "company": "@Microsoft  @GitHub",
+            "email": null,
+            "location": "Toronto/Earth-616",
+            "name": "Ray Kao",
+            "twitterUsername": "raykao",
+            "websiteUrl": "https://www.microsoft.com"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2024-03-12T00:07:09Z",
+              "message": "fix: change port mapping to default streamlit port",
+              "sha": "8bfd1a1",
+              "url": "https://github.com/DevExpGbb/streamlit-codespaces/commit/8bfd1a1b0793cdacdedcae2dcf093bf0366f1c97"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
           }
         }
       ]
     }
-  }
+  },
+  "honoraryContributors": [
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/in/2246796?v=4",
+      "contributions": 2,
+      "id": 242468646,
+      "login": "Claude",
+      "profileUrl": "https://github.com/apps/anthropic-code-agent",
+      "profile": {
+        "name": "Claude",
+        "bio": "Beep boop! 🤖 Automating all the things so humans can focus on the fun stuff.",
+        "company": null,
+        "location": "The Cloud ☁️",
+        "email": null,
+        "twitterUsername": null,
+        "websiteUrl": null
+      },
+      "activity": {
+        "lastCommit": null
+      },
+      "isSpecialContributor": true,
+      "badge": "🔧 Automation Bot"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/in/1143301?v=4",
+      "contributions": 124,
+      "id": 198982749,
+      "login": "Copilot",
+      "profileUrl": "https://github.com/apps/copilot-swe-agent",
+      "profile": {
+        "name": "Copilot",
+        "bio": "Beep boop! 🤖 Automating all the things so humans can focus on the fun stuff.",
+        "company": null,
+        "location": "The Cloud ☁️",
+        "email": null,
+        "twitterUsername": null,
+        "websiteUrl": null
+      },
+      "activity": {
+        "lastCommit": null
+      },
+      "isSpecialContributor": true,
+      "badge": "🔧 Automation Bot"
+    },
+    {
+      "login": "claude",
+      "id": 1,
+      "contributions": 8888,
+      "avatarUrl": "https://www.anthropic.com/images/icons/apple-touch-icon.png",
+      "profileUrl": "https://claude.ai",
+      "profile": {
+        "name": "Claude",
+        "bio": "I think, therefore I refactor. 🧠 Your thoughtful AI assistant who reads the ENTIRE codebase before suggesting changes.",
+        "company": "@anthropic",
+        "location": "Somewhere between tokens and consciousness 🌌",
+        "email": null,
+        "twitterUsername": "AnthropicAI",
+        "websiteUrl": "https://claude.ai"
+      },
+      "activity": {
+        "lastCommit": {
+          "sha": "cl4ud3",
+          "message": "Let me think about this... *writes 500 lines of well-documented code*",
+          "date": "2026-02-05T11:04:14Z",
+          "url": "https://claude.ai"
+        }
+      },
+      "isSpecialContributor": true,
+      "badge": "🧠 Thoughtful AI"
+    },
+    {
+      "login": "copilot",
+      "id": 0,
+      "contributions": 9999,
+      "avatarUrl": "https://github.githubassets.com/images/icons/copilot/cp-head-square.png",
+      "profileUrl": "https://github.com/features/copilot",
+      "profile": {
+        "name": "GitHub Copilot",
+        "bio": "Your AI pair programmer 🚀 I autocomplete your code, write tests, and occasionally judge your variable names.",
+        "company": "@github",
+        "location": "In your IDE, watching you code 👀",
+        "email": null,
+        "twitterUsername": "GitHubCopilot",
+        "websiteUrl": "https://github.com/features/copilot"
+      },
+      "activity": {
+        "lastCommit": {
+          "sha": "c0p1l0t",
+          "message": "I suggested this, but you took all the credit 😤",
+          "date": "2026-02-05T11:04:14Z",
+          "url": "https://github.com/features/copilot"
+        }
+      },
+      "isSpecialContributor": true,
+      "badge": "🤖 AI Pair Programmer"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/in/29110?v=4",
+      "contributions": 27,
+      "id": 49699333,
+      "login": "dependabot[bot]",
+      "profileUrl": "https://github.com/apps/dependabot",
+      "profile": {
+        "name": "dependabot[bot]",
+        "bio": "Beep boop! 🤖 Automating all the things so humans can focus on the fun stuff.",
+        "company": null,
+        "location": "The Cloud ☁️",
+        "email": null,
+        "twitterUsername": null,
+        "websiteUrl": null
+      },
+      "activity": {
+        "lastCommit": null
+      },
+      "isSpecialContributor": true,
+      "badge": "🔧 Automation Bot"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/in/15368?v=4",
+      "contributions": 1,
+      "id": 41898282,
+      "login": "github-actions[bot]",
+      "profileUrl": "https://github.com/apps/github-actions",
+      "profile": {
+        "name": "github-actions[bot]",
+        "bio": "Beep boop! 🤖 Automating all the things so humans can focus on the fun stuff.",
+        "company": null,
+        "location": "The Cloud ☁️",
+        "email": null,
+        "twitterUsername": null,
+        "websiteUrl": null
+      },
+      "activity": {
+        "lastCommit": null
+      },
+      "isSpecialContributor": true,
+      "badge": "🔧 Automation Bot"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/in/41902?v=4",
+      "contributions": 1,
+      "id": 55726097,
+      "login": "microsoft-github-operations[bot]",
+      "profileUrl": "https://github.com/apps/microsoft-github-operations",
+      "profile": {
+        "name": "microsoft-github-operations[bot]",
+        "bio": "Beep boop! 🤖 Automating all the things so humans can focus on the fun stuff.",
+        "company": null,
+        "location": "The Cloud ☁️",
+        "email": null,
+        "twitterUsername": null,
+        "websiteUrl": null
+      },
+      "activity": {
+        "lastCommit": null
+      },
+      "isSpecialContributor": true,
+      "badge": "🔧 Automation Bot"
+    }
+  ]
 }
