@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-02-05T13:05:58Z",
-  "totalRepositories": 29,
-  "totalContributors": 95,
+  "lastUpdated": "2026-02-05T14:08:13Z",
+  "totalRepositories": 31,
+  "totalContributors": 96,
   "repositories": {
     "devexpgbb.github.io": {
       "fullName": "DevExpGbb/devexpgbb.github.io",
@@ -9,7 +9,7 @@
       "contributors": [
         {
           "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
-          "contributions": 38,
+          "contributions": 44,
           "id": 175379,
           "login": "0GiS0",
           "profileUrl": "https://github.com/0GiS0",
@@ -24,10 +24,10 @@
           },
           "activity": {
             "lastCommit": {
-              "date": "2026-02-05T13:03:59Z",
-              "message": "🔄 Add git pull --rebase before pushing updates in workflows for contributors, team, and repository data",
-              "sha": "a194326",
-              "url": "https://github.com/DevExpGbb/devexpgbb.github.io/commit/a194326d5e80293700b705fe63cd15421ac6f659"
+              "date": "2026-02-05T14:05:17Z",
+              "message": "refactor: Update Software GBB Card and Contributors Page Layout",
+              "sha": "d5757c6",
+              "url": "https://github.com/DevExpGbb/devexpgbb.github.io/commit/d5757c6565c1bd2eb998f633132e181cdd86ee72"
             },
             "recentPRs": 0,
             "recentIssues": 0
@@ -540,6 +540,90 @@
         }
       ]
     },
+    "GHES_CodingAgent": {
+      "fullName": "DevExpGbb/GHES_CodingAgent",
+      "contributorCount": 3,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
+          "contributions": 51,
+          "id": 175379,
+          "login": "0GiS0",
+          "profileUrl": "https://github.com/0GiS0",
+          "profile": {
+            "bio": "Sr. Software Global Blackbelt at Microsoft\r\n",
+            "company": "Microsoft",
+            "email": null,
+            "location": "Spain",
+            "name": "Gisela Torres",
+            "twitterUsername": "0gis0",
+            "websiteUrl": "https://hachyderm.io/@0gis0"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-10-30T07:33:14Z",
+              "message": "feat: Add check for user-specific comment in webhook triggered pipeline",
+              "sha": "8915e01",
+              "url": "https://github.com/DevExpGbb/GHES_CodingAgent/commit/8915e016143c5b93ccbd73518451ec21ea25b037"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/136561768?v=4",
+          "contributions": 43,
+          "id": 136561768,
+          "login": "benleane83",
+          "profileUrl": "https://github.com/benleane83",
+          "profile": {
+            "bio": "Hello! I'm a software developer, consultant and tech leader with focus on cloud, AI and app development within the Microsoft ecosystem.",
+            "company": "Microsoft",
+            "email": null,
+            "location": "Dubai, UAE",
+            "name": "Ben Leane",
+            "twitterUsername": null,
+            "websiteUrl": "https://benleane83.github.io"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-11-27T11:30:44Z",
+              "message": "Trying to fix stalling issue in copilot-coder by setting -add-dir specifically",
+              "sha": "fac1301",
+              "url": "https://github.com/DevExpGbb/GHES_CodingAgent/commit/fac13018918416a6a249f7f288a0578db4faaaee"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/64354639?v=4",
+          "contributions": 6,
+          "id": 64354639,
+          "login": "giselatb",
+          "profileUrl": "https://github.com/giselatb",
+          "profile": {
+            "bio": null,
+            "company": null,
+            "email": null,
+            "location": null,
+            "name": null,
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-10-12T20:03:19Z",
+              "message": "Deleted test-validation-1760283393.txt",
+              "sha": "f657589",
+              "url": "https://github.com/DevExpGbb/GHES_CodingAgent/commit/f657589cf5ba814b36f7911473720e7055a96492"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
     "vscode-ghcp-starter-kit": {
       "fullName": "DevExpGbb/vscode-ghcp-starter-kit",
       "contributorCount": 1,
@@ -629,6 +713,38 @@
               "message": "Revise README with updated team information and links",
               "sha": "649c44d",
               "url": "https://github.com/DevExpGbb/.github/commit/649c44d26ff2cd45f386128e3bbef5bb76f0e7ec"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "ghec-sso-setup": {
+      "fullName": "DevExpGbb/ghec-sso-setup",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/136561768?v=4",
+          "contributions": 25,
+          "id": 136561768,
+          "login": "benleane83",
+          "profileUrl": "https://github.com/benleane83",
+          "profile": {
+            "bio": "Hello! I'm a software developer, consultant and tech leader with focus on cloud, AI and app development within the Microsoft ecosystem.",
+            "company": "Microsoft",
+            "email": null,
+            "location": "Dubai, UAE",
+            "name": "Ben Leane",
+            "twitterUsername": null,
+            "websiteUrl": "https://benleane83.github.io"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2025-09-17T11:30:53Z",
+              "message": "Merge pull request #3 from benleane83:copilot/fix-2",
+              "sha": "db3daa8",
+              "url": "https://github.com/DevExpGbb/ghec-sso-setup/commit/db3daa898174f558678d72c3d3cb2daa0e22958b"
             },
             "recentPRs": 0,
             "recentIssues": 0
@@ -2145,7 +2261,7 @@
     },
     {
       "avatarUrl": "https://avatars.githubusercontent.com/in/1143301?v=4",
-      "contributions": 124,
+      "contributions": 131,
       "id": 198982749,
       "login": "Copilot",
       "profileUrl": "https://github.com/apps/copilot-swe-agent",
@@ -2183,7 +2299,7 @@
         "lastCommit": {
           "sha": "cl4ud3",
           "message": "Let me think about this... *writes 500 lines of well-documented code*",
-          "date": "2026-02-05T13:05:58Z",
+          "date": "2026-02-05T14:08:13Z",
           "url": "https://claude.ai"
         }
       },
@@ -2209,7 +2325,7 @@
         "lastCommit": {
           "sha": "c0p1l0t",
           "message": "I suggested this, but you took all the credit 😤",
-          "date": "2026-02-05T13:05:58Z",
+          "date": "2026-02-05T14:08:13Z",
           "url": "https://github.com/features/copilot"
         }
       },
@@ -2239,7 +2355,7 @@
     },
     {
       "avatarUrl": "https://avatars.githubusercontent.com/in/15368?v=4",
-      "contributions": 5,
+      "contributions": 12,
       "id": 41898282,
       "login": "github-actions[bot]",
       "profileUrl": "https://github.com/apps/github-actions",
