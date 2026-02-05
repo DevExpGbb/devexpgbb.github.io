@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-05T14:47:39Z",
+  "lastUpdated": "2026-02-05T15:03:30Z",
   "totalRepositories": 32,
   "totalContributors": 97,
   "repositories": {
@@ -24,10 +24,10 @@
           },
           "activity": {
             "lastCommit": {
-              "date": "2026-02-05T14:44:45Z",
-              "message": "Merge branch 'main' of https://github.com/DevExpGbb/devexpgbb.github.io",
-              "sha": "fd9edb9",
-              "url": "https://github.com/DevExpGbb/devexpgbb.github.io/commit/fd9edb90ac897f814e25c4635f624da37ccca94e"
+              "date": "2026-02-05T14:56:43Z",
+              "message": "feat: Enhance blog fetching functionality with YAML configuration and add new blog source",
+              "sha": "57e43d1",
+              "url": "https://github.com/DevExpGbb/devexpgbb.github.io/commit/57e43d1a1a8f792a9ac441b3fcbbe60575ff6d04"
             },
             "recentPRs": 0,
             "recentIssues": 0
@@ -2357,7 +2357,7 @@
         "lastCommit": {
           "sha": "cl4ud3",
           "message": "Let me think about this... *writes 500 lines of well-documented code*",
-          "date": "2026-02-05T14:47:39Z",
+          "date": "2026-02-05T15:03:30Z",
           "url": "https://claude.ai"
         }
       },
@@ -2383,7 +2383,7 @@
         "lastCommit": {
           "sha": "c0p1l0t",
           "message": "I suggested this, but you took all the credit 😤",
-          "date": "2026-02-05T14:47:39Z",
+          "date": "2026-02-05T15:03:30Z",
           "url": "https://github.com/features/copilot"
         }
       },
