@@ -1,0 +1,129 @@
+---
+export interface SoftwareGbb {
+  login: string;
+  id: number;
+  avatarUrl: string;
+  profile: {
+    name: string | null;
+    bio: string | null;
+    company: string | null;
+    location: string | null;
+    twitterUsername: string | null;
+    websiteUrl: string | null;
+  };
+  totalContributions: number;
+  repositoriesContributed: string[];
+  repositoryCount: number;
+}
+
+interface Props {
+  member: SoftwareGbb;
+  rank?: number;
+}
+
+const { member, rank } = Astro.props;
+const displayName = member.profile.name || member.login;
+
+// Top 3 get special styling
+const isTopContributor = rank && rank <= 3;
+const medalEmojis: Record<number, string> = { 1: '🥇', 2: '🥈', 3: '🥉' };
+---
+
+<a
+  href={`https://github.com/${member.login}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={[
+    'group relative flex flex-col bg-white rounded-2xl p-5 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border overflow-hidden',
+    isTopContributor ? 'border-amber-200 bg-gradient-to-br from-amber-50/50 to-white' : 'border-gray-100/80'
+  ]}
+>
+  {/* Gradient overlay on hover */}
+  <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+
+  {/* Rank badge */}
+  {isTopContributor && rank && (
+    <div class="absolute top-3 right-3 text-2xl">
+      {medalEmojis[rank]}
+    </div>
+  )}
+
+  {/* Header: Avatar + Name */}
+  <div class="flex items-center gap-4 mb-4">
+    <img
+      src={member.avatarUrl}
+      alt={member.login}
+      class:list={[
+        'w-14 h-14 rounded-full shadow-md',
+        isTopContributor ? 'ring-2 ring-amber-300' : 'ring-2 ring-white'
+      ]}
+      loading="lazy"
+    />
+    <div class="flex-1 min-w-0">
+      <h3 class="font-bold text-gray-900 truncate group-hover:text-blue-600 transition-colors">
+        {displayName}
+      </h3>
+      <p class="text-sm text-gray-500">@{member.login}</p>
+    </div>
+  </div>
+
+  {/* Stats */}
+  <div class="flex items-center gap-3 mb-3">
+    <div class="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 rounded-full">
+      <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span class="font-bold text-green-700">{member.totalContributions}</span>
+      <span class="text-xs text-green-600">commits</span>
+    </div>
+    <div class="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 rounded-full">
+      <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+      </svg>
+      <span class="font-bold text-blue-700">{member.repositoryCount}</span>
+      <span class="text-xs text-blue-600">repos</span>
+    </div>
+  </div>
+
+  {/* Bio */}
+  {member.profile.bio && (
+    <p class="text-sm text-gray-500 line-clamp-2 mb-3">
+      {member.profile.bio}
+    </p>
+  )}
+
+  {/* Location & Links */}
+  <div class="flex items-center gap-3 text-xs text-gray-400 mt-auto pt-2">
+    {member.profile.location && (
+      <span class="flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        {member.profile.location}
+      </span>
+    )}
+    {member.profile.twitterUsername && (
+      <span class="flex items-center gap-1 hover:text-blue-500">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </span>
+    )}
+  </div>
+
+  {/* Repos contributed - tooltip on hover */}
+  {member.repositoryCount > 0 && (
+    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900/95 to-gray-900/80 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+      <p class="text-xs font-semibold mb-2 text-gray-300">Contributed to:</p>
+      <div class="flex flex-wrap gap-1">
+        {member.repositoriesContributed.slice(0, 6).map(repo => (
+          <span class="text-xs px-2 py-0.5 bg-white/10 rounded">{repo}</span>
+        ))}
+        {member.repositoryCount > 6 && (
+          <span class="text-xs px-2 py-0.5 bg-white/10 rounded">+{member.repositoryCount - 6} more</span>
+        )}
+      </div>
+    </div>
+  )}
+</a>

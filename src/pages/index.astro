@@ -1,11 +1,14 @@
 ---
 import RepoCard from '../components/RepoCard.astro';
+import SoftwareGbbCard from '../components/SoftwareGbbCard.astro';
+import type { SoftwareGbb } from '../components/SoftwareGbbCard.astro';
 import Layout from '../layouts/Layout.astro';
 import { CATEGORIES, categorizeRepositories, groupByCategory, type RepoCategory, type Repository } from '../utils/categorize';
 
 // Import repository data
 // This file is updated via GitHub Actions workflow
 import repositoriesData from '../data/repositories.json';
+import softwareGbbsData from '../data/software-gbbs.json';
 
 const repositories = repositoriesData as Repository[];
 const categorizedRepos = categorizeRepositories(repositories);
@@ -19,6 +22,9 @@ const archivedRepos = categorizedRepos.filter(repo => repo.isArchived);
 
 // Group for stats
 const grouped = groupByCategory(categorizedRepos);
+
+// Software GBBs
+const softwareGbbs = (softwareGbbsData.members as SoftwareGbb[]).filter(m => m.totalContributions > 0);
 
 // Calculate stats
 const forkCount = activeRepos.filter(r => r.isFork).length;
@@ -158,6 +164,26 @@ const stats = {
       {/* No results message */}
       <p id="no-results" class="text-gray-500 text-center py-12 hidden">No repositories match the current filters.</p>
     </section>
+
+    {/* Software GBBs Section */}
+    {softwareGbbs.length > 0 && (
+      <section class="mb-16 border-t border-gray-200 pt-10">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+          <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          Software GBBs
+          <span class="text-sm font-normal text-gray-500 ml-2">({softwareGbbs.length} active contributors)</span>
+        </h2>
+        <p class="text-gray-500 mb-6">Meet the Software Global Black Belts contributing to this organization.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          {softwareGbbs.map((member, index) => (
+            <SoftwareGbbCard member={member} rank={index + 1} />
+          ))}
+        </div>
+      </section>
+    )}
 
     {/* Archived Repos (collapsed) */}
     {archivedRepos.length > 0 && (

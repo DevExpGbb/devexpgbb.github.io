@@ -1,0 +1,414 @@
+{
+  "lastUpdated": "2026-02-05T11:44:00Z",
+  "teamName": "Software GBBs",
+  "teamSlug": "software-gbbs",
+  "memberCount": 23,
+  "members": [
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/860691?v=4",
+      "id": 860691,
+      "login": "raykao",
+      "profile": {
+        "bio": "Husband, Father and award eligible primate. Cloud Native, AI Dev Tools and Platform Engineering @Microsoft @GitHub Cloud and AI Global Black Belt Team",
+        "company": "@Microsoft  @GitHub",
+        "location": "Toronto/Earth-616",
+        "name": "Ray Kao",
+        "twitterUsername": "raykao",
+        "websiteUrl": "https://www.microsoft.com"
+      },
+      "totalContributions": 416,
+      "repositoriesContributed": [
+        "agentic-platform-engineering",
+        "agentic-devops-demo",
+        "Cobol-Demo",
+        "platform-mode",
+        "vscode-ghcp-starter-kit",
+        "samples",
+        ".github",
+        "github-copilot-office-hours",
+        "xamarin-to-maui-ghcp-demo",
+        "30-days-of-platform-engineering",
+        "demo-cobol-knowledge-base",
+        "dependency-review-demo",
+        "devcenter-catalog",
+        "azure-dev-center-demos",
+        "common-terraform-modules",
+        "project-protomatter-bootstrap-template-repo",
+        "codespaces-azure-nas",
+        "rk-github-demo",
+        "gitops-demo",
+        "mlflow-codespaces",
+        "github-azure-workload-identity",
+        "streamlit-codespaces"
+      ],
+      "repositoryCount": 22
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/47673516?v=4",
+      "id": 47673516,
+      "login": "paulanunes85",
+      "profile": {
+        "bio": "Paula Silva is Developer Productivity, Global Black Belt at Microsoft Americas",
+        "company": "GitHub",
+        "location": "São Paulo, Brazil",
+        "name": "Paula Silva",
+        "twitterUsername": null,
+        "websiteUrl": "https://www.linkedin.com/in/paulanunes/"
+      },
+      "totalContributions": 160,
+      "repositoriesContributed": [
+        "three-horizons-v1.2"
+      ],
+      "repositoryCount": 1
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
+      "id": 175379,
+      "login": "0GiS0",
+      "profile": {
+        "bio": "Sr. Software Global Blackbelt at Microsoft\r\n",
+        "company": "Microsoft",
+        "location": "Spain",
+        "name": "Gisela Torres",
+        "twitterUsername": "0gis0",
+        "websiteUrl": "https://hachyderm.io/@0gis0"
+      },
+      "totalContributions": 141,
+      "repositoriesContributed": [
+        "devexpgbb.github.io",
+        "ado-github-copilot-extension",
+        "azure-dev-center-demos",
+        "rk-testing-gh-copilot-azure-agent-on-codespaces"
+      ],
+      "repositoryCount": 4
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/10506023?v=4",
+      "id": 10506023,
+      "login": "dsanchezcr",
+      "profile": {
+        "bio": "Director Go-To-Market Azure Developer Audience @Microsoft @github",
+        "company": "@GitHub",
+        "location": "Orlando, Florida, USA",
+        "name": "David Sanchez",
+        "twitterUsername": "dsanchezcr",
+        "websiteUrl": "https://dsanchezcr.com"
+      },
+      "totalContributions": 64,
+      "repositoriesContributed": [
+        "agentic-devops-demo",
+        "GitHubCopilotLicenseAssignment"
+      ],
+      "repositoryCount": 2
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/51440732?v=4",
+      "id": 51440732,
+      "login": "danielmeppiel",
+      "profile": {
+        "bio": "Developer productivity @microsoft, Global Black Belt. Always a hubber at @GitHub. Connecting @Azure and @GitHub through AI. ",
+        "company": "Microsoft",
+        "location": "France",
+        "name": "Daniel Meppiel",
+        "twitterUsername": null,
+        "websiteUrl": "https://www.devprodlogs.com/"
+      },
+      "totalContributions": 18,
+      "repositoriesContributed": [
+        "ai-native-dev-lab",
+        "platform-mode"
+      ],
+      "repositoryCount": 2
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/1683889?v=4",
+      "id": 1683889,
+      "login": "ChrisRomp",
+      "profile": {
+        "bio": "Principal Software Solutions Engineer & Global Black Belt (GBB) at Microsoft, based in San Francisco, CA.",
+        "company": "Microsoft",
+        "location": "San Francisco, CA",
+        "name": "Chris Romp",
+        "twitterUsername": null,
+        "websiteUrl": ""
+      },
+      "totalContributions": 1,
+      "repositoriesContributed": [
+        "ai-native-dev-lab"
+      ],
+      "repositoryCount": 1
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/2588978?v=4",
+      "id": 2588978,
+      "login": "alxayo",
+      "profile": {
+        "bio": null,
+        "company": null,
+        "location": null,
+        "name": "Alex",
+        "twitterUsername": null,
+        "websiteUrl": ""
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/3072734?v=4",
+      "id": 3072734,
+      "login": "shinyay",
+      "profile": {
+        "bio": "{\r\n  \"position\": \"Developer Global Black Belt\",\r\n  \"location\": \"Tokyo,JP\",\r\n  \"favorites\": [\"Spring\", \"Kotlin\", \"Developer Productivity\"]\r\n}",
+        "company": "@Microsoft @GutHub",
+        "location": "Tokyo",
+        "name": "Shinya Yanagihara",
+        "twitterUsername": "yanashin18618",
+        "websiteUrl": "https://www.microsoft.com"
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/3915176?v=4",
+      "id": 3915176,
+      "login": "jasonkeicher",
+      "profile": {
+        "bio": null,
+        "company": "GitHub",
+        "location": "New Jersey",
+        "name": "Jason Keicher",
+        "twitterUsername": null,
+        "websiteUrl": ""
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/9865836?v=4",
+      "id": 9865836,
+      "login": "kfolkes",
+      "profile": {
+        "bio": "linkedin.com\\in\\krystalfolkes",
+        "company": null,
+        "location": "Dallas",
+        "name": "Krystal Folkes",
+        "twitterUsername": null,
+        "websiteUrl": "http://krystalfolkes.com"
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/10872124?v=4",
+      "id": 10872124,
+      "login": "fbouteruche",
+      "profile": {
+        "bio": null,
+        "company": "Microsoft",
+        "location": "Paris",
+        "name": "François Bouteruche",
+        "twitterUsername": null,
+        "websiteUrl": ""
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/16080993?v=4",
+      "id": 16080993,
+      "login": "jacwu",
+      "profile": {
+        "bio": null,
+        "company": "Microsoft",
+        "location": "Shanghai",
+        "name": "Jacky Wu",
+        "twitterUsername": null,
+        "websiteUrl": ""
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/17726346?v=4",
+      "id": 17726346,
+      "login": "tcardosoMSFT",
+      "profile": {
+        "bio": null,
+        "company": "Microsoft",
+        "location": "Brazil",
+        "name": "Thiago Cardoso Luiz",
+        "twitterUsername": null,
+        "websiteUrl": "www.tcardoso.org"
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/18750956?v=4",
+      "id": 18750956,
+      "login": "Frank802",
+      "profile": {
+        "bio": "EMEA Sr. Software GBB @Microsoft",
+        "company": "@Microsoft",
+        "location": "Milan, Italy",
+        "name": "Francesco Lana",
+        "twitterUsername": null,
+        "websiteUrl": ""
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/20535201?v=4",
+      "id": 20535201,
+      "login": "arnaudlh",
+      "profile": {
+        "bio": "I build a thing or two @ Microsoft",
+        "company": "Microsoft",
+        "location": "Singapore",
+        "name": "Arnaud Lheureux",
+        "twitterUsername": "arnaudlheureux",
+        "websiteUrl": "http://aka.ms/arnaud"
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/22909641?v=4",
+      "id": 22909641,
+      "login": "umaranit",
+      "profile": {
+        "bio": "test",
+        "company": null,
+        "location": "test",
+        "name": "Umarani",
+        "twitterUsername": null,
+        "websiteUrl": ""
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
+      "id": 26189114,
+      "login": "ewega",
+      "profile": {
+        "bio": "Making typos and learning. Developer Specialist at @microsoft ",
+        "company": "Microsoft ",
+        "location": "Nairobi, KE",
+        "name": "Eldrick Wega",
+        "twitterUsername": null,
+        "websiteUrl": "eldrickwega.com"
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/40822355?v=4",
+      "id": 40822355,
+      "login": "suuus",
+      "profile": {
+        "bio": "Giving \"Generic Microsoft Employee\". ",
+        "company": "@microsoft",
+        "location": "The Netherlands",
+        "name": "Suzanne Daniels",
+        "twitterUsername": null,
+        "websiteUrl": ""
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/52427852?v=4",
+      "id": 52427852,
+      "login": "jkordick",
+      "profile": {
+        "bio": "software global black belt @ microsoft",
+        "company": "@microsoft",
+        "location": "Germany",
+        "name": "Julia Kordick",
+        "twitterUsername": null,
+        "websiteUrl": "https://www.linkedin.com/in/julia-kordick/"
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/59450481?v=4",
+      "id": 59450481,
+      "login": "jdvcDev",
+      "profile": {
+        "bio": null,
+        "company": "@Microsoft",
+        "location": "Denver",
+        "name": null,
+        "twitterUsername": null,
+        "websiteUrl": ""
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/62118837?v=4",
+      "id": 62118837,
+      "login": "sitoader",
+      "profile": {
+        "bio": null,
+        "company": "Microsoft",
+        "location": "Copenhagen",
+        "name": "Simona Toader",
+        "twitterUsername": null,
+        "websiteUrl": ""
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/108512532?v=4",
+      "id": 108512532,
+      "login": "sombaner",
+      "profile": {
+        "bio": "As a Global Black Belt at Microsoft, I focus in empowering developers and modernizing enterprise applications at scale.",
+        "company": "Microsoft",
+        "location": "Bangalore",
+        "name": "Somnath Banerjee",
+        "twitterUsername": "Somnath2301",
+        "websiteUrl": "sombaner@github.com"
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/136561768?v=4",
+      "id": 136561768,
+      "login": "benleane83",
+      "profile": {
+        "bio": "Hello! I'm a software developer, consultant and tech leader with focus on cloud, AI and app development within the Microsoft ecosystem.",
+        "company": "Microsoft",
+        "location": "Dubai, UAE",
+        "name": "Ben Leane",
+        "twitterUsername": null,
+        "websiteUrl": "https://benleane83.github.io"
+      },
+      "totalContributions": 0,
+      "repositoriesContributed": [],
+      "repositoryCount": 0
+    }
+  ]
+}

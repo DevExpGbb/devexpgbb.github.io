@@ -1,0 +1,147 @@
+name: 👥 Fetch Software GBBs Team
+
+on:
+  workflow_run:
+    workflows: ["👥 Fetch Contributors Data"]
+    types:
+      - completed
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-team:
+    name: 📊 Fetch Software GBBs
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🔍 Verify contributors.json exists
+        run: |
+          if [ ! -f src/data/contributors.json ]; then
+            echo "❌ contributors.json not found. Cannot proceed."
+            exit 1
+          fi
+          echo "✅ Found contributors.json"
+
+      - name: 👥 Fetch Software GBBs team members
+        env:
+          GH_TOKEN: ${{ secrets.GHCP_CLI_PAT }}
+        run: |
+          set -e
+
+          echo "🚀 Fetching Software GBBs team members..."
+
+          # Fetch team members
+          team_members=$(gh api orgs/DevExpGbb/teams/software-gbbs/members \
+            --jq '[.[] | {login, id, avatarUrl: .avatar_url}]')
+
+          member_count=$(echo "$team_members" | jq 'length')
+          echo "👥 Found $member_count team members"
+
+          # Load contributors data
+          contributors_data=$(cat src/data/contributors.json)
+
+          # Build team data with contribution counts
+          echo "📊 Calculating contributions for each team member..."
+
+          team_with_contributions="[]"
+
+          for login in $(echo "$team_members" | jq -r '.[].login'); do
+            echo "  Processing: $login"
+
+            # Get member base info
+            member_info=$(echo "$team_members" | jq --arg login "$login" '.[] | select(.login == $login)')
+
+            # Fetch user profile
+            profile=$(gh api "users/${login}" \
+              --jq '{name, bio, company, location, twitterUsername: .twitter_username, websiteUrl: .blog}' \
+              2>/dev/null || echo '{"name":null,"bio":null,"company":null,"location":null,"twitterUsername":null,"websiteUrl":null}')
+
+            # Calculate total contributions across all repos
+            total_contributions=$(echo "$contributors_data" | jq --arg login "$login" '
+              [.repositories[].contributors[]? | select(.login == $login) | .contributions] | add // 0
+            ')
+
+            # Get list of repos they contributed to
+            repos_contributed=$(echo "$contributors_data" | jq --arg login "$login" '
+              [.repositories | to_entries[] | select(.value.contributors[]?.login == $login) | .key]
+            ')
+
+            repo_count=$(echo "$repos_contributed" | jq 'length')
+
+            # Build member object
+            member_obj=$(echo "$member_info" | jq \
+              --argjson profile "$profile" \
+              --argjson contributions "$total_contributions" \
+              --argjson repos "$repos_contributed" \
+              --argjson repoCount "$repo_count" \
+              '. + {
+                profile: $profile,
+                totalContributions: $contributions,
+                repositoriesContributed: $repos,
+                repositoryCount: $repoCount
+              }')
+
+            team_with_contributions=$(echo "$team_with_contributions" | jq --argjson member "$member_obj" '. + [$member]')
+
+            sleep 0.2
+          done
+
+          # Sort by contributions (descending)
+          sorted_team=$(echo "$team_with_contributions" | jq 'sort_by(-.totalContributions)')
+
+          # Build final JSON
+          final_json=$(jq -n \
+            --arg updated "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+            --argjson count "$member_count" \
+            --argjson members "$sorted_team" \
+            '{
+              lastUpdated: $updated,
+              teamName: "Software GBBs",
+              teamSlug: "software-gbbs",
+              memberCount: $count,
+              members: $members
+            }')
+
+          echo "$final_json" > src/data/software-gbbs.json
+
+          echo "✅ Generated software-gbbs.json with $member_count members"
+          echo ""
+          echo "📋 Top contributors:"
+          echo "$sorted_team" | jq -r 'limit(5; .[]) | "  \(.login): \(.totalContributions) contributions"'
+
+      - name: 📝 Commit and push if changed
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet src/data/software-gbbs.json 2>/dev/null; then
+            echo "📭 No changes detected"
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            git add src/data/software-gbbs.json
+            git commit -m "👥 Update Software GBBs team data [skip ci]"
+            git push
+            echo "📬 Changes committed and pushed"
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🚀 Trigger deployment
+        if: steps.commit.outputs.changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🔄 Triggering deployment workflow..."
+          gh workflow run deploy.yml
+          echo "✅ Deployment triggered"
