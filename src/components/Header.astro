@@ -35,6 +35,16 @@ const isActive = (path: string) => currentPath === path;
         </a>
 
         <a
+          href="/software-gbbs"
+          class:list={[
+            "text-sm font-medium transition-colors hover:text-blue-600",
+            isActive('/software-gbbs') ? "text-blue-600" : "text-gray-600"
+          ]}
+        >
+          💻 Software GBBs
+        </a>
+
+        <a
           href="https://laughing-adventure-wr24zge.pages.github.io/"
           target="_blank"
           rel="noopener noreferrer"

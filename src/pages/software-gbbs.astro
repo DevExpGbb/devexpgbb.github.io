@@ -1,0 +1,192 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SoftwareGbbCard from '../components/SoftwareGbbCard.astro';
+import type { SoftwareGbb } from '../components/SoftwareGbbCard.astro';
+import { detectRegion, type Region } from '../utils/processContributors';
+
+// Import raw data
+import softwareGbbsData from '../data/software-gbbs.json';
+
+// Process and sort members by contributions (contributors first, then alphabetically)
+const members = (softwareGbbsData.members as SoftwareGbb[])
+  .map(m => ({
+    ...m,
+    region: detectRegion(m.profile.location)
+  }))
+  .sort((a, b) => {
+    // First sort by contributions (descending)
+    if (b.totalContributions !== a.totalContributions) {
+      return b.totalContributions - a.totalContributions;
+    }
+    // Then alphabetically by name/login
+    const nameA = a.profile.name || a.login;
+    const nameB = b.profile.name || b.login;
+    return nameA.localeCompare(nameB);
+  });
+
+const stats = {
+  total: members.length,
+  totalContributions: members.reduce((sum, m) => sum + m.totalContributions, 0),
+  totalRepos: new Set(members.flatMap(m => m.repositoriesContributed)).size
+};
+
+// Calculate region counts
+const regionCounts = members.reduce((acc, m) => {
+  acc[m.region] = (acc[m.region] || 0) + 1;
+  return acc;
+}, {} as Record<Region, number>);
+
+const regions = [
+  { id: 'all', label: '🌍 All Regions', count: members.length },
+  { id: 'americas', label: '🌎 Americas', count: regionCounts.americas || 0 },
+  { id: 'europe', label: '🌍 Europe', count: regionCounts.europe || 0 },
+  { id: 'asia-pacific', label: '🌏 Asia-Pacific', count: regionCounts['asia-pacific'] || 0 },
+  { id: 'other', label: '🌐 Other/Remote', count: regionCounts.other || 0 },
+];
+
+const lastUpdated = new Date(softwareGbbsData.lastUpdated).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<Layout
+  title="Software GBBs - IP Atlas"
+  description="Meet the Software GBB team members and their contributions"
+>
+  <main class="max-w-7xl mx-auto px-4 py-12">
+    <!-- Hero Section -->
+    <header class="text-center mb-12">
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">
+        💻 Software GBBs
+      </h1>
+      <p class="text-xl text-gray-600 mb-8">
+        Meet the Software GBB team members and their contributions to DevExpGbb
+      </p>
+
+      <!-- Stats -->
+      <div class="flex justify-center gap-4 flex-wrap mb-6">
+        <div class="bg-white px-6 py-3 rounded-full shadow-sm border border-gray-100">
+          <span class="text-2xl font-bold text-blue-600">{stats.total}</span>
+          <span class="text-sm text-gray-600 ml-2">members</span>
+        </div>
+        <div class="bg-white px-6 py-3 rounded-full shadow-sm border border-gray-100">
+          <span class="text-2xl font-bold text-green-600">{stats.totalContributions.toLocaleString()}</span>
+          <span class="text-sm text-gray-600 ml-2">contributions</span>
+        </div>
+        <div class="bg-white px-6 py-3 rounded-full shadow-sm border border-gray-100">
+          <span class="text-2xl font-bold text-purple-600">{stats.totalRepos}</span>
+          <span class="text-sm text-gray-600 ml-2">repositories</span>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-400">
+        Last updated: {lastUpdated}
+      </p>
+    </header>
+
+    <!-- Region Filter -->
+    <section class="mb-8">
+      <div class="flex flex-wrap justify-center gap-2" id="region-filter">
+        {regions.map((region) => (
+          <button
+            type="button"
+            data-region={region.id}
+            class:list={[
+              "region-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border",
+              region.id === 'all' 
+                ? "bg-blue-600 text-white border-blue-600 shadow-md" 
+                : "bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:bg-blue-50"
+            ]}
+          >
+            {region.label}
+            <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-black/10">
+              {region.count}
+            </span>
+          </button>
+        ))}
+      </div>
+      <p id="filter-status" class="text-center text-sm text-gray-500 mt-3">
+        Showing all {stats.total} members
+      </p>
+    </section>
+
+    <!-- Members Grid -->
+    <section>
+      <div id="members-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {members.map((member, index) => (
+          <div class="member-card" data-region={member.region}>
+            <SoftwareGbbCard member={member} rank={index + 1} />
+          </div>
+        ))}
+      </div>
+
+      <!-- No results message -->
+      <div id="no-results" class="hidden text-center py-12">
+        <div class="text-6xl mb-4">🔍</div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-2">No members found</h3>
+        <p class="text-gray-500">Try selecting a different region filter</p>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.region-btn');
+  const memberCards = document.querySelectorAll<HTMLElement>('.member-card');
+  const filterStatus = document.getElementById('filter-status');
+  const noResults = document.getElementById('no-results');
+  const grid = document.getElementById('members-grid');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const selectedRegion = button.dataset.region;
+      
+      // Update button styles
+      filterButtons.forEach(btn => {
+        if (btn.dataset.region === selectedRegion) {
+          btn.classList.remove('bg-white', 'text-gray-700', 'border-gray-200', 'hover:border-blue-300', 'hover:bg-blue-50');
+          btn.classList.add('bg-blue-600', 'text-white', 'border-blue-600', 'shadow-md');
+        } else {
+          btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600', 'shadow-md');
+          btn.classList.add('bg-white', 'text-gray-700', 'border-gray-200', 'hover:border-blue-300', 'hover:bg-blue-50');
+        }
+      });
+
+      // Filter cards
+      let visibleCount = 0;
+      memberCards.forEach(card => {
+        const cardRegion = card.dataset.region;
+        const isVisible = selectedRegion === 'all' || cardRegion === selectedRegion;
+        
+        if (isVisible) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Update status text
+      if (filterStatus) {
+        const regionLabel = selectedRegion === 'all' ? 'all regions' : 
+          selectedRegion === 'americas' ? 'Americas' :
+          selectedRegion === 'europe' ? 'Europe' :
+          selectedRegion === 'asia-pacific' ? 'Asia-Pacific' : 'Other/Remote';
+        filterStatus.textContent = `Showing ${visibleCount} member${visibleCount !== 1 ? 's' : ''} from ${regionLabel}`;
+      }
+
+      // Show/hide no results message
+      if (noResults && grid) {
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+          grid.classList.add('hidden');
+        } else {
+          noResults.classList.add('hidden');
+          grid.classList.remove('hidden');
+        }
+      }
+    });
+  });
+</script>
