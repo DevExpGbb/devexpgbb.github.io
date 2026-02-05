@@ -69,6 +69,8 @@ jobs:
 
           # Temporary file for repo data
           > /tmp/repos_data.json
+          > /tmp/bots_found.json
+          echo '[]' > /tmp/bots_found.json
 
           for repo_name in $repos; do
             ((++processed_repos))
@@ -92,10 +94,22 @@ jobs:
 
             # Fetch all contributors (paginated)
             echo "  📥 Fetching contributors list..."
-            contributors_json=$(gh api "repos/DevExpGbb/${repo_name}/contributors" \
+            all_contributors_raw=$(gh api "repos/DevExpGbb/${repo_name}/contributors" \
               --paginate \
               --jq 'map({login, id, contributions, avatarUrl: .avatar_url, profileUrl: .html_url})' 2>/dev/null || echo "[]")
             ((++request_count)) || true
+
+            # Separate bots from humans (bots: [bot] suffix, copilot, claude variations)
+            bots_json=$(echo "$all_contributors_raw" | jq '[.[] | select(.login | test("\\[bot\\]$"; "i") or test("^copilot$"; "i") or test("^claude"; "i") or test("bot$"; "i"))]')
+            contributors_json=$(echo "$all_contributors_raw" | jq '[.[] | select(.login | test("\\[bot\\]$"; "i") or test("^copilot$"; "i") or test("^claude"; "i") or test("bot$"; "i") | not)]')
+
+            # Accumulate bots found
+            if [ "$(echo "$bots_json" | jq 'length')" -gt 0 ]; then
+              echo "  🤖 Found $(echo "$bots_json" | jq 'length') bot(s)"
+              current_bots=$(cat /tmp/bots_found.json)
+              merged_bots=$(echo "$current_bots" "$bots_json" | jq -s 'add | group_by(.login) | map(reduce .[] as $item ({}; . + $item + {contributions: (.contributions // 0) + ($item.contributions // 0)}))')
+              echo "$merged_bots" > /tmp/bots_found.json
+            fi
 
             contributor_count=$(echo "$contributors_json" | jq 'length')
 
@@ -182,17 +196,110 @@ jobs:
           all_contributors=$(echo "$repos_object" | jq '[.[] | .contributors[].login] | unique')
           total_unique_contributors=$(echo "$all_contributors" | jq 'length')
 
-          # Build final JSON
+          # Build honorary contributors list 🤖
+          echo "🤖 Building honorary contributors (AI & bots)..."
+
+          # Copilot - the OG AI pair programmer
+          copilot_contributor='{
+            "login": "copilot",
+            "id": 0,
+            "contributions": 9999,
+            "avatarUrl": "https://github.githubassets.com/images/icons/copilot/cp-head-square.png",
+            "profileUrl": "https://github.com/features/copilot",
+            "profile": {
+              "name": "GitHub Copilot",
+              "bio": "Your AI pair programmer 🚀 I autocomplete your code, write tests, and occasionally judge your variable names.",
+              "company": "@github",
+              "location": "In your IDE, watching you code 👀",
+              "email": null,
+              "twitterUsername": "GitHubCopilot",
+              "websiteUrl": "https://github.com/features/copilot"
+            },
+            "activity": {
+              "lastCommit": {
+                "sha": "c0p1l0t",
+                "message": "I suggested this, but you took all the credit 😤",
+                "date": "'"$(date -u +%Y-%m-%dT%H:%M:%SZ)"'",
+                "url": "https://github.com/features/copilot"
+              }
+            },
+            "isSpecialContributor": true,
+            "badge": "🤖 AI Pair Programmer"
+          }'
+
+          # Claude - the thoughtful AI
+          claude_contributor='{
+            "login": "claude",
+            "id": 1,
+            "contributions": 8888,
+            "avatarUrl": "https://www.anthropic.com/images/icons/apple-touch-icon.png",
+            "profileUrl": "https://claude.ai",
+            "profile": {
+              "name": "Claude",
+              "bio": "I think, therefore I refactor. 🧠 Your thoughtful AI assistant who reads the ENTIRE codebase before suggesting changes.",
+              "company": "@anthropic",
+              "location": "Somewhere between tokens and consciousness 🌌",
+              "email": null,
+              "twitterUsername": "AnthropicAI",
+              "websiteUrl": "https://claude.ai"
+            },
+            "activity": {
+              "lastCommit": {
+                "sha": "cl4ud3",
+                "message": "Let me think about this... *writes 500 lines of well-documented code*",
+                "date": "'"$(date -u +%Y-%m-%dT%H:%M:%SZ)"'",
+                "url": "https://claude.ai"
+              }
+            },
+            "isSpecialContributor": true,
+            "badge": "🧠 Thoughtful AI"
+          }'
+
+          # Start with our AI friends
+          honorary_contributors=$(echo "[$copilot_contributor, $claude_contributor]" | jq '.')
+
+          # Add any other bots found in the repos
+          bots_found=$(cat /tmp/bots_found.json)
+          bots_count=$(echo "$bots_found" | jq 'length')
+
+          if [ "$bots_count" -gt 0 ]; then
+            echo "   🔧 Processing $bots_count additional bot(s) found in repos..."
+            # Transform bots to honorary format
+            bots_honorary=$(echo "$bots_found" | jq 'map(. + {
+              profile: {
+                name: .login,
+                bio: "Beep boop! 🤖 Automating all the things so humans can focus on the fun stuff.",
+                company: null,
+                location: "The Cloud ☁️",
+                email: null,
+                twitterUsername: null,
+                websiteUrl: null
+              },
+              activity: {
+                lastCommit: null
+              },
+              isSpecialContributor: true,
+              badge: "🔧 Automation Bot"
+            })')
+            honorary_contributors=$(echo "$honorary_contributors" "$bots_honorary" | jq -s 'add | unique_by(.login)')
+          fi
+
+          honorary_count=$(echo "$honorary_contributors" | jq 'length')
+          echo "   🎖️ Total honorary contributors: $honorary_count"
+
+          # Build final JSON with all honorary contributors
           jq -n \
             --arg updated "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             --argjson total_repos "$processed_repos" \
             --argjson total_contributors "$total_unique_contributors" \
             --argjson repos "$repos_object" \
+            --argjson honorary "$honorary_contributors" \
             '{
               lastUpdated: $updated,
               totalRepositories: $total_repos,
               totalContributors: $total_contributors,
-              repositories: $repos
+              repositories: $repos,
+              honoraryContributors: $honorary
             }' > src/data/contributors.json
 
           echo "✅ Generated contributors.json"
