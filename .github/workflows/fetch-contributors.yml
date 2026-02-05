@@ -154,14 +154,21 @@ jobs:
               # Get contributor base info from the list
               contributor_base=$(echo "$top_contributors" | jq --arg login "$contributor_login" '.[] | select(.login == $login)')
 
-              # Combine all data
-              contributor_full=$(echo "$contributor_base" | jq \
-                --argjson profile "$profile_data" \
-                --argjson lastCommit "$last_commit" \
-                '. + {profile: $profile, activity: {lastCommit: $lastCommit, recentPRs: 0, recentIssues: 0}}')
+              # Write JSON to temp files to avoid shell quoting issues with --argjson
+              echo "$profile_data" > /tmp/profile_data.json
+              echo "$last_commit" > /tmp/last_commit.json
+              echo "$contributor_base" > /tmp/contributor_base.json
+
+              # Combine all data using --slurpfile to avoid shell escaping issues
+              contributor_full=$(jq -n \
+                --slurpfile base /tmp/contributor_base.json \
+                --slurpfile profile /tmp/profile_data.json \
+                --slurpfile lastCommit /tmp/last_commit.json \
+                '$base[0] + {profile: $profile[0], activity: {lastCommit: $lastCommit[0], recentPRs: 0, recentIssues: 0}}')
 
               # Add to detailed contributors array
-              detailed_contributors=$(echo "$detailed_contributors" | jq --argjson new "$contributor_full" '. + [$new]')
+              echo "$contributor_full" > /tmp/contributor_full.json
+              detailed_contributors=$(echo "$detailed_contributors" | jq --slurpfile new /tmp/contributor_full.json '. + $new')
 
               sleep 0.5
             done
@@ -169,16 +176,18 @@ jobs:
             # For remaining contributors (beyond top 5), add basic info only
             if [ "$contributor_count" -gt 5 ]; then
               remaining_contributors=$(echo "$contributors_json" | jq '[.[5:] | .[] | . + {profile: null, activity: null}]')
-              detailed_contributors=$(echo "$detailed_contributors" | jq --argjson remaining "$remaining_contributors" '. + $remaining')
+              echo "$remaining_contributors" > /tmp/remaining_contributors.json
+              detailed_contributors=$(echo "$detailed_contributors" | jq --slurpfile remaining /tmp/remaining_contributors.json '. + $remaining[0]')
             fi
 
-            # Create repo entry
+            # Create repo entry using temp files to avoid shell quoting issues
+            echo "$detailed_contributors" > /tmp/detailed_contributors.json
             repo_entry=$(jq -n \
               --arg name "$repo_name" \
               --arg fullName "DevExpGbb/$repo_name" \
               --argjson count "$contributor_count" \
-              --argjson contributors "$detailed_contributors" \
-              '{($name): {fullName: $fullName, contributorCount: $count, contributors: $contributors}}')
+              --slurpfile contributors /tmp/detailed_contributors.json \
+              '{($name): {fullName: $fullName, contributorCount: $count, contributors: $contributors[0]}}')
 
             # Append to repos data
             echo "$repo_entry" >> /tmp/repos_data.json
@@ -288,18 +297,22 @@ jobs:
           echo "   🎖️ Total honorary contributors: $honorary_count"
 
           # Build final JSON with all honorary contributors
+          # Write complex JSON to temp files to avoid shell quoting issues
+          echo "$repos_object" > /tmp/repos_object.json
+          echo "$honorary_contributors" > /tmp/honorary_contributors.json
+
           jq -n \
             --arg updated "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             --argjson total_repos "$processed_repos" \
             --argjson total_contributors "$total_unique_contributors" \
-            --argjson repos "$repos_object" \
-            --argjson honorary "$honorary_contributors" \
+            --slurpfile repos /tmp/repos_object.json \
+            --slurpfile honorary /tmp/honorary_contributors.json \
             '{
               lastUpdated: $updated,
               totalRepositories: $total_repos,
               totalContributors: $total_contributors,
-              repositories: $repos,
-              honoraryContributors: $honorary
+              repositories: $repos[0],
+              honoraryContributors: $honorary[0]
             }' > src/data/contributors.json
 
           echo "✅ Generated contributors.json"
