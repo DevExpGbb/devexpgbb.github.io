@@ -51,10 +51,18 @@ jobs:
             # If the API call fails or returns empty, use null
             top_contributor_raw=$(gh api "repos/DevExpGbb/${repo_name}/contributors" 2>/dev/null) || true
             
-            if [ -n "$top_contributor_raw" ] && \
-               top_contributor=$(echo "$top_contributor_raw" | jq -e 'if length == 0 then null else .[0] | {login: .login, avatarUrl: .avatar_url} end' 2>/dev/null); then
-              # Successfully got valid contributor data, use it
-              echo "$repo" | jq --argjson tc "$top_contributor" '. + {topContributor: $tc}'
+            # Validate that the response is valid JSON before trying to parse it
+            if [ -n "$top_contributor_raw" ] && echo "$top_contributor_raw" | jq empty 2>/dev/null; then
+              # Try to parse the contributor data
+              top_contributor=$(echo "$top_contributor_raw" | jq -e 'if length == 0 then null else .[0] | {login: .login, avatarUrl: .avatar_url} end' 2>/dev/null) || true
+              
+              if [ -n "$top_contributor" ] && [ "$top_contributor" != "null" ]; then
+                # Successfully got valid contributor data, use it
+                echo "$repo" | jq --argjson tc "$top_contributor" '. + {topContributor: $tc}'
+              else
+                # Empty array or null - use null
+                echo "$repo" | jq '. + {topContributor: null}'
+              fi
             else
               # API failed, returned empty, or invalid data - use null
               echo "$repo" | jq '. + {topContributor: null}'
