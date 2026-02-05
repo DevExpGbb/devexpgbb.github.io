@@ -13,6 +13,6 @@
       "Opinion",
       "Thought leadership"
     ],
-    "description": "Reflection based on hands-on experience for engineers and technical leaders facing application modernization, focusing on foundations and the role of agentic AI."
+    "description": "<p>How to read this article This article is a reflection based on hands-on experience and is written for engineers and technical leaders who are facing a new application modernization effort and want to build a realistic mental model before reaching for tools. If you are new to application modernization, I recommend reading the article end to end. [&#8230;]</p>\n<p>The post <a href=\"https://devblogs.microsoft.com/all-things-azure/the-realities-of-application-modernization-with-agentic-ai-early-2026/\">The Realities of Application Modernization with Agentic AI (Early 2026)</a> appeared first on <a href=\"https://devblogs.microsoft.com/all-things-azure\">All things Azure</a>.</p>"
   }
 ]

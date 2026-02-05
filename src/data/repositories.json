@@ -12,7 +12,7 @@
         }
       },
       {
-        "size": 54453,
+        "size": 59056,
         "node": {
           "name": "Astro"
         }
@@ -34,6 +34,12 @@
         "node": {
           "name": "Shell"
         }
+      },
+      {
+        "size": 2311,
+        "node": {
+          "name": "Python"
+        }
       }
     ],
     "name": "devexpgbb.github.io",
@@ -53,7 +59,7 @@
       }
     ],
     "stargazerCount": 1,
-    "updatedAt": "2026-02-05T14:10:18Z",
+    "updatedAt": "2026-02-05T14:44:50Z",
     "url": "https://github.com/DevExpGbb/devexpgbb.github.io",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
