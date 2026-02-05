@@ -1,0 +1,87 @@
+---
+import { ASSET_TYPES, formatDate } from '../utils/categorize';
+
+export interface BlogPost {
+  source: string;
+  title: string;
+  url: string;
+  date: string;
+  author: string;
+  categories: string[];
+  description: string | null;
+}
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const blogTypeInfo = ASSET_TYPES['blog'];
+---
+
+<a 
+  href={post.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="blog-card group relative flex flex-col bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100/80 dark:border-gray-700/80 overflow-hidden"
+>
+  {/* Gradient overlay on hover */}
+  <div class="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+
+  {/* Badges row */}
+  <div class="flex items-center gap-1.5 mb-2 relative flex-wrap">
+    {/* Blog Asset Type Badge */}
+    <span class={`flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded-full font-medium ${blogTypeInfo.bgColor} ${blogTypeInfo.color} dark:bg-pink-900/50 dark:text-pink-300`}>
+      <span>{blogTypeInfo.emoji}</span>
+      <span>{blogTypeInfo.label}</span>
+    </span>
+    
+    {/* Source Badge */}
+    <span class="text-[10px] px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-full font-medium">
+      {post.source}
+    </span>
+    
+    {/* Author Badge */}
+    <span class="text-[10px] px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full font-medium">
+      {post.author}
+    </span>
+  </div>
+
+  {/* Title */}
+  <h3 class="font-semibold text-sm text-gray-900 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors line-clamp-2 mb-1 relative">
+    {post.title}
+  </h3>
+
+  {/* Description */}
+  <p class="text-xs text-gray-500 dark:text-gray-400 mb-2 line-clamp-2 flex-grow min-h-[2rem] leading-relaxed relative">
+    {post.description?.replace(/<[^>]*>/g, '').substring(0, 150) || 'No description available'}
+  </p>
+
+  {/* Categories */}
+  {post.categories && post.categories.length > 0 && (
+    <div class="flex flex-wrap gap-1 mb-2 relative">
+      {post.categories.slice(0, 3).map(cat => (
+        <span class="text-[10px] px-1.5 py-0.5 bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 rounded-full font-medium">
+          {cat}
+        </span>
+      ))}
+    </div>
+  )}
+
+  {/* Footer: Date + Read link */}
+  <div class="flex items-center justify-between pt-2 border-t border-gray-100/80 dark:border-gray-700/80 relative">
+    <div class="flex items-center gap-1 text-[10px] text-gray-400">
+      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>{formatDate(post.date)}</span>
+    </div>
+    <span class="text-[10px] text-pink-600 dark:text-pink-400 font-medium group-hover:underline">Read →</span>
+  </div>
+</a>
+
+<style>
+  .blog-card {
+    backdrop-filter: blur(8px);
+  }
+</style>

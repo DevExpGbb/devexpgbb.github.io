@@ -1,5 +1,7 @@
 ---
 import RepoCard from '../components/RepoCard.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import type { BlogPost } from '../components/BlogPostCard.astro';
 import SoftwareGbbCard from '../components/SoftwareGbbCard.astro';
 import type { SoftwareGbb } from '../components/SoftwareGbbCard.astro';
 import Layout from '../layouts/Layout.astro';
@@ -40,24 +42,18 @@ const groupedByType = groupByAssetType(categorizedRepos);
 const softwareGbbs = (softwareGbbsData.members as SoftwareGbb[]).filter(m => m.totalContributions > 0);
 
 // Blog posts (already filtered in workflow by desired author(s))
-type BlogPost = {
-  source: string;
-  title: string;
-  url: string;
-  date: string;
-  author: string;
-  categories: string[];
-  description: string | null;
-};
 const blogPosts = blogPostsData as BlogPost[];
 
-// Calculate stats
+// Calculate stats - include blog posts in the "blog" asset type
 const forkCount = activeRepos.filter(r => r.isFork).length;
+const totalItems = activeRepos.length + blogPosts.length;
 const stats = {
   total: repositories.length,
   active: activeRepos.length,
   archived: archivedRepos.length,
   forks: forkCount,
+  blogPosts: blogPosts.length,
+  totalItems: totalItems,
   byCategory: Object.entries(groupedByCategory)
     .filter(([_, repos]) => repos.length > 0)
     .map(([category, repos]) => ({
@@ -66,14 +62,30 @@ const stats = {
       activeCount: repos.filter(r => !r.isArchived).length,
     }))
     .sort((a, b) => b.count - a.count),
-  byType: Object.entries(groupedByType)
-    .filter(([_, repos]) => repos.length > 0)
-    .map(([assetType, repos]) => ({
-      assetType: ASSET_TYPES[assetType as AssetType],
-      count: repos.length,
-      activeCount: repos.filter(r => !r.isArchived).length,
-    }))
-    .sort((a, b) => b.count - a.count),
+  byType: (() => {
+    const types = Object.entries(groupedByType)
+      .filter(([_, repos]) => repos.length > 0)
+      .map(([assetType, repos]) => ({
+        assetType: ASSET_TYPES[assetType as AssetType],
+        count: repos.length,
+        activeCount: repos.filter(r => !r.isArchived).length,
+      }));
+    
+    // Add blog posts to the "blog" type or create it if it doesn't exist
+    const blogTypeIndex = types.findIndex(t => t.assetType.name === 'blog');
+    if (blogTypeIndex >= 0) {
+      types[blogTypeIndex].count += blogPosts.length;
+      types[blogTypeIndex].activeCount += blogPosts.length;
+    } else if (blogPosts.length > 0) {
+      types.push({
+        assetType: ASSET_TYPES['blog'],
+        count: blogPosts.length,
+        activeCount: blogPosts.length,
+      });
+    }
+    
+    return types.sort((a, b) => b.count - a.count);
+  })(),
 };
 ---
 
@@ -170,25 +182,6 @@ const stats = {
               ))}
             </div>
           </div>
-          
-          {/* Blog Posts Filter */}
-          {blogPosts.length > 0 && (
-            <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
-              <h3 class="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5 flex items-center gap-1">
-                📰 Blog Posts
-              </h3>
-              <label class="flex items-center gap-2 px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors">
-                <input
-                  type="checkbox"
-                  id="blog-filter"
-                  class="w-3.5 h-3.5 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500"
-                  checked
-                />
-                <span class="text-xs text-gray-700 dark:text-gray-300">Show blog posts</span>
-                <span class="ml-auto text-[10px] text-gray-400">{blogPosts.length}</span>
-              </label>
-            </div>
-          )}
 
           {/* Fork Filter */}
           {stats.forks > 0 && (
@@ -210,7 +203,7 @@ const stats = {
           
           <div class="pt-2 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
             <p id="filter-status" class="text-[10px] text-gray-500 dark:text-gray-400">
-              Showing {stats.active} repos
+              Showing {stats.totalItems} items
             </p>
             <button
               id="clear-filters"
@@ -224,65 +217,27 @@ const stats = {
 
       {/* Main Content */}
       <div class="flex-1 min-w-0">
-        {/* Blog Posts Section */}
-        {blogPosts.length > 0 && (
-          <section id="blog-section" class="mb-10">
-            <h2 class="text-lg font-bold text-gray-800 dark:text-white mb-1 flex items-center gap-2">
-              <span class="text-lg">📰</span>
-              Blog Posts
-              <span class="text-xs font-normal text-gray-500 dark:text-gray-400 ml-2">({blogPosts.length})</span>
-            </h2>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Latest posts authored by our team across external blogs.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-              {blogPosts.map((post) => (
-                <a href={post.url} target="_blank" rel="noopener noreferrer" class="group relative block bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100/80 dark:border-gray-700/80 overflow-hidden">
-                  <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-
-                  <div class="flex items-center gap-1.5 mb-2 flex-wrap">
-                    <span class="text-[10px] px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-full font-medium">{post.source}</span>
-                    <span class="text-[10px] px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full font-medium">{post.author}</span>
-                    {post.categories?.slice(0, 3).map((c) => (
-                      <span class="text-[10px] px-1.5 py-0.5 bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 rounded-full font-medium">{c}</span>
-                    ))}
-                  </div>
-
-                  <h3 class="font-semibold text-sm text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 mb-1">
-                    {post.title}
-                  </h3>
-
-                  <p class="text-xs text-gray-500 dark:text-gray-400 mb-2 line-clamp-3 leading-relaxed">
-                    {post.description || 'No description available'}
-                  </p>
-
-                  <div class="flex items-center justify-between pt-2 border-t border-gray-100/80 dark:border-gray-700/80">
-                    <div class="flex items-center gap-1 text-[10px] text-gray-400">
-                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span>{formatDate(post.date)}</span>
-                    </div>
-                    <span class="text-[10px] text-blue-600 dark:text-blue-400 font-medium">Read →</span>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Repository Grid */}
+        {/* Assets Grid (Repositories + Blog Posts) */}
         <section class="mb-10">
           <h2 class="text-lg font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
             <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
-            Active Repositories
+            Assets
+            <span class="text-xs font-normal text-gray-500 dark:text-gray-400">({stats.totalItems} items)</span>
           </h2>
           
-          {activeRepos.length === 0 ? (
-            <p class="text-gray-500 text-center py-8">No active repositories.</p>
+          {stats.totalItems === 0 ? (
+            <p class="text-gray-500 text-center py-8">No assets available.</p>
           ) : (
             <div id="repos-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+              {/* Blog Posts */}
+              {blogPosts.map(post => (
+                <div class="repo-item" data-fork="false" data-category="other" data-type="blog">
+                  <BlogPostCard post={post} />
+                </div>
+              ))}
+              {/* Repositories */}
               {activeRepos.map(repo => (
                 <div class="repo-item" data-fork={repo.isFork ? "true" : "false"} data-category={repo.category} data-type={repo.assetType}>
                   <RepoCard repo={repo} />
@@ -366,19 +321,10 @@ const stats = {
     const categoryCheckboxes = document.querySelectorAll<HTMLInputElement>('.category-checkbox');
     const typeCheckboxes = document.querySelectorAll<HTMLInputElement>('.type-checkbox');
     const forkFilter = document.getElementById('fork-filter') as HTMLInputElement | null;
-    const blogFilter = document.getElementById('blog-filter') as HTMLInputElement | null;
-    const blogSection = document.getElementById('blog-section') as HTMLElement | null;
     const clearFiltersBtn = document.getElementById('clear-filters');
     const repoItems = document.querySelectorAll('.repo-item');
     const noResults = document.getElementById('no-results');
     const filterStatus = document.getElementById('filter-status');
-    
-    // Blog filter handler
-    if (blogFilter && blogSection) {
-      blogFilter.addEventListener('change', () => {
-        blogSection.style.display = blogFilter.checked ? '' : 'none';
-      });
-    }
     
     // Apply all filters
     function applyFilters() {
@@ -414,7 +360,7 @@ const stats = {
       
       // Update filter status
       if (filterStatus) {
-        filterStatus.textContent = `Showing ${visibleCount} repositor${visibleCount !== 1 ? 'ies' : 'y'}`;
+        filterStatus.textContent = `Showing ${visibleCount} item${visibleCount !== 1 ? 's' : ''}`;
       }
     }
     
@@ -466,10 +412,6 @@ const stats = {
         categoryCheckboxes.forEach(cb => cb.checked = false);
         typeCheckboxes.forEach(cb => cb.checked = false);
         if (forkFilter) forkFilter.checked = false;
-        if (blogFilter) {
-          blogFilter.checked = true;
-          if (blogSection) blogSection.style.display = '';
-        }
         
         applyFilters();
       });
