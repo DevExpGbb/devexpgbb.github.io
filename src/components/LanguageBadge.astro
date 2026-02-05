@@ -31,7 +31,7 @@ const languageColors: Record<string, { bg: string; ring: string }> = {
 const colors = languageColors[name] || { bg: 'bg-gray-400', ring: 'ring-gray-200' };
 ---
 
-<div class="inline-flex items-center gap-1.5 text-xs text-gray-600 px-2 py-1 bg-gray-50 rounded-md">
-  <span class={`w-2.5 h-2.5 rounded-full ${colors.bg} ring-2 ${colors.ring}`}></span>
+<div class="inline-flex items-center gap-1 text-[10px] text-gray-600 px-1.5 py-0.5 bg-gray-50 rounded">
+  <span class={`w-2 h-2 rounded-full ${colors.bg}`}></span>
   <span class="font-medium">{name}</span>
 </div>

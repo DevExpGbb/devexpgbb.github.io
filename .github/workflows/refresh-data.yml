@@ -59,6 +59,14 @@ jobs:
                 top_contributor="$contributor_data"
               fi
             fi
+
+            # Fetch topics via REST API (string array)
+            topics_data="[]"
+            if topics_resp=$(gh api "repos/DevExpGbb/${repo_name}/topics" --jq '.names' 2>/dev/null); then
+              if [ -n "$topics_resp" ] && [ "$topics_resp" != "null" ]; then
+                topics_data="$topics_resp"
+              fi
+            fi
             
             # Add comma separator for all but first
             if [ "$first" = true ]; then
@@ -68,7 +76,9 @@ jobs:
             fi
             
             # Add repo with contributor
-            echo "$repo_json" | jq --argjson tc "$top_contributor" '. + {topContributor: $tc}' >> /tmp/repos_with_contributors.json
+            echo "$repo_json" | jq --argjson tc "$top_contributor" --argjson topics "$topics_data" '
+              . + { topContributor: $tc, topics: $topics } 
+            ' >> /tmp/repos_with_contributors.json
           done
 
           echo "]" >> /tmp/repos_with_contributors.json

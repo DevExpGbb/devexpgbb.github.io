@@ -3,7 +3,16 @@ import RepoCard from '../components/RepoCard.astro';
 import SoftwareGbbCard from '../components/SoftwareGbbCard.astro';
 import type { SoftwareGbb } from '../components/SoftwareGbbCard.astro';
 import Layout from '../layouts/Layout.astro';
-import { CATEGORIES, categorizeRepositories, groupByCategory, type RepoCategory, type Repository } from '../utils/categorize';
+import { 
+  ASSET_CATEGORIES, 
+  ASSET_TYPES, 
+  categorizeRepositories, 
+  groupByCategory, 
+  groupByAssetType,
+  type AssetCategory, 
+  type AssetType,
+  type Repository 
+} from '../utils/categorize';
 
 // Import repository data
 // This file is updated via GitHub Actions workflow
@@ -21,7 +30,8 @@ const activeRepos = categorizedRepos
 const archivedRepos = categorizedRepos.filter(repo => repo.isArchived);
 
 // Group for stats
-const grouped = groupByCategory(categorizedRepos);
+const groupedByCategory = groupByCategory(categorizedRepos);
+const groupedByType = groupByAssetType(categorizedRepos);
 
 // Software GBBs
 const softwareGbbs = (softwareGbbsData.members as SoftwareGbb[]).filter(m => m.totalContributions > 0);
@@ -33,10 +43,18 @@ const stats = {
   active: activeRepos.length,
   archived: archivedRepos.length,
   forks: forkCount,
-  byCategory: Object.entries(grouped)
+  byCategory: Object.entries(groupedByCategory)
     .filter(([_, repos]) => repos.length > 0)
     .map(([category, repos]) => ({
-      category: CATEGORIES[category as RepoCategory],
+      category: ASSET_CATEGORIES[category as AssetCategory],
+      count: repos.length,
+      activeCount: repos.filter(r => !r.isArchived).length,
+    }))
+    .sort((a, b) => b.count - a.count),
+  byType: Object.entries(groupedByType)
+    .filter(([_, repos]) => repos.length > 0)
+    .map(([assetType, repos]) => ({
+      assetType: ASSET_TYPES[assetType as AssetType],
       count: repos.length,
       activeCount: repos.filter(r => !r.isArchived).length,
     }))
@@ -82,43 +100,57 @@ const stats = {
     </header>
 
     {/* Main Content with Sidebar */}
-    <div class="flex flex-col lg:flex-row gap-8">
+    <div class="flex flex-col lg:flex-row gap-6">
       {/* Filters Sidebar */}
-      <aside class="lg:w-64 flex-shrink-0">
-        <div class="lg:sticky lg:top-24 bg-white rounded-2xl border border-gray-100 p-5 shadow-sm space-y-6">
-          {/* Category Filter */}
+      <aside class="lg:w-56 flex-shrink-0">
+        <div class="lg:sticky lg:top-20 bg-white rounded-xl border border-gray-100 p-3 shadow-sm space-y-3">
+          <h2 class="text-sm font-bold text-gray-900 pb-2 border-b border-gray-100">Filters</h2>
+          
+          {/* Asset Category Filter */}
           <div>
-            <h2 class="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-              </svg>
-              Filter by Category
-            </h2>
-            <div class="flex flex-col gap-2">
-              <button
-                class="category-filter w-full px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 border text-left flex items-center justify-between bg-blue-600 text-white border-blue-600 shadow-md"
-                data-category="all"
-                data-active="true"
-              >
-                <span>All</span>
-                <span class="px-2 py-0.5 text-xs rounded-full bg-white/20">
-                  {stats.active}
-                </span>
-              </button>
+            <h3 class="text-xs font-semibold text-gray-600 mb-1.5 flex items-center gap-1">
+              🗂️ Asset Category
+            </h3>
+            <div class="flex flex-col gap-0.5">
               {stats.byCategory.map(({ category, activeCount }) => (
                 activeCount > 0 && (
-                  <button
-                    class={`category-filter w-full px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 border text-left flex items-center justify-between bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:bg-blue-50`}
-                    data-category={category.name}
-                    data-active="false"
-                    data-bg={category.bgColor}
-                    data-text={category.color}
-                  >
-                    <span>{category.label}</span>
-                    <span class="px-2 py-0.5 text-xs rounded-full bg-gray-100">
-                      {activeCount}
+                  <label class="flex items-center gap-2 px-2 py-1 rounded hover:bg-gray-50 cursor-pointer transition-colors">
+                    <input
+                      type="checkbox"
+                      class="category-checkbox w-3.5 h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      data-category={category.name}
+                    />
+                    <span class="text-xs text-gray-700 flex items-center gap-1.5">
+                      <span>{category.emoji}</span>
+                      <span>{category.label}</span>
                     </span>
-                  </button>
+                    <span class="ml-auto text-[10px] text-gray-400">{activeCount}</span>
+                  </label>
+                )
+              ))}
+            </div>
+          </div>
+          
+          {/* Asset Type Filter */}
+          <div class="pt-2 border-t border-gray-100">
+            <h3 class="text-xs font-semibold text-gray-600 mb-1.5 flex items-center gap-1">
+              📋 Asset Type
+            </h3>
+            <div class="flex flex-col gap-0.5">
+              {stats.byType.map(({ assetType, activeCount }) => (
+                activeCount > 0 && (
+                  <label class="flex items-center gap-2 px-2 py-1 rounded hover:bg-gray-50 cursor-pointer transition-colors">
+                    <input
+                      type="checkbox"
+                      class="type-checkbox w-3.5 h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      data-type={assetType.name}
+                    />
+                    <span class="text-xs text-gray-700 flex items-center gap-1.5">
+                      <span>{assetType.emoji}</span>
+                      <span>{assetType.label}</span>
+                    </span>
+                    <span class="ml-auto text-[10px] text-gray-400">{activeCount}</span>
+                  </label>
                 )
               ))}
             </div>
@@ -126,49 +158,53 @@ const stats = {
           
           {/* Fork Filter */}
           {stats.forks > 0 && (
-            <div class="pt-4 border-t border-gray-100">
-              <h2 class="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"/>
-                </svg>
-                Forks
-              </h2>
-              <button
-                id="fork-filter"
-                class="w-full px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 border text-left flex items-center justify-between border-violet-200 text-violet-600 hover:bg-violet-50"
-                data-active="false"
-              >
-                <span>Show only forks</span>
-                <span class="px-2 py-0.5 text-xs rounded-full bg-violet-100">
-                  {stats.forks}
-                </span>
-              </button>
+            <div class="pt-2 border-t border-gray-100">
+              <h3 class="text-xs font-semibold text-gray-600 mb-1.5 flex items-center gap-1">
+                🍴 Forks
+              </h3>
+              <label class="flex items-center gap-2 px-2 py-1 rounded hover:bg-gray-50 cursor-pointer transition-colors">
+                <input
+                  type="checkbox"
+                  id="fork-filter"
+                  class="w-3.5 h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                <span class="text-xs text-gray-700">Show only forks</span>
+                <span class="ml-auto text-[10px] text-gray-400">{stats.forks}</span>
+              </label>
             </div>
           )}
           
-          <p id="filter-status" class="text-xs text-gray-500 text-center">
-            Showing {stats.active} repositories
-          </p>
+          <div class="pt-2 border-t border-gray-100 flex justify-between items-center">
+            <p id="filter-status" class="text-[10px] text-gray-500">
+              Showing {stats.active} repos
+            </p>
+            <button
+              id="clear-filters"
+              class="text-[10px] text-blue-600 hover:text-blue-700 font-medium"
+            >
+              Clear filters
+            </button>
+          </div>
         </div>
       </aside>
 
       {/* Main Content */}
       <div class="flex-1 min-w-0">
         {/* Repository Grid */}
-        <section class="mb-16">
-          <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <section class="mb-10">
+          <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
             Active Repositories
           </h2>
           
           {activeRepos.length === 0 ? (
-            <p class="text-gray-500 text-center py-12">No active repositories.</p>
+            <p class="text-gray-500 text-center py-8">No active repositories.</p>
           ) : (
-            <div id="repos-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div id="repos-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
               {activeRepos.map(repo => (
-                <div class="repo-item" data-fork={repo.isFork ? "true" : "false"} data-category={repo.category}>
+                <div class="repo-item" data-fork={repo.isFork ? "true" : "false"} data-category={repo.category} data-type={repo.assetType}>
                   <RepoCard repo={repo} />
                 </div>
               ))}
@@ -176,20 +212,20 @@ const stats = {
           )}
           
           {/* No results message */}
-          <p id="no-results" class="text-gray-500 text-center py-12 hidden">No repositories match the current filters.</p>
+          <p id="no-results" class="text-gray-500 text-center py-8 hidden">No repositories match the current filters.</p>
         </section>
 
         {/* Software GBBs Section */}
         {softwareGbbs.length > 0 && (
-          <section class="mb-16 border-t border-gray-200 pt-10">
-            <h2 class="text-2xl font-bold text-gray-800 mb-2 flex items-center gap-2">
-              <span class="text-2xl">🥋</span>
+          <section class="mb-10 border-t border-gray-200 pt-6">
+            <h2 class="text-lg font-bold text-gray-800 mb-1 flex items-center gap-2">
+              <span class="text-lg">🥋</span>
               Software GBBs
-              <span class="text-sm font-normal text-gray-500 ml-2">({softwareGbbs.length} active contributors)</span>
+              <span class="text-xs font-normal text-gray-500 ml-2">({softwareGbbs.length} active)</span>
             </h2>
-            <p class="text-gray-500 mb-6">Meet the Software Global Black Belts contributing to this organization.</p>
+            <p class="text-xs text-gray-500 mb-4">Software Global Black Belts contributing to this organization.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
               {softwareGbbs.map((member, index) => (
                 <SoftwareGbbCard member={member} rank={index + 1} />
               ))}
@@ -199,15 +235,15 @@ const stats = {
 
         {/* Archived Repos (collapsed) */}
         {archivedRepos.length > 0 && (
-          <section class="border-t border-gray-200 pt-10">
+          <section class="border-t border-gray-200 pt-6">
             <details class="group">
-              <summary class="cursor-pointer text-lg font-semibold text-gray-500 hover:text-gray-700 flex items-center gap-2 mb-6">
-                <svg class="w-5 h-5 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <summary class="cursor-pointer text-sm font-semibold text-gray-500 hover:text-gray-700 flex items-center gap-2 mb-4">
+                <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
                 Archived Repositories ({archivedRepos.length})
               </summary>
-              <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
                 {archivedRepos.map(repo => (
                   <RepoCard repo={repo} />
                 ))}
@@ -219,7 +255,7 @@ const stats = {
     </div>
 
     {/* Footer */}
-    <footer class="mt-16 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
+    <footer class="mt-10 pt-6 border-t border-gray-200 text-center text-xs text-gray-500">
       <p>
         Data automatically updated from
         <a href="https://github.com/DevExpGbb" class="text-blue-500 hover:underline ml-1" target="_blank" rel="noopener">
@@ -243,11 +279,14 @@ const stats = {
 
   <script>
     // Filter state
-    let activeCategory = 'all';
+    let selectedCategories: Set<string> = new Set();
+    let selectedTypes: Set<string> = new Set();
     let showOnlyForks = false;
     
-    const forkFilter = document.getElementById('fork-filter');
-    const categoryFilters = document.querySelectorAll('.category-filter');
+    const categoryCheckboxes = document.querySelectorAll<HTMLInputElement>('.category-checkbox');
+    const typeCheckboxes = document.querySelectorAll<HTMLInputElement>('.type-checkbox');
+    const forkFilter = document.getElementById('fork-filter') as HTMLInputElement | null;
+    const clearFiltersBtn = document.getElementById('clear-filters');
     const repoItems = document.querySelectorAll('.repo-item');
     const noResults = document.getElementById('no-results');
     const filterStatus = document.getElementById('filter-status');
@@ -258,12 +297,20 @@ const stats = {
       
       repoItems.forEach(item => {
         const itemCategory = item.getAttribute('data-category');
+        const itemType = item.getAttribute('data-type');
         const isFork = item.getAttribute('data-fork') === 'true';
         
-        const matchesCategory = activeCategory === 'all' || itemCategory === activeCategory;
+        // If no category selected, show all categories
+        const matchesCategory = selectedCategories.size === 0 || 
+          (itemCategory && selectedCategories.has(itemCategory));
+        
+        // If no type selected, show all types
+        const matchesType = selectedTypes.size === 0 || 
+          (itemType && selectedTypes.has(itemType));
+        
         const matchesFork = !showOnlyForks || isFork;
         
-        if (matchesCategory && matchesFork) {
+        if (matchesCategory && matchesType && matchesFork) {
           (item as HTMLElement).style.display = '';
           visibleCount++;
         } else {
@@ -282,51 +329,54 @@ const stats = {
       }
     }
     
-    // Category filter click handlers
-    categoryFilters.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const category = btn.getAttribute('data-category')!;
-        activeCategory = category;
-        
-        // Update button styles
-        categoryFilters.forEach(b => {
-          const isActive = b.getAttribute('data-category') === category;
-          const badge = b.querySelector('span:last-child');
-          b.setAttribute('data-active', String(isActive));
-          
-          if (isActive) {
-            b.classList.remove('bg-white', 'text-gray-700', 'border-gray-200', 'hover:border-blue-300', 'hover:bg-blue-50');
-            b.classList.add('bg-blue-600', 'text-white', 'border-blue-600', 'shadow-md');
-            badge?.classList.remove('bg-gray-100');
-            badge?.classList.add('bg-white/20');
+    // Category checkbox handlers
+    categoryCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        const category = checkbox.getAttribute('data-category');
+        if (category) {
+          if (checkbox.checked) {
+            selectedCategories.add(category);
           } else {
-            b.classList.remove('bg-blue-600', 'text-white', 'border-blue-600', 'shadow-md');
-            b.classList.add('bg-white', 'text-gray-700', 'border-gray-200', 'hover:border-blue-300', 'hover:bg-blue-50');
-            badge?.classList.remove('bg-white/20');
-            badge?.classList.add('bg-gray-100');
+            selectedCategories.delete(category);
           }
-        });
-        
+        }
         applyFilters();
       });
     });
     
-    // Fork filter click handler
-    if (forkFilter) {
-      forkFilter.addEventListener('click', () => {
-        showOnlyForks = !showOnlyForks;
-        forkFilter.setAttribute('data-active', String(showOnlyForks));
-        
-        // Update button style
-        if (showOnlyForks) {
-          forkFilter.classList.remove('border-violet-200', 'text-violet-600', 'hover:bg-violet-50');
-          forkFilter.classList.add('bg-violet-500', 'text-white', 'border-violet-500');
-          forkFilter.querySelector('span')!.textContent = 'Showing forks only';
-        } else {
-          forkFilter.classList.add('border-violet-200', 'text-violet-600', 'hover:bg-violet-50');
-          forkFilter.classList.remove('bg-violet-500', 'text-white', 'border-violet-500');
-          forkFilter.querySelector('span')!.textContent = 'Show only forks';
+    // Type checkbox handlers
+    typeCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        const type = checkbox.getAttribute('data-type');
+        if (type) {
+          if (checkbox.checked) {
+            selectedTypes.add(type);
+          } else {
+            selectedTypes.delete(type);
+          }
         }
+        applyFilters();
+      });
+    });
+    
+    // Fork filter handler
+    if (forkFilter) {
+      forkFilter.addEventListener('change', () => {
+        showOnlyForks = forkFilter.checked;
+        applyFilters();
+      });
+    }
+    
+    // Clear filters
+    if (clearFiltersBtn) {
+      clearFiltersBtn.addEventListener('click', () => {
+        selectedCategories.clear();
+        selectedTypes.clear();
+        showOnlyForks = false;
+        
+        categoryCheckboxes.forEach(cb => cb.checked = false);
+        typeCheckboxes.forEach(cb => cb.checked = false);
+        if (forkFilter) forkFilter.checked = false;
         
         applyFilters();
       });

@@ -1,20 +1,27 @@
 ---
-import type { CategoryInfo } from '../utils/categorize';
+import type { AssetCategoryInfo } from '../utils/categorize';
 
 interface Props {
-  category: CategoryInfo;
-  size?: 'sm' | 'md';
+  category: AssetCategoryInfo;
+  size?: 'xs' | 'sm' | 'md';
 }
 
 const { category, size = 'sm' } = Astro.props;
 
 const sizeClasses = {
-  sm: 'text-xs px-2.5 py-1',
-  md: 'text-sm px-3 py-1.5',
+  xs: 'text-[10px] px-1.5 py-0.5',
+  sm: 'text-xs px-2 py-0.5',
+  md: 'text-sm px-3 py-1',
+};
+
+const emojiSizes = {
+  xs: 'text-xs',
+  sm: 'text-sm',
+  md: 'text-base',
 };
 ---
 
-<span class={`inline-flex items-center gap-1.5 font-semibold rounded-lg ${category.bgColor} ${category.color} ${sizeClasses[size]} shadow-sm`}>
-  <span class="text-base leading-none">{category.emoji}</span>
+<span class={`inline-flex items-center gap-1 font-medium rounded-md ${category.bgColor} ${category.color} ${sizeClasses[size]}`}>
+  <span class={`${emojiSizes[size]} leading-none`}>{category.emoji}</span>
   <span>{category.label}</span>
 </span>
