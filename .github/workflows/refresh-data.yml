@@ -21,45 +21,60 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -e
           echo "📦 Fetching public repository list..."
 
           # Fetch only PUBLIC repos with basic info
-          if ! gh repo list DevExpGbb \
+          gh repo list DevExpGbb \
             --json name,description,url,owner,isArchived,repositoryTopics,languages,primaryLanguage,createdAt,updatedAt,stargazerCount \
             --visibility public \
             --limit 200 \
-            > /tmp/repos_basic.json; then
-            echo "❌ Failed to fetch repository list"
-            exit 1
-          fi
+            > /tmp/repos_basic.json
 
-          # Validate that we got valid JSON
-          if ! jq empty /tmp/repos_basic.json 2>/dev/null; then
-            echo "❌ Invalid JSON received from gh repo list"
-            cat /tmp/repos_basic.json
-            exit 1
-          fi
+          repo_count=$(jq length /tmp/repos_basic.json)
+          echo "📋 Found $repo_count public repositories"
 
           echo "👥 Fetching top contributors for each repository..."
 
-          # Process each repo to add top contributor
-          jq -c '.[]' /tmp/repos_basic.json | while read -r repo; do
-            repo_name=$(echo "$repo" | jq -r '.name')
+          # Create output file
+          echo "[" > /tmp/repos_with_contributors.json
+          first=true
+
+          # Process each repo
+          for row in $(jq -r '.[] | @base64' /tmp/repos_basic.json); do
+            _jq() {
+              echo "$row" | base64 --decode | jq -r "$1"
+            }
+            
+            repo_name=$(_jq '.name')
             echo "  Processing: $repo_name"
             
-            # Fetch top contributor (first one from contributors list)
-            # If the API call fails or returns empty, use null
-            top_contributor_raw=$(gh api "repos/DevExpGbb/${repo_name}/contributors" 2>/dev/null) || true
+            # Get the full repo object
+            repo_json=$(echo "$row" | base64 --decode)
             
-            if [ -n "$top_contributor_raw" ] && \
-               top_contributor=$(echo "$top_contributor_raw" | jq -e 'if length == 0 then null else .[0] | {login: .login, avatarUrl: .avatar_url} end' 2>/dev/null); then
-              # Successfully got valid contributor data, use it
-              echo "$repo" | jq --argjson tc "$top_contributor" '. + {topContributor: $tc}'
-            else
-              # API failed, returned empty, or invalid data - use null
-              echo "$repo" | jq '. + {topContributor: null}'
+            # Fetch top contributor
+            top_contributor="null"
+            if contributor_data=$(gh api "repos/DevExpGbb/${repo_name}/contributors" --jq '.[0] | {login: .login, avatarUrl: .avatar_url}' 2>/dev/null); then
+              if [ -n "$contributor_data" ] && [ "$contributor_data" != "null" ]; then
+                top_contributor="$contributor_data"
+              fi
             fi
-          done | jq -s '.' > src/data/repositories.json
+            
+            # Add comma separator for all but first
+            if [ "$first" = true ]; then
+              first=false
+            else
+              echo "," >> /tmp/repos_with_contributors.json
+            fi
+            
+            # Add repo with contributor
+            echo "$repo_json" | jq --argjson tc "$top_contributor" '. + {topContributor: $tc}' >> /tmp/repos_with_contributors.json
+          done
+
+          echo "]" >> /tmp/repos_with_contributors.json
+
+          # Format the final JSON
+          jq '.' /tmp/repos_with_contributors.json > src/data/repositories.json
 
           echo "✅ Generated repositories.json with $(jq length src/data/repositories.json) repositories"
 
