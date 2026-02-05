@@ -12,6 +12,10 @@ const ip = defineCollection({
     author: z.string().optional(),
     link: z.string().url().optional(),
     cover: z.string().optional(),
+    // Lifecycle metadata for automated maintenance
+    owner: z.string().optional(), // GitHub handle or email
+    status: z.enum(['wip', 'ready', 'deprecated']).default('ready'),
+    last_updated: z.date().optional(), // Last content update date
   }),
 });
 

@@ -47,8 +47,22 @@ published: true
 date: 2026-02-04
 author: "Team"
 link: "https://optional-link"
+# Lifecycle metadata (for automated maintenance)
+owner: "@githubhandle"    # Your GitHub handle
+status: "ready"           # wip | ready | deprecated
+last_updated: 2026-02-04  # Last content update date
 ---
 ```
+
+### Automated Catalog Maintenance
+
+IP Atlas includes automated lifecycle management to keep content fresh and relevant:
+
+- **Staleness Detection**: Runs weekly to identify content not updated in 90+ days
+- **Owner Notifications**: Creates GitHub issues to remind owners to review stale content
+- **Lifecycle Tracking**: Uses `status` field to track content state (wip/ready/deprecated)
+
+See [CATALOG_LIFECYCLE.md](CATALOG_LIFECYCLE.md) for complete details on the automated maintenance process.
 
 ## 🧞 Commands
 

@@ -10,6 +10,9 @@ published: true
 date: 2026-02-04
 author: "IP Atlas Team"
 link: "https://astro.build/"
+owner: "@raykao"
+status: "ready"
+last_updated: 2026-02-04
 ---
 
 Welcome to **IP Atlas**. This starter shows you how to structure and publish team materials:
