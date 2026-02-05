@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-02-05T14:08:13Z",
-  "totalRepositories": 31,
-  "totalContributors": 96,
+  "lastUpdated": "2026-02-05T14:36:36Z",
+  "totalRepositories": 32,
+  "totalContributors": 97,
   "repositories": {
     "devexpgbb.github.io": {
       "fullName": "DevExpGbb/devexpgbb.github.io",
@@ -139,6 +139,38 @@
               "message": "fix: update aks-mcp URL to remove trailing slash",
               "sha": "39b38b6",
               "url": "https://github.com/DevExpGbb/agentic-platform-engineering/commit/39b38b65284190479537ee85d3dda3b8a3b44236"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        }
+      ]
+    },
+    "ghcp-action-importer": {
+      "fullName": "DevExpGbb/ghcp-action-importer",
+      "contributorCount": 1,
+      "contributors": [
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/18750956?v=4",
+          "contributions": 13,
+          "id": 18750956,
+          "login": "Frank802",
+          "profileUrl": "https://github.com/Frank802",
+          "profile": {
+            "bio": "EMEA Sr. Software GBB @Microsoft",
+            "company": "@Microsoft",
+            "email": null,
+            "location": "Milan, Italy",
+            "name": "Francesco Lana",
+            "twitterUsername": null,
+            "websiteUrl": ""
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2026-02-03T12:21:55Z",
+              "message": "Refactor services to support standalone and session-based usage; enhance validation and conversion methods",
+              "sha": "f99f181",
+              "url": "https://github.com/DevExpGbb/ghcp-action-importer/commit/f99f181afa07b0b245e04c7549379ecb88d3a9de"
             },
             "recentPRs": 0,
             "recentIssues": 0
@@ -2299,7 +2331,7 @@
         "lastCommit": {
           "sha": "cl4ud3",
           "message": "Let me think about this... *writes 500 lines of well-documented code*",
-          "date": "2026-02-05T14:08:13Z",
+          "date": "2026-02-05T14:36:36Z",
           "url": "https://claude.ai"
         }
       },
@@ -2325,7 +2357,7 @@
         "lastCommit": {
           "sha": "c0p1l0t",
           "message": "I suggested this, but you took all the credit 😤",
-          "date": "2026-02-05T14:08:13Z",
+          "date": "2026-02-05T14:36:36Z",
           "url": "https://github.com/features/copilot"
         }
       },
