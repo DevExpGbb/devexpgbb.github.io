@@ -107,7 +107,7 @@ jobs:
             if [ "$(echo "$bots_json" | jq 'length')" -gt 0 ]; then
               echo "  🤖 Found $(echo "$bots_json" | jq 'length') bot(s)"
               current_bots=$(cat /tmp/bots_found.json)
-              merged_bots=$(echo "$current_bots" "$bots_json" | jq -s 'add | group_by(.login) | map(reduce .[] as $item ({}; . + $item + {contributions: (.contributions // 0) + ($item.contributions // 0)}))')
+              merged_bots=$(echo "$current_bots" "$bots_json" | jq -s 'add | group_by(.login) | map(reduce .[] as $item ({}; . + $item + {contributions: ((.contributions // 0) + ($item.contributions // 0))}))')
               echo "$merged_bots" > /tmp/bots_found.json
             fi
 
