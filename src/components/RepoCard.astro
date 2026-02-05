@@ -66,10 +66,17 @@ const isRecentlyUpdated = (new Date().getTime() - new Date(repo.updatedAt).getTi
     )}
   </div>
 
-  {/* Title */}
-  <h3 class="font-semibold text-sm text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 mb-1 relative">
-    {repo.name}
-  </h3>
+  {/* Title - Shows README title if available, with repo name as subtitle */}
+  <div class="mb-1 relative">
+    <h3 class="font-semibold text-sm text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
+      {repo.readmeTitle || repo.name}
+    </h3>
+    {repo.readmeTitle && (
+      <p class="text-[10px] text-gray-400 font-mono mt-0.5 line-clamp-1">
+        {repo.name}
+      </p>
+    )}
+  </div>
 
   {/* Description */}
   <p class="text-xs text-gray-500 mb-2 line-clamp-2 flex-grow min-h-[2rem] leading-relaxed relative">

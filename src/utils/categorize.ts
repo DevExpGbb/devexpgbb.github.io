@@ -166,6 +166,7 @@ export interface Repository {
   updatedAt: string;
   stargazerCount: number;
   topContributor: { login: string; avatarUrl: string } | null;
+  readmeTitle?: string | null;
 }
 
 export interface CategorizedRepository extends Repository {
