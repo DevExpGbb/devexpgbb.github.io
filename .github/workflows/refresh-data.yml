@@ -24,11 +24,21 @@ jobs:
           echo "📦 Fetching public repository list..."
 
           # Fetch only PUBLIC repos with basic info
-          gh repo list DevExpGbb \
+          if ! gh repo list DevExpGbb \
             --json name,description,url,owner,isArchived,repositoryTopics,languages,primaryLanguage,createdAt,updatedAt,stargazerCount \
             --visibility public \
             --limit 200 \
-            > /tmp/repos_basic.json
+            > /tmp/repos_basic.json; then
+            echo "❌ Failed to fetch repository list"
+            exit 1
+          fi
+
+          # Validate that we got valid JSON
+          if ! jq empty /tmp/repos_basic.json 2>/dev/null; then
+            echo "❌ Invalid JSON received from gh repo list"
+            cat /tmp/repos_basic.json
+            exit 1
+          fi
 
           echo "👥 Fetching top contributors for each repository..."
 
@@ -38,11 +48,17 @@ jobs:
             echo "  Processing: $repo_name"
             
             # Fetch top contributor (first one from contributors list)
-            top_contributor=$(gh api "repos/DevExpGbb/${repo_name}/contributors" \
-              --jq '.[0] | {login: .login, avatarUrl: .avatar_url}' 2>/dev/null || echo 'null')
+            # If the API call fails or returns empty, use null
+            top_contributor_raw=$(gh api "repos/DevExpGbb/${repo_name}/contributors" 2>/dev/null) || true
             
-            # Add topContributor to repo object
-            echo "$repo" | jq --argjson tc "$top_contributor" '. + {topContributor: $tc}'
+            if [ -n "$top_contributor_raw" ] && \
+               top_contributor=$(echo "$top_contributor_raw" | jq -e 'if length == 0 then null else .[0] | {login: .login, avatarUrl: .avatar_url} end' 2>/dev/null); then
+              # Successfully got valid contributor data, use it
+              echo "$repo" | jq --argjson tc "$top_contributor" '. + {topContributor: $tc}'
+            else
+              # API failed, returned empty, or invalid data - use null
+              echo "$repo" | jq '. + {topContributor: null}'
+            fi
           done | jq -s '.' > src/data/repositories.json
 
           echo "✅ Generated repositories.json with $(jq length src/data/repositories.json) repositories"
