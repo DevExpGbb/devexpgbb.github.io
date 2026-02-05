@@ -1,0 +1,232 @@
+name: 👥 Fetch Contributors Data
+
+on:
+  workflow_run:
+    workflows: ["🔄 Refresh Repository Data"]
+    types:
+      - completed
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-contributors:
+    name: 📊 Fetch Detailed Contributors
+    runs-on: ubuntu-latest
+    # Only run if the previous workflow succeeded or if manually triggered
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          # Important: fetch the latest from main (in case refresh-data.yml just pushed)
+          ref: main
+          fetch-depth: 1
+
+      - name: 🔍 Verify repositories.json exists
+        run: |
+          if [ ! -f src/data/repositories.json ]; then
+            echo "❌ repositories.json not found. Cannot proceed."
+            exit 1
+          fi
+          echo "✅ Found repositories.json with $(jq length src/data/repositories.json) repositories"
+
+      - name: 👥 Fetch contributors and profile data
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+
+          echo "🚀 Starting contributors data collection..."
+
+          # Create associative array for profile cache
+          declare -A profile_cache
+
+          # Initialize output structure
+          cat > /tmp/contributors_header.json <<'EOF'
+          {
+            "lastUpdated": "",
+            "totalRepositories": 0,
+            "totalContributors": 0,
+            "repositories": {}
+          }
+          EOF
+
+          # Parse repositories.json
+          repos=$(jq -r '.[].name' src/data/repositories.json)
+          repo_count=$(echo "$repos" | wc -l | tr -d ' ')
+
+          echo "📋 Processing $repo_count repositories..."
+
+          # Initialize counters
+          total_unique_contributors=0
+          processed_repos=0
+          request_count=0
+
+          # Temporary file for repo data
+          > /tmp/repos_data.json
+
+          for repo_name in $repos; do
+            ((processed_repos++))
+            echo ""
+            echo "[$processed_repos/$repo_count] 🔍 Processing: $repo_name"
+
+            # Check rate limit every 50 requests
+            if (( request_count % 50 == 0 )); then
+              rate_info=$(gh api rate_limit --jq '.resources.core')
+              remaining=$(echo "$rate_info" | jq -r '.remaining')
+              echo "  ⚡ Rate limit: $remaining requests remaining"
+
+              if (( remaining < 100 )); then
+                reset_time=$(echo "$rate_info" | jq -r '.reset')
+                current_time=$(date +%s)
+                sleep_seconds=$((reset_time - current_time + 10))
+                echo "  ⏳ Rate limit low. Sleeping for $sleep_seconds seconds..."
+                sleep $sleep_seconds
+              fi
+            fi
+
+            # Fetch all contributors (paginated)
+            echo "  📥 Fetching contributors list..."
+            contributors_json=$(gh api "repos/DevExpGbb/${repo_name}/contributors" \
+              --paginate \
+              --jq 'map({login, id, contributions, avatarUrl: .avatar_url, profileUrl: .html_url})' 2>/dev/null || echo "[]")
+            ((request_count++))
+
+            contributor_count=$(echo "$contributors_json" | jq 'length')
+
+            if [ "$contributor_count" -eq 0 ]; then
+              echo "  ⚠️  No contributors found, skipping..."
+              continue
+            fi
+
+            echo "  👥 Found $contributor_count contributors"
+
+            # Process top 5 contributors for detailed info
+            top_contributors=$(echo "$contributors_json" | jq '[limit(5; .[])]')
+
+            # Build detailed contributors array
+            detailed_contributors="[]"
+            contributor_index=0
+
+            for contributor_login in $(echo "$top_contributors" | jq -r '.[].login'); do
+              ((contributor_index++))
+              echo "    [$contributor_index/5] 👤 Fetching details for: $contributor_login"
+
+              # Check if profile is cached
+              if [[ -v "profile_cache[$contributor_login]" ]]; then
+                profile_data="${profile_cache[$contributor_login]}"
+                echo "      ✨ Using cached profile"
+              else
+                # Fetch user profile
+                profile_data=$(gh api "users/${contributor_login}" \
+                  --jq '{name, bio, company, location, email, twitterUsername: .twitter_username, websiteUrl: .blog}' \
+                  2>/dev/null || echo '{"name":null,"bio":null,"company":null,"location":null,"email":null,"twitterUsername":null,"websiteUrl":null}')
+                ((request_count++))
+                profile_cache[$contributor_login]="$profile_data"
+                echo "      📝 Profile fetched"
+                sleep 0.3
+              fi
+
+              # Fetch last commit
+              last_commit=$(gh api "repos/DevExpGbb/${repo_name}/commits?author=${contributor_login}&per_page=1" \
+                --jq 'if length > 0 then .[0] | {sha: .sha[0:7], message: .commit.message | split("\n")[0], date: .commit.author.date, url: .html_url} else null end' \
+                2>/dev/null || echo 'null')
+              ((request_count++))
+
+              # Get contributor base info from the list
+              contributor_base=$(echo "$top_contributors" | jq --arg login "$contributor_login" '.[] | select(.login == $login)')
+
+              # Combine all data
+              contributor_full=$(echo "$contributor_base" | jq \
+                --argjson profile "$profile_data" \
+                --argjson lastCommit "$last_commit" \
+                '. + {profile: $profile, activity: {lastCommit: $lastCommit, recentPRs: 0, recentIssues: 0}}')
+
+              # Add to detailed contributors array
+              detailed_contributors=$(echo "$detailed_contributors" | jq --argjson new "$contributor_full" '. + [$new]')
+
+              sleep 0.5
+            done
+
+            # For remaining contributors (beyond top 5), add basic info only
+            if [ "$contributor_count" -gt 5 ]; then
+              remaining_contributors=$(echo "$contributors_json" | jq '[.[5:] | .[] | . + {profile: null, activity: null}]')
+              detailed_contributors=$(echo "$detailed_contributors" | jq --argjson remaining "$remaining_contributors" '. + $remaining')
+            fi
+
+            # Create repo entry
+            repo_entry=$(jq -n \
+              --arg name "$repo_name" \
+              --arg fullName "DevExpGbb/$repo_name" \
+              --argjson count "$contributor_count" \
+              --argjson contributors "$detailed_contributors" \
+              '{($name): {fullName: $fullName, contributorCount: $count, contributors: $contributors}}')
+
+            # Append to repos data
+            echo "$repo_entry" >> /tmp/repos_data.json
+
+            echo "  ✅ Completed $repo_name"
+          done
+
+          echo ""
+          echo "🔄 Building final JSON structure..."
+
+          # Merge all repo entries
+          repos_object=$(jq -s 'reduce .[] as $item ({}; . + $item)' /tmp/repos_data.json)
+
+          # Count unique contributors
+          all_contributors=$(echo "$repos_object" | jq '[.[] | .contributors[].login] | unique')
+          total_unique_contributors=$(echo "$all_contributors" | jq 'length')
+
+          # Build final JSON
+          jq -n \
+            --arg updated "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --argjson total_repos "$processed_repos" \
+            --argjson total_contributors "$total_unique_contributors" \
+            --argjson repos "$repos_object" \
+            '{
+              lastUpdated: $updated,
+              totalRepositories: $total_repos,
+              totalContributors: $total_contributors,
+              repositories: $repos
+            }' > src/data/contributors.json
+
+          echo "✅ Generated contributors.json"
+          echo "   📊 Total repositories: $processed_repos"
+          echo "   👥 Unique contributors: $total_unique_contributors"
+          echo "   📦 API requests made: $request_count"
+
+          # Show file size
+          file_size=$(du -h src/data/contributors.json | cut -f1)
+          echo "   💾 File size: $file_size"
+
+      - name: 📝 Commit and push if changed
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet src/data/contributors.json; then
+            echo "📭 No changes detected in contributors data"
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            git add src/data/contributors.json
+            git commit -m "👥 Update contributors data [skip ci]"
+            git push
+            echo "📬 Contributors data updated and pushed"
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🚀 Trigger deployment
+        if: steps.commit.outputs.changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🔄 Triggering deployment workflow..."
+          gh workflow run deploy.yml
+          echo "✅ Deployment triggered"
