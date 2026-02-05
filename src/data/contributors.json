@@ -1,15 +1,15 @@
 {
-  "lastUpdated": "2026-02-05T14:36:36Z",
+  "lastUpdated": "2026-02-05T14:47:39Z",
   "totalRepositories": 32,
   "totalContributors": 97,
   "repositories": {
     "devexpgbb.github.io": {
       "fullName": "DevExpGbb/devexpgbb.github.io",
-      "contributorCount": 2,
+      "contributorCount": 3,
       "contributors": [
         {
           "avatarUrl": "https://avatars.githubusercontent.com/u/175379?v=4",
-          "contributions": 44,
+          "contributions": 46,
           "id": 175379,
           "login": "0GiS0",
           "profileUrl": "https://github.com/0GiS0",
@@ -24,10 +24,36 @@
           },
           "activity": {
             "lastCommit": {
-              "date": "2026-02-05T14:05:17Z",
-              "message": "refactor: Update Software GBB Card and Contributors Page Layout",
-              "sha": "d5757c6",
-              "url": "https://github.com/DevExpGbb/devexpgbb.github.io/commit/d5757c6565c1bd2eb998f633132e181cdd86ee72"
+              "date": "2026-02-05T14:44:45Z",
+              "message": "Merge branch 'main' of https://github.com/DevExpGbb/devexpgbb.github.io",
+              "sha": "fd9edb9",
+              "url": "https://github.com/DevExpGbb/devexpgbb.github.io/commit/fd9edb90ac897f814e25c4635f624da37ccca94e"
+            },
+            "recentPRs": 0,
+            "recentIssues": 0
+          }
+        },
+        {
+          "avatarUrl": "https://avatars.githubusercontent.com/u/51440732?v=4",
+          "contributions": 1,
+          "id": 51440732,
+          "login": "danielmeppiel",
+          "profileUrl": "https://github.com/danielmeppiel",
+          "profile": {
+            "bio": "Developer productivity @microsoft, Global Black Belt. Always a hubber at @GitHub. Connecting @Azure and @GitHub through AI. ",
+            "company": "Microsoft",
+            "email": null,
+            "location": "France",
+            "name": "Daniel Meppiel",
+            "twitterUsername": null,
+            "websiteUrl": "https://www.devprodlogs.com/"
+          },
+          "activity": {
+            "lastCommit": {
+              "date": "2026-02-05T14:42:16Z",
+              "message": "Merge pull request #19 from DevExpGbb/copilot/exclude-github-from-catalog",
+              "sha": "fb40181",
+              "url": "https://github.com/DevExpGbb/devexpgbb.github.io/commit/fb40181ea5645ee6ffeccaf73cfef4082a2589e9"
             },
             "recentPRs": 0,
             "recentIssues": 0
@@ -2293,7 +2319,7 @@
     },
     {
       "avatarUrl": "https://avatars.githubusercontent.com/in/1143301?v=4",
-      "contributions": 131,
+      "contributions": 133,
       "id": 198982749,
       "login": "Copilot",
       "profileUrl": "https://github.com/apps/copilot-swe-agent",
@@ -2331,7 +2357,7 @@
         "lastCommit": {
           "sha": "cl4ud3",
           "message": "Let me think about this... *writes 500 lines of well-documented code*",
-          "date": "2026-02-05T14:36:36Z",
+          "date": "2026-02-05T14:47:39Z",
           "url": "https://claude.ai"
         }
       },
@@ -2357,7 +2383,7 @@
         "lastCommit": {
           "sha": "c0p1l0t",
           "message": "I suggested this, but you took all the credit 😤",
-          "date": "2026-02-05T14:36:36Z",
+          "date": "2026-02-05T14:47:39Z",
           "url": "https://github.com/features/copilot"
         }
       },
@@ -2387,7 +2413,7 @@
     },
     {
       "avatarUrl": "https://avatars.githubusercontent.com/in/15368?v=4",
-      "contributions": 12,
+      "contributions": 18,
       "id": 41898282,
       "login": "github-actions[bot]",
       "profileUrl": "https://github.com/apps/github-actions",
