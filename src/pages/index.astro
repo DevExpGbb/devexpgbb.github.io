@@ -19,7 +19,8 @@ import {
 import repositoriesData from '../data/repositories.json';
 import softwareGbbsData from '../data/software-gbbs.json';
 
-const repositories = repositoriesData as Repository[];
+// Filter out the .github repository (special GitHub org config repo)
+const repositories = (repositoriesData as Repository[]).filter(repo => repo.name !== '.github');
 const categorizedRepos = categorizeRepositories(repositories);
 
 // Filter out archived repos by default and sort by updated date
