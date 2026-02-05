@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   workflow_run:
-    workflows: ["👥 Fetch Contributors Data"]
+    workflows: ["🥋 Fetch Software GBBs Team"]
     types:
       - completed
     branches:
@@ -24,13 +24,13 @@ jobs:
   build:
     name: 🔨 Build
     runs-on: ubuntu-latest
-    # Run on push, manual trigger, or when fetch-contributors completes successfully
+    # Run on push, manual trigger, or when fetch-team completes successfully
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v4
         with:
-          # Important: fetch the latest from main (in case fetch-contributors just pushed)
+          # Important: fetch the latest from main (in case fetch-team just pushed)
           ref: main
 
       - name: 📦 Setup pnpm
