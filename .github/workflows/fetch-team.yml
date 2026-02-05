@@ -132,6 +132,7 @@ jobs:
           else
             git add src/data/software-gbbs.json
             git commit -m "👥 Update Software GBBs team data [skip ci]"
+            git pull --rebase origin main
             git push
             echo "📬 Changes committed and pushed"
             echo "changes=true" >> $GITHUB_OUTPUT

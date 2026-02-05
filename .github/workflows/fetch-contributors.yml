@@ -336,6 +336,7 @@ jobs:
           else
             git add src/data/contributors.json
             git commit -m "👥 Update contributors data [skip ci]"
+            git pull --rebase origin main
             git push
             echo "📬 Contributors data updated and pushed"
             echo "changes=true" >> $GITHUB_OUTPUT

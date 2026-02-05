@@ -90,6 +90,7 @@ jobs:
           else
             git add src/data/repositories.json
             git commit -m "🔄 Refresh repository data [skip ci]"
+            git pull --rebase origin main
             git push
             echo "📬 Changes committed and pushed"
             echo "changes=true" >> $GITHUB_OUTPUT
