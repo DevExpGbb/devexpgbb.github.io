@@ -1,0 +1,161 @@
+name: 📅 Catalog Maintenance
+
+on:
+  schedule:
+    # Runs every Monday at 9:00 AM UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check-staleness:
+    name: 🔍 Check for Stale Content
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 🔍 Run Staleness Check
+        id: check
+        run: |
+          node scripts/check-staleness.js || true
+
+          # Read the report
+          if [ -f stale-content-report.json ]; then
+            echo "REPORT_EXISTS=true" >> $GITHUB_OUTPUT
+            STALE_COUNT=$(jq '.staleEntries | length' stale-content-report.json)
+            echo "STALE_COUNT=$STALE_COUNT" >> $GITHUB_OUTPUT
+
+            # Export report for next step
+            cat stale-content-report.json > /tmp/report.json
+          else
+            echo "REPORT_EXISTS=false" >> $GITHUB_OUTPUT
+            echo "STALE_COUNT=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 📝 Create Issues for Stale Content
+        if: steps.check.outputs.REPORT_EXISTS == 'true' && steps.check.outputs.STALE_COUNT > 0
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "📋 Processing stale content notifications..."
+
+          # Read stale entries
+          STALE_ENTRIES=$(jq -c '.staleEntries[]' /tmp/report.json)
+
+          # Process each stale entry
+          while IFS= read -r entry; do
+            FILE=$(echo "$entry" | jq -r '.file')
+            TITLE=$(echo "$entry" | jq -r '.title')
+            OWNER=$(echo "$entry" | jq -r '.owner // "N/A"')
+            DAYS=$(echo "$entry" | jq -r '.daysSinceUpdate')
+            SEVERITY=$(echo "$entry" | jq -r '.severity')
+
+            echo "Creating issue for: $FILE ($DAYS days stale)"
+
+            # Create issue title
+            ISSUE_TITLE="📅 Catalog Review Needed: $TITLE"
+
+            # Create issue body
+            ISSUE_BODY="## Stale Content Notification
+
+This catalog entry has not been updated in **$DAYS days** and needs your attention.
+
+**Details:**
+- 📄 File: \`src/content/ip/$FILE\`
+- 👤 Owner: $OWNER
+- ⏰ Days since update: $DAYS
+- 🔴 Severity: $SEVERITY
+
+**Action Required:**
+
+Please review this content and take one of the following actions:
+
+1. **Update the content** if changes are needed
+2. **Refresh** the \`last_updated\` field to confirm review (even if no changes)
+3. **Set status to \`deprecated\`** if no longer relevant
+
+### How to Update
+
+Edit \`src/content/ip/$FILE\` and update the frontmatter:
+
+\`\`\`yaml
+---
+last_updated: $(date +%Y-%m-%d)  # Update to today's date
+status: ready                     # Or 'deprecated' if outdated
+---
+\`\`\`
+
+For more information, see [CATALOG_LIFECYCLE.md](https://github.com/DevExpGbb/devexpgbb.github.io/blob/main/CATALOG_LIFECYCLE.md).
+
+---
+*This issue was created automatically by the Catalog Maintenance workflow.*"
+
+            # Check if issue already exists for this file
+            EXISTING_ISSUE=$(gh issue list \
+              --label "catalog-maintenance" \
+              --search "\"$TITLE\" in:title" \
+              --json number,title \
+              --jq ".[0].number // empty" || echo "")
+
+            if [ -n "$EXISTING_ISSUE" ]; then
+              echo "  Issue already exists: #$EXISTING_ISSUE"
+              # Update the existing issue with a comment
+              gh issue comment "$EXISTING_ISSUE" \
+                --body "⏰ Still stale after $DAYS days. Please review and update."
+            else
+              # Create new issue
+              ASSIGNEE=""
+              if [ "$OWNER" != "N/A" ] && [ -n "$OWNER" ]; then
+                OWNER_CLEAN=$(echo "$OWNER" | sed 's/@//')
+                ASSIGNEE="--assignee $OWNER_CLEAN"
+              fi
+
+              gh issue create \
+                --title "$ISSUE_TITLE" \
+                --body "$ISSUE_BODY" \
+                --label "catalog-maintenance,needs-review" \
+                $ASSIGNEE || echo "  Failed to assign to $OWNER (user may not have repo access)"
+            fi
+
+          done <<< "$STALE_ENTRIES"
+
+          echo "✅ Processed ${{ steps.check.outputs.STALE_COUNT }} stale entries"
+
+      - name: 📊 Summary
+        if: always()
+        run: |
+          echo "## Catalog Maintenance Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.check.outputs.REPORT_EXISTS }}" == "true" ]; then
+            TOTAL=$(jq '.totalEntries' /tmp/report.json)
+            STALE=$(jq '.staleEntries | length' /tmp/report.json)
+            HEALTHY=$(jq '.healthyEntries | length' /tmp/report.json)
+            MISSING=$(jq '.missingMetadata | length' /tmp/report.json)
+
+            echo "- 📚 Total entries: $TOTAL" >> $GITHUB_STEP_SUMMARY
+            echo "- ⚠️  Stale entries: $STALE" >> $GITHUB_STEP_SUMMARY
+            echo "- ✅ Healthy entries: $HEALTHY" >> $GITHUB_STEP_SUMMARY
+            echo "- ❓ Missing metadata: $MISSING" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            if [ "$STALE" -gt 0 ]; then
+              echo "### Stale Content" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "| File | Title | Owner | Days Stale |" >> $GITHUB_STEP_SUMMARY
+              echo "|------|-------|-------|------------|" >> $GITHUB_STEP_SUMMARY
+
+              jq -r '.staleEntries[] | "| \(.file) | \(.title) | \(.owner // "N/A") | \(.daysSinceUpdate) |"' /tmp/report.json >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "❌ No report generated" >> $GITHUB_STEP_SUMMARY
+          fi

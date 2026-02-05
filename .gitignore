@@ -13,6 +13,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# staleness reports
+stale-content-report.json
 
 # environment variables
 .env

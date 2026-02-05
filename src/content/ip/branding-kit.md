@@ -9,6 +9,9 @@ published: true
 date: 2026-01-15
 author: "Design Team"
 link: "https://example.com/branding-kit"
+owner: "@raykao"
+status: "ready"
+last_updated: 2026-01-15
 ---
 
 Includes:
