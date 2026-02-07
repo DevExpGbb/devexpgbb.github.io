@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-06T18:19:03Z",
+  "lastUpdated": "2026-02-07T08:10:04Z",
   "teamName": "Software GBBs",
   "teamSlug": "software-gbbs",
   "memberCount": 23,
@@ -196,6 +196,24 @@
       "repositoryCount": 1
     },
     {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/62118837?v=4",
+      "id": 62118837,
+      "login": "sitoader",
+      "profile": {
+        "bio": null,
+        "company": "Microsoft",
+        "location": "Copenhagen",
+        "name": "Simona Toader",
+        "twitterUsername": null,
+        "websiteUrl": ""
+      },
+      "totalContributions": 2,
+      "repositoriesContributed": [
+        "agentic-workflows-copilot-cli"
+      ],
+      "repositoryCount": 1
+    },
+    {
       "avatarUrl": "https://avatars.githubusercontent.com/u/1683889?v=4",
       "id": 1683889,
       "login": "ChrisRomp",
@@ -382,22 +400,6 @@
         "company": "@Microsoft",
         "location": "Denver",
         "name": null,
-        "twitterUsername": null,
-        "websiteUrl": ""
-      },
-      "totalContributions": 0,
-      "repositoriesContributed": [],
-      "repositoryCount": 0
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/62118837?v=4",
-      "id": 62118837,
-      "login": "sitoader",
-      "profile": {
-        "bio": null,
-        "company": "Microsoft",
-        "location": "Copenhagen",
-        "name": "Simona Toader",
         "twitterUsername": null,
         "websiteUrl": ""
       },
