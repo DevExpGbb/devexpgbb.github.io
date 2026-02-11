@@ -105,6 +105,8 @@ function main() {
     const repoName = repo.name;
     process.stdout.write(`\r  Processing: ${repoName.padEnd(50)}`);
 
+    // Only process repos that have .gbbcatalog.yml
+    // This ensures we don't create noise for repos that haven't opted into catalog lifecycle management
     const content = fetchCatalogFile(repoName);
     if (!content) {
       continue;
@@ -150,23 +152,28 @@ function main() {
     const reviewCycleDays = data.catalog.review_cycle_days || validator.DEFAULT_REVIEW_CYCLE_DAYS;
     const needsReview = validator.needsReview(lastReviewed, reviewCycleDays);
 
-    // Auto-disable if needs review
-    let enabled = data.catalog.enabled;
+    // Get catalog state
+    const state = validator.getCatalogState(data.catalog);
+
+    // Only include in catalog if enabled AND not needing review
+    // But always add to catalog-metadata.json (even if stale) so we can notify owners
+    const enabled = data.catalog.enabled;
+
     if (needsReview && enabled) {
-      console.log(`\n  ⚠️  ${repoName}: Needs review (last update: ${lastReviewed}), setting enabled=false`);
-      enabled = false;
+      console.log(`\n  ⚠️  ${repoName}: Needs review (last update: ${lastReviewed}), will notify owner`);
     }
 
-    // Only include if enabled
-    if (enabled) {
-      const state = validator.getCatalogState(data.catalog);
-      catalogMetadata[repoName] = {
-        ...data.catalog,
-        last_reviewed: lastReviewed,
-        enabled: true,
-        state,
-        schema_version: data.schema_version
-      };
+    // Add to catalog metadata for all repos with .gbbcatalog.yml
+    catalogMetadata[repoName] = {
+      ...data.catalog,
+      last_reviewed: lastReviewed,
+      enabled: enabled && !needsReview, // Disable if stale, but keep in metadata for issue creation
+      state,
+      schema_version: data.schema_version
+    };
+
+    // Count only truly enabled repos (not stale)
+    if (enabled && !needsReview) {
       enabledCount++;
     }
   }
