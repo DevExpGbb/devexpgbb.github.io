@@ -6,5 +6,4 @@ catalog:
   display_name: "IP Atlas"
   description: "Repository catalog and content hub for the DevExpGbb team. Automatically aggregates and displays all repositories from the DevExpGbb organization with lifecycle management."
   maturity: production
-  last_reviewed: 2026-02-11
   review_cycle_days: 180

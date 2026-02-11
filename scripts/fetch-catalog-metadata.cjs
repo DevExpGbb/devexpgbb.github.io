@@ -25,6 +25,25 @@ function exec(command) {
 }
 
 /**
+ * Fetches repository metadata (updatedAt)
+ */
+function fetchRepoMetadata(repoName) {
+  const command = `gh api "repos/${ORG_NAME}/${repoName}" --jq '{updatedAt: .updated_at, pushedAt: .pushed_at}' 2>/dev/null`;
+  const output = exec(command);
+
+  if (!output) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(output.trim());
+  } catch (err) {
+    console.error(`Error parsing repo metadata for ${repoName}:`, err.message);
+    return null;
+  }
+}
+
+/**
  * Fetches .gbbcatalog.yml content from a repository
  */
 function fetchCatalogFile(repoName) {
@@ -97,6 +116,24 @@ function main() {
       continue;
     }
 
+    // Fetch repo metadata to get last update date
+    const repoMetadata = fetchRepoMetadata(repoName);
+    if (!repoMetadata) {
+      console.log(`\n  ⚠️  ${repoName}: Failed to fetch repository metadata`);
+      continue;
+    }
+
+    // Use last_reviewed from catalog file, or fall back to repo's pushedAt/updatedAt
+    let lastReviewed = data.catalog.last_reviewed;
+    if (!lastReviewed) {
+      // Use pushedAt (last commit push time) or updatedAt as fallback
+      const repoDate = repoMetadata.pushedAt || repoMetadata.updatedAt;
+      lastReviewed = repoDate.split('T')[0]; // Convert to YYYY-MM-DD
+    }
+
+    // Add last_reviewed to the catalog data for validation
+    data.catalog.last_reviewed = lastReviewed;
+
     // Validate
     const validator = require('./validate-catalog.cjs');
     const result = validator.validateCatalogMetadata(data);
@@ -109,11 +146,24 @@ function main() {
 
     processedCount++;
 
+    // Check if review is needed (> 6 months / 180 days)
+    const reviewCycleDays = data.catalog.review_cycle_days || validator.DEFAULT_REVIEW_CYCLE_DAYS;
+    const needsReview = validator.needsReview(lastReviewed, reviewCycleDays);
+
+    // Auto-disable if needs review
+    let enabled = data.catalog.enabled;
+    if (needsReview && enabled) {
+      console.log(`\n  ⚠️  ${repoName}: Needs review (last update: ${lastReviewed}), setting enabled=false`);
+      enabled = false;
+    }
+
     // Only include if enabled
-    if (data.catalog.enabled) {
+    if (enabled) {
       const state = validator.getCatalogState(data.catalog);
       catalogMetadata[repoName] = {
         ...data.catalog,
+        last_reviewed: lastReviewed,
+        enabled: true,
         state,
         schema_version: data.schema_version
       };
@@ -135,4 +185,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { fetchCatalogFile, parseYaml };
+module.exports = { fetchCatalogFile, fetchRepoMetadata, parseYaml };

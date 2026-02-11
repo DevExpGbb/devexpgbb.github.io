@@ -86,26 +86,27 @@ function validateCatalogMetadata(data) {
     errors.push(`catalog.maturity must be one of: ${VALID_MATURITY_STATES.join(', ')}. Got: ${catalog.maturity}`);
   }
 
-  // Check last_reviewed (required, valid date)
-  if (!catalog.last_reviewed) {
-    errors.push('Missing required field: catalog.last_reviewed');
-  } else if (typeof catalog.last_reviewed === 'string') {
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-    if (!dateRegex.test(catalog.last_reviewed)) {
-      errors.push('catalog.last_reviewed must be in YYYY-MM-DD format');
-    } else {
-      const date = new Date(catalog.last_reviewed);
-      if (isNaN(date.getTime())) {
+  // Check last_reviewed (optional, valid date if provided)
+  // If not provided, will use repo updatedAt date from GitHub
+  if (catalog.last_reviewed !== undefined && catalog.last_reviewed !== null) {
+    if (typeof catalog.last_reviewed === 'string') {
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+      if (!dateRegex.test(catalog.last_reviewed)) {
+        errors.push('catalog.last_reviewed must be in YYYY-MM-DD format');
+      } else {
+        const date = new Date(catalog.last_reviewed);
+        if (isNaN(date.getTime())) {
+          errors.push('catalog.last_reviewed is not a valid date');
+        }
+      }
+    } else if (catalog.last_reviewed instanceof Date) {
+      // YAML parser might parse it as Date object
+      if (isNaN(catalog.last_reviewed.getTime())) {
         errors.push('catalog.last_reviewed is not a valid date');
       }
+    } else {
+      errors.push('catalog.last_reviewed must be a date string in YYYY-MM-DD format');
     }
-  } else if (catalog.last_reviewed instanceof Date) {
-    // YAML parser might parse it as Date object
-    if (isNaN(catalog.last_reviewed.getTime())) {
-      errors.push('catalog.last_reviewed is not a valid date');
-    }
-  } else {
-    errors.push('catalog.last_reviewed must be a date string in YYYY-MM-DD format');
   }
 
   // Check review_cycle_days (optional, number)

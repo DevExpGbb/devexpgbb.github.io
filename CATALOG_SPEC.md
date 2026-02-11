@@ -21,7 +21,7 @@ catalog:
   display_name: "Project Name"   # Required: Human-friendly title
   description: "Short summary"   # Required: 1-3 sentences describing the project
   maturity: incubating           # Required: incubating | production | deprecated
-  last_reviewed: 2026-02-10      # Required: YYYY-MM-DD format
+  last_reviewed: 2026-02-10      # Optional: YYYY-MM-DD format (defaults to repo's last push date)
   review_cycle_days: 180         # Optional: defaults to 180 days
 ```
 
@@ -35,24 +35,25 @@ catalog:
 | `catalog.display_name` | string | Human-friendly project name |
 | `catalog.description` | string | Brief description (1-3 sentences) |
 | `catalog.maturity` | string | One of: `incubating`, `production`, `deprecated` |
-| `catalog.last_reviewed` | string | Date in YYYY-MM-DD format |
 
 ### Optional Fields
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
+| `catalog.last_reviewed` | string | repo's last push date | Date in YYYY-MM-DD format. If not provided, uses the repository's last push date |
 | `catalog.review_cycle_days` | number | 180 | Days between required reviews |
 
 ## Lifecycle States
 
-Based on the metadata, repositories are categorized into these states:
+Based on the metadata and repository activity, repositories are categorized into these states:
 
 | State | Condition |
 |-------|-----------|
-| **Not in Catalog** | No `.gbbcatalog.yml` OR `enabled: false` |
-| **Published** | `enabled: true` and recently reviewed |
-| **Needs Review** | `enabled: true` but review is stale (older than `review_cycle_days`) |
+| **Not in Catalog** | No `.gbbcatalog.yml` OR `enabled: false` OR needs review (> 6 months since last update) |
+| **Published** | `enabled: true` and recently updated (within review cycle) |
 | **Deprecated** | `maturity: deprecated` |
+
+**Important**: Repositories are automatically removed from the catalog if they haven't been updated in more than 6 months (or the configured `review_cycle_days`). To re-enable a repository in the catalog after it's been removed, you must update the repository code (push new commits) or explicitly set a recent `last_reviewed` date in the `.gbbcatalog.yml` file.
 
 ## Maturity Levels
 
@@ -72,10 +73,11 @@ Based on the metadata, repositories are categorized into these states:
 
 ### Stale Review Detection
 
-- Automatically detects repositories with stale reviews
+- Automatically detects repositories with no updates in the last 6 months (or configured `review_cycle_days`)
+- Automatically removes stale repositories from the catalog (sets `enabled: false`)
 - Opens GitHub issues tagged with `catalog-review-needed`
 - Assigns issue to the repository owner
-- Workflow does NOT auto-remove or auto-archive repositories
+- To re-enable, push new commits or update `last_reviewed` date in `.gbbcatalog.yml`
 
 ## Examples
 
@@ -90,11 +92,24 @@ catalog:
   display_name: "Azure DevOps Migration Tool"
   description: "Automated tool to migrate repositories from Azure DevOps to GitHub. Supports code, work items, and pipelines."
   maturity: incubating
-  last_reviewed: 2026-02-11
   review_cycle_days: 90
 ```
 
 ### Production Project
+
+```yaml
+schema_version: 1
+
+catalog:
+  enabled: true
+  owner: janedoe
+  display_name: "GitHub Copilot Workshop"
+  description: "Comprehensive hands-on workshop for GitHub Copilot. Includes exercises for multiple programming languages and real-world scenarios."
+  maturity: production
+  review_cycle_days: 180
+```
+
+### Production Project with Explicit Review Date
 
 ```yaml
 schema_version: 1
@@ -120,7 +135,6 @@ catalog:
   display_name: "Legacy Authentication Service"
   description: "Legacy authentication service. Replaced by the new unified auth system. Kept for reference only."
   maturity: deprecated
-  last_reviewed: 2026-02-11
   review_cycle_days: 365
 ```
 
@@ -135,7 +149,6 @@ catalog:
   display_name: "Experimental Feature"
   description: "Experimental feature in development"
   maturity: incubating
-  last_reviewed: 2026-02-11
 ```
 
 ## Validation
@@ -171,7 +184,6 @@ catalog:
   display_name: "Your Project Name"
   description: "Your project description"
   maturity: incubating
-  last_reviewed: 2026-02-11
   review_cycle_days: 180
 ```
 
@@ -183,15 +195,24 @@ git commit -m "Add catalog metadata"
 git push
 ```
 
+**Note**: The `last_reviewed` date is optional. If not provided, the system will automatically use your repository's last push date.
+
 ### 3. Review Updates
 
 When you receive a "Catalog Review Needed" issue:
 
-1. Review and update your `.gbbcatalog.yml` metadata
-2. Update the `last_reviewed` date to today
-3. Update any other fields if needed
-4. Commit and push changes
-5. The issue will be automatically closed
+**Option 1: Push new code** (Recommended)
+- Make updates to your repository
+- Push new commits
+- The system will automatically use the new push date
+
+**Option 2: Update metadata manually**
+1. Update `.gbbcatalog.yml`:
+   ```yaml
+   last_reviewed: 2026-02-11  # Update to today's date
+   ```
+2. Update any other fields if needed
+3. Commit and push changes
 
 ### 4. Deprecate a Project
 
@@ -200,7 +221,6 @@ When deprecating a project:
 1. Update `.gbbcatalog.yml`:
    ```yaml
    maturity: deprecated
-   last_reviewed: 2026-02-11
    ```
 2. Optionally archive the repository via GitHub settings
 3. The catalog will show it as deprecated
@@ -235,13 +255,13 @@ A: Yes. Simply don't add `.gbbcatalog.yml` or set `enabled: false`. Your repo ca
 A: The validation workflow will fail and notify you. Your repo will not appear in the catalog until the file is fixed.
 
 **Q: How often do I need to review my catalog metadata?**
-A: By default, every 180 days. You can customize this with `review_cycle_days`.
+A: By default, every 180 days (6 months). You can customize this with `review_cycle_days`. The review date is automatically tracked based on your repository's last push date. If your repository isn't updated within the review cycle, it will be automatically removed from the catalog.
 
 **Q: Can I change the owner of an IP?**
-A: Yes. Update the `owner` field in `.gbbcatalog.yml` and update the `last_reviewed` date.
+A: Yes. Update the `owner` field in `.gbbcatalog.yml` and commit the change.
 
-**Q: What if I forget to review?**
-A: The automated workflow will create a GitHub issue assigned to you as a reminder.
+**Q: What happens if my repository hasn't been updated in 6 months?**
+A: The automated workflow will remove it from the catalog (set `enabled: false`) and create a GitHub issue assigned to you as a reminder. To re-enable, either push new commits or manually update the `last_reviewed` date in `.gbbcatalog.yml`.
 
 ## Support
 
