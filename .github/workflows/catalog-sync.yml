@@ -1,0 +1,227 @@
+name: 📋 Catalog Lifecycle Sync
+
+on:
+  schedule:
+    # Run weekly on Monday at 9:00 AM UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/validate-catalog.cjs'
+      - 'scripts/fetch-catalog-metadata.cjs'
+      - '.github/workflows/catalog-sync.yml'
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  sync-catalog:
+    name: 🔄 Sync Catalog Metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 📦 Install dependencies
+        run: |
+          npm install js-yaml --no-save
+
+      - name: 🔍 Fetch catalog metadata from repos
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/fetch-catalog-metadata.cjs
+
+      - name: 📝 Commit and push if changed
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if ! git diff --quiet src/data/catalog-metadata.json; then
+            git add src/data/catalog-metadata.json
+            git commit -m "📋 Update catalog metadata [skip ci]"
+            git pull --rebase origin main
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "✓ Catalog metadata updated"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "📭 No changes to catalog metadata"
+          fi
+
+  check-stale-reviews:
+    name: 🔍 Check for Stale Reviews
+    runs-on: ubuntu-latest
+    needs: sync-catalog
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 📦 Install dependencies
+        run: |
+          npm install js-yaml --no-save
+
+      - name: 🔍 Check for repositories needing review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+
+          # Pull latest changes
+          git pull origin main
+
+          # Check if catalog-metadata.json exists
+          if [ ! -f "src/data/catalog-metadata.json" ]; then
+            echo "No catalog metadata found"
+            exit 0
+          fi
+
+          echo "📋 Checking for repositories needing review..."
+
+          # Read catalog metadata and check for stale reviews
+          node -e "
+          const fs = require('fs');
+          const validator = require('./scripts/validate-catalog.cjs');
+          const catalogData = JSON.parse(fs.readFileSync('src/data/catalog-metadata.json', 'utf8'));
+
+          const needsReviewRepos = [];
+
+          for (const [repoName, metadata] of Object.entries(catalogData)) {
+            if (metadata.state === 'needs-review') {
+              needsReviewRepos.push({
+                repo: repoName,
+                owner: metadata.owner,
+                lastReviewed: metadata.last_reviewed,
+                displayName: metadata.display_name
+              });
+            }
+          }
+
+          if (needsReviewRepos.length === 0) {
+            console.log('✓ No repositories need review');
+            process.exit(0);
+          }
+
+          console.log(\`⚠️  Found \${needsReviewRepos.length} repositories needing review:\`);
+          needsReviewRepos.forEach(r => {
+            console.log(\`  - \${r.repo} (owner: @\${r.owner}, last reviewed: \${r.lastReviewed})\`);
+          });
+
+          // Save to file for next step
+          fs.writeFileSync('needs-review.json', JSON.stringify(needsReviewRepos, null, 2));
+          "
+
+      - name: 📬 Create issues for stale reviews
+        if: hashFiles('needs-review.json') != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ ! -f "needs-review.json" ]; then
+            echo "No repositories need review"
+            exit 0
+          fi
+
+          # Read the repos needing review
+          repos=$(cat needs-review.json)
+          count=$(echo "$repos" | jq length)
+
+          if [ "$count" -eq 0 ]; then
+            echo "No repositories need review"
+            exit 0
+          fi
+
+          echo "Creating issues for $count repositories..."
+
+          # Process each repo
+          echo "$repos" | jq -c '.[]' | while read -r repo; do
+            repo_name=$(echo "$repo" | jq -r '.repo')
+            owner=$(echo "$repo" | jq -r '.owner')
+            last_reviewed=$(echo "$repo" | jq -r '.lastReviewed')
+            display_name=$(echo "$repo" | jq -r '.displayName')
+
+            echo "Processing: $repo_name"
+
+            # Check if an open issue already exists
+            existing_issue=$(gh issue list \
+              --repo "DevExpGbb/$repo_name" \
+              --state open \
+              --label "catalog-review-needed" \
+              --json number \
+              --jq 'length' 2>/dev/null || echo "0")
+
+            if [ "$existing_issue" -gt 0 ]; then
+              echo "  ℹ️  Issue already exists for $repo_name"
+              continue
+            fi
+
+            # Create issue
+            issue_title="📋 Catalog Review Needed for $display_name"
+            issue_body="## Catalog Review Required
+
+Hello @$owner 👋
+
+The catalog metadata for **$display_name** needs to be reviewed and updated.
+
+**Last reviewed:** $last_reviewed
+
+### Action Required
+
+Please review and update the \`.gbbcatalog.yml\` file in the repository root:
+
+1. Verify the information is still accurate:
+   - \`display_name\`: Current project name
+   - \`description\`: Current project description
+   - \`maturity\`: Current maturity level (incubating, production, or deprecated)
+   - \`owner\`: Current owner's GitHub username
+
+2. Update the \`last_reviewed\` field to today's date (YYYY-MM-DD format)
+
+3. Commit and push the changes
+
+### Example Update
+
+\`\`\`yaml
+schema_version: 1
+
+catalog:
+  enabled: true
+  owner: $owner
+  display_name: \"$display_name\"
+  description: \"Your updated description\"
+  maturity: production
+  last_reviewed: $(date +%Y-%m-%d)
+  review_cycle_days: 180
+\`\`\`
+
+Once updated, this issue will be automatically closed.
+
+---
+
+📚 [View Catalog Lifecycle Documentation](https://github.com/DevExpGbb/devexpgbb.github.io#catalog-lifecycle)
+"
+
+            gh issue create \
+              --repo "DevExpGbb/$repo_name" \
+              --title "$issue_title" \
+              --body "$issue_body" \
+              --label "catalog-review-needed" \
+              --assignee "$owner" || echo "  ⚠️  Failed to create issue for $repo_name"
+
+            echo "  ✓ Created issue for $repo_name"
+          done
+
+          echo "✓ Finished creating review issues"

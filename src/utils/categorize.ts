@@ -1,6 +1,29 @@
 // Categorization utility for GitHub repositories
 // This file contains logic to automatically categorize repos based on their metadata
 
+// Catalog lifecycle states
+export type CatalogState =
+  | "not-in-catalog"
+  | "published"
+  | "needs-review"
+  | "deprecated";
+
+// Catalog maturity levels
+export type CatalogMaturity = "incubating" | "production" | "deprecated";
+
+// Catalog metadata interface
+export interface CatalogMetadata {
+  enabled: boolean;
+  owner: string;
+  display_name: string;
+  description: string;
+  maturity: CatalogMaturity;
+  last_reviewed: string;
+  review_cycle_days?: number;
+  state: CatalogState;
+  schema_version: number;
+}
+
 // Asset Category (what product/technology it relates to)
 export type AssetCategory =
   | "github-copilot"
@@ -166,6 +189,8 @@ export interface Repository {
   updatedAt: string;
   stargazerCount: number;
   topContributor: { login: string; avatarUrl: string } | null;
+  // Catalog metadata (from .gbbcatalog.yml)
+  catalogMetadata?: CatalogMetadata;
 }
 
 export interface CategorizedRepository extends Repository {
