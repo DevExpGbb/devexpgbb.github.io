@@ -22,6 +22,15 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 📦 Install Node dependencies
+        run: |
+          npm install js-yaml --no-save
+
       - name: 🔍 Fetch repositories from DevExpGbb
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -101,6 +110,13 @@ jobs:
             --config "src/data/blogs.yaml" \
             --out "src/data/blog-posts.json"
 
+      - name: 📋 Fetch catalog metadata
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "📋 Fetching catalog metadata from repositories..."
+          node scripts/fetch-catalog-metadata.cjs
+
       - name: 📝 Commit and push if changed
         id: commit
         run: |
@@ -115,13 +131,16 @@ jobs:
           if ! git diff --quiet src/data/blog-posts.json; then
             changed=true
           fi
+          if ! git diff --quiet src/data/catalog-metadata.json 2>/dev/null; then
+            changed=true
+          fi
 
           if [ "$changed" = false ]; then
             echo "📭 No changes detected"
             echo "changes=false" >> $GITHUB_OUTPUT
           else
-            git add src/data/repositories.json src/data/blog-posts.json || true
-            git commit -m "🔄 Refresh data (repos + blogs) [skip ci]"
+            git add src/data/repositories.json src/data/blog-posts.json src/data/catalog-metadata.json || true
+            git commit -m "🔄 Refresh data (repos + blogs + catalog) [skip ci]"
             git pull --rebase origin main
             git push
             echo "📬 Changes committed and pushed"

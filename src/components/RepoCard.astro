@@ -15,6 +15,24 @@ const updatedDate = formatDate(repo.updatedAt);
 
 // Check if recently updated (within last 7 days)
 const isRecentlyUpdated = (new Date().getTime() - new Date(repo.updatedAt).getTime()) < 7 * 24 * 60 * 60 * 1000;
+
+// Get catalog metadata
+const catalogMeta = repo.catalogMetadata;
+const hasCatalogMeta = catalogMeta && catalogMeta.enabled;
+
+// Maturity badge colors
+const maturityColors = {
+  'incubating': { bg: 'bg-yellow-50 dark:bg-yellow-900/30', text: 'text-yellow-700 dark:text-yellow-300', emoji: '🌱' },
+  'production': { bg: 'bg-green-50 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-300', emoji: '✅' },
+  'deprecated': { bg: 'bg-gray-50 dark:bg-gray-900/30', text: 'text-gray-600 dark:text-gray-400', emoji: '⚠️' }
+};
+
+const stateColors = {
+  'published': { bg: 'bg-blue-50 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300', emoji: '📋' },
+  'needs-review': { bg: 'bg-orange-50 dark:bg-orange-900/30', text: 'text-orange-700 dark:text-orange-300', emoji: '🔄' },
+  'deprecated': { bg: 'bg-gray-50 dark:bg-gray-900/30', text: 'text-gray-600 dark:text-gray-400', emoji: '⚠️' },
+  'not-in-catalog': { bg: '', text: '', emoji: '' }
+};
 ---
 
 <a 
@@ -32,20 +50,36 @@ const isRecentlyUpdated = (new Date().getTime() - new Date(repo.updatedAt).getTi
   {/* Badges row */}
   <div class="flex items-center gap-1.5 mb-2 relative flex-wrap">
     <CategoryBadge category={repo.categoryInfo} size="xs" />
-    
+
+    {/* Catalog Maturity Badge */}
+    {hasCatalogMeta && catalogMeta.maturity && (
+      <span class={`flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded-full font-medium ${maturityColors[catalogMeta.maturity].bg} ${maturityColors[catalogMeta.maturity].text}`}>
+        <span>{maturityColors[catalogMeta.maturity].emoji}</span>
+        {catalogMeta.maturity.charAt(0).toUpperCase() + catalogMeta.maturity.slice(1)}
+      </span>
+    )}
+
+    {/* Catalog State Badge (if needs review) */}
+    {hasCatalogMeta && catalogMeta.state === 'needs-review' && (
+      <span class={`flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded-full font-medium ${stateColors['needs-review'].bg} ${stateColors['needs-review'].text}`} title="Catalog review needed">
+        <span>{stateColors['needs-review'].emoji}</span>
+        Needs Review
+      </span>
+    )}
+
     {isRecentlyUpdated && !repo.isArchived && (
       <span class="flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 bg-green-50 text-green-600 rounded-full font-medium">
         <span class="w-1 h-1 bg-green-500 rounded-full animate-pulse"></span>
         Active
       </span>
     )}
-    
+
     {repo.isArchived && (
       <span class="text-[10px] px-1.5 py-0.5 bg-gray-100 text-gray-500 rounded-full font-medium">
         Archived
       </span>
     )}
-    
+
     {repo.isFork && (
       <span class="flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 bg-violet-50 text-violet-600 rounded-full font-medium">
         <svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 16 16">
@@ -66,15 +100,25 @@ const isRecentlyUpdated = (new Date().getTime() - new Date(repo.updatedAt).getTi
     )}
   </div>
 
-  {/* Title */}
+  {/* Title - use catalog display name if available */}
   <h3 class="font-semibold text-sm text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1 mb-1 relative">
-    {repo.name}
+    {hasCatalogMeta && catalogMeta.display_name ? catalogMeta.display_name : repo.name}
   </h3>
 
-  {/* Description */}
+  {/* Description - use catalog description if available */}
   <p class="text-xs text-gray-500 dark:text-gray-400 mb-2 line-clamp-2 flex-grow min-h-[2rem] leading-relaxed relative">
-    {repo.description || 'No description provided'}
+    {hasCatalogMeta && catalogMeta.description ? catalogMeta.description : (repo.description || 'No description provided')}
   </p>
+
+  {/* Catalog Owner (if different from contributor) */}
+  {hasCatalogMeta && catalogMeta.owner && (
+    <div class="text-[10px] text-gray-400 mb-2 relative flex items-center gap-1">
+      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+      </svg>
+      <span>Owner: <span class="font-medium text-gray-500">@{catalogMeta.owner}</span></span>
+    </div>
+  )}
 
   {/* Languages */}
   {topLanguages.length > 0 && (

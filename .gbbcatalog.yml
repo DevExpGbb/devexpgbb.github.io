@@ -1,0 +1,9 @@
+schema_version: 1
+
+catalog:
+  enabled: true
+  owner: 0GiS0
+  display_name: "IP Atlas"
+  description: "Repository catalog and content hub for the DevExpGbb team. Automatically aggregates and displays all repositories from the DevExpGbb organization with lifecycle management."
+  maturity: production
+  review_cycle_days: 180
