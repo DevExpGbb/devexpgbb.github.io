@@ -1,20 +1,16 @@
 [
   {
     "source": "returngis",
-    "title": "Haz que tus custom agents sean subagents de GitHub Copilot",
-    "url": "https://www.returngis.net/2026/02/haz-que-tus-custom-agents-sean-subagents-de-github-copilot/",
-    "date": "2026-02-09T06:44:15+00:00",
+    "title": "🤖🚀 GitHub Agentic Workflows: tu primer workflow sin escribir YAML",
+    "url": "https://www.returngis.net/2026/02/github-agentic-workflows-tu-primer-workflow-sin-escribir-yaml/",
+    "date": "2026-02-14T07:36:19+00:00",
     "author": "Gisela Torres",
     "categories": [
-      "GitHub",
+      "GitHub Actions",
       "Coding Agent",
-      "Custom Agents",
-      "GitHub Copilot",
-      "ia",
-      "Sub agents",
-      "Visual Studio Code"
+      "GitHub Agentic Workflows"
     ],
-    "description": "<p>¡Hola developer 👋🏻!¿Sabías que cada vez que creas un custom agent, ya sea a nivel de proyecto o de usuario, en realidad estás creando un posible subagent? 🧩🤖 En este artículo te explico cómo funcionan los subagents, qué papel juegan dentro de los flujos agentic y, sobre todo, cómo puedes sacarles partido en escenarios reales. Veremos cómo usarlos tanto desde Visual Studio Code como junto... </p>\n<p class=\"more\"><a class=\"more-link\" href=\"https://www.returngis.net/2026/02/haz-que-tus-custom-agents-sean-subagents-de-github-copilot/\">Leer</a></p>\n<p>La entrada <a href=\"https://www.returngis.net/2026/02/haz-que-tus-custom-agents-sean-subagents-de-github-copilot/\">Haz que tus custom agents sean subagents de GitHub Copilot</a> se publicó primero en <a href=\"https://www.returngis.net\">return(GiS);</a>.</p>"
+    "description": "<p>¡Hola developer 👋🏻!Justo acabo de grabar un vídeo que sale la semana que viene 😅, donde cuento qué flujos estoy utilizando yo a día de hoy con GitHub Copilot CLI para hacerme la vida más fácil. 👉 En cuanto el vídeo esté publicado, lo enlazaré directamente en este artículo. Y casi al mismo tiempo, ayer se anunció la disponibilidad en technical preview de una nueva... </p>\n<p class=\"more\"><a class=\"more-link\" href=\"https://www.returngis.net/2026/02/github-agentic-workflows-tu-primer-workflow-sin-escribir-yaml/\">Leer</a></p>\n<p>La entrada <a href=\"https://www.returngis.net/2026/02/github-agentic-workflows-tu-primer-workflow-sin-escribir-yaml/\">🤖🚀 GitHub Agentic Workflows: tu primer workflow sin escribir YAML</a> se publicó primero en <a href=\"https://www.returngis.net\">return(GiS);</a>.</p>"
   },
   {
     "source": "all-things-azure",
