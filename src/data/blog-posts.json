@@ -1,16 +1,17 @@
 [
   {
     "source": "returngis",
-    "title": "🤖🚀 GitHub Agentic Workflows: tu primer workflow sin escribir YAML",
-    "url": "https://www.returngis.net/2026/02/github-agentic-workflows-tu-primer-workflow-sin-escribir-yaml/",
-    "date": "2026-02-14T07:36:19+00:00",
+    "title": "Mi configuración de Dev Container para Spring Boot",
+    "url": "https://www.returngis.net/2026/02/mi-configuracion-de-dev-container-para-spring-boot/",
+    "date": "2026-02-16T11:42:53+00:00",
     "author": "Gisela Torres",
     "categories": [
-      "GitHub Actions",
-      "Coding Agent",
-      "GitHub Agentic Workflows"
+      "Contenedores",
+      "Dev Containers",
+      "Java",
+      "Spring Boot"
     ],
-    "description": "<p>¡Hola developer 👋🏻!Justo acabo de grabar un vídeo que sale la semana que viene 😅, donde cuento qué flujos estoy utilizando yo a día de hoy con GitHub Copilot CLI para hacerme la vida más fácil. 👉 En cuanto el vídeo esté publicado, lo enlazaré directamente en este artículo. Y casi al mismo tiempo, ayer se anunció la disponibilidad en technical preview de una nueva... </p>\n<p class=\"more\"><a class=\"more-link\" href=\"https://www.returngis.net/2026/02/github-agentic-workflows-tu-primer-workflow-sin-escribir-yaml/\">Leer</a></p>\n<p>La entrada <a href=\"https://www.returngis.net/2026/02/github-agentic-workflows-tu-primer-workflow-sin-escribir-yaml/\">🤖🚀 GitHub Agentic Workflows: tu primer workflow sin escribir YAML</a> se publicó primero en <a href=\"https://www.returngis.net\">return(GiS);</a>.</p>"
+    "description": "<p>¡Hola developer 👋🏻! Uno de los vídeos que más ha gustado de mi canal de YouTube es el que habla sobre Dev Containers y cómo pueden hacernos la vida mucho más sencilla. La idea es clara: contenerizar todo nuestro entorno de desarrollo y olvidarnos, de una vez por todas, del caos de tecnologías, lenguajes, versiones y dependencias con el que convivimos hoy en día. Si... </p>\n<p class=\"more\"><a class=\"more-link\" href=\"https://www.returngis.net/2026/02/mi-configuracion-de-dev-container-para-spring-boot/\">Leer</a></p>\n<p>La entrada <a href=\"https://www.returngis.net/2026/02/mi-configuracion-de-dev-container-para-spring-boot/\">Mi configuración de Dev Container para Spring Boot</a> se publicó primero en <a href=\"https://www.returngis.net\">return(GiS);</a>.</p>"
   },
   {
     "source": "all-things-azure",
