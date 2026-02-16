@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-16T08:18:25Z",
+  "lastUpdated": "2026-02-16T18:15:49Z",
   "teamName": "Software GBBs",
   "teamSlug": "software-gbbs",
   "memberCount": 23,
@@ -160,6 +160,24 @@
       "repositoryCount": 1
     },
     {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
+      "id": 26189114,
+      "login": "ewega",
+      "profile": {
+        "bio": "Making typos and learning. Developer Specialist at @microsoft ",
+        "company": "Microsoft ",
+        "location": "Nairobi, KE",
+        "name": "Eldrick Wega",
+        "twitterUsername": null,
+        "websiteUrl": "eldrickwega.com"
+      },
+      "totalContributions": 5,
+      "repositoriesContributed": [
+        "copilot-plugins"
+      ],
+      "repositoryCount": 1
+    },
+    {
       "avatarUrl": "https://avatars.githubusercontent.com/u/2588978?v=4",
       "id": 2588978,
       "login": "alxayo",
@@ -174,24 +192,6 @@
       "totalContributions": 4,
       "repositoriesContributed": [
         "sec-check"
-      ],
-      "repositoryCount": 1
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
-      "id": 26189114,
-      "login": "ewega",
-      "profile": {
-        "bio": "Making typos and learning. Developer Specialist at @microsoft ",
-        "company": "Microsoft ",
-        "location": "Nairobi, KE",
-        "name": "Eldrick Wega",
-        "twitterUsername": null,
-        "websiteUrl": "eldrickwega.com"
-      },
-      "totalContributions": 4,
-      "repositoriesContributed": [
-        "copilot-plugins"
       ],
       "repositoryCount": 1
     },
