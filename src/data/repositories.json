@@ -6,7 +6,7 @@
     "isFork": false,
     "languages": [
       {
-        "size": 108285,
+        "size": 120689,
         "node": {
           "name": "Go"
         }
@@ -38,7 +38,7 @@
       }
     ],
     "stargazerCount": 0,
-    "updatedAt": "2026-02-17T15:54:02Z",
+    "updatedAt": "2026-02-17T21:36:14Z",
     "url": "https://github.com/DevExpGbb/gh-devlake",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
@@ -49,43 +49,6 @@
       "dora-metrics",
       "gh-extension"
     ]
-  },
-  {
-    "createdAt": "2026-02-05T15:49:21Z",
-    "description": "GitHub Copilot CLI plugins published by the Software/DevEx GBB team",
-    "isArchived": false,
-    "isFork": false,
-    "languages": [
-      {
-        "size": 90975,
-        "node": {
-          "name": "PowerShell"
-        }
-      },
-      {
-        "size": 16677,
-        "node": {
-          "name": "Bicep"
-        }
-      }
-    ],
-    "name": "copilot-plugins",
-    "owner": {
-      "id": "O_kgDOCQHDPw",
-      "login": "DevExpGbb"
-    },
-    "primaryLanguage": {
-      "name": "PowerShell"
-    },
-    "repositoryTopics": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-02-17T14:05:40Z",
-    "url": "https://github.com/DevExpGbb/copilot-plugins",
-    "topContributor": {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
-      "login": "ewega"
-    },
-    "topics": []
   },
   {
     "createdAt": "2026-02-04T22:20:15Z",
@@ -147,7 +110,7 @@
       }
     ],
     "stargazerCount": 3,
-    "updatedAt": "2026-02-17T08:18:27Z",
+    "updatedAt": "2026-02-17T18:23:32Z",
     "url": "https://github.com/DevExpGbb/devexpgbb.github.io",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/in/15368?v=4",
@@ -157,6 +120,43 @@
       "github-platform",
       "code"
     ]
+  },
+  {
+    "createdAt": "2026-02-05T15:49:21Z",
+    "description": "GitHub Copilot CLI plugins published by the Software/DevEx GBB team",
+    "isArchived": false,
+    "isFork": false,
+    "languages": [
+      {
+        "size": 90975,
+        "node": {
+          "name": "PowerShell"
+        }
+      },
+      {
+        "size": 16677,
+        "node": {
+          "name": "Bicep"
+        }
+      }
+    ],
+    "name": "copilot-plugins",
+    "owner": {
+      "id": "O_kgDOCQHDPw",
+      "login": "DevExpGbb"
+    },
+    "primaryLanguage": {
+      "name": "PowerShell"
+    },
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "updatedAt": "2026-02-17T14:05:40Z",
+    "url": "https://github.com/DevExpGbb/copilot-plugins",
+    "topContributor": {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
+      "login": "ewega"
+    },
+    "topics": []
   },
   {
     "createdAt": "2026-01-26T17:40:23Z",
