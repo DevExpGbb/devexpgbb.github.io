@@ -12,21 +12,5 @@
       "Spring Boot"
     ],
     "description": "<p>¡Hola developer 👋🏻! Uno de los vídeos que más ha gustado de mi canal de YouTube es el que habla sobre Dev Containers y cómo pueden hacernos la vida mucho más sencilla. La idea es clara: contenerizar todo nuestro entorno de desarrollo y olvidarnos, de una vez por todas, del caos de tecnologías, lenguajes, versiones y dependencias con el que convivimos hoy en día. Si... </p>\n<p class=\"more\"><a class=\"more-link\" href=\"https://www.returngis.net/2026/02/mi-configuracion-de-dev-container-para-spring-boot/\">Leer</a></p>\n<p>La entrada <a href=\"https://www.returngis.net/2026/02/mi-configuracion-de-dev-container-para-spring-boot/\">Mi configuración de Dev Container para Spring Boot</a> se publicó primero en <a href=\"https://www.returngis.net\">return(GiS);</a>.</p>"
-  },
-  {
-    "source": "all-things-azure",
-    "title": "The Realities of Application Modernization with Agentic AI (Early 2026)",
-    "url": "https://devblogs.microsoft.com/all-things-azure/the-realities-of-application-modernization-with-agentic-ai-early-2026/",
-    "date": "2026-01-07T16:06:35+00:00",
-    "author": "jkordick",
-    "categories": [
-      "Agents",
-      "App Development",
-      "Migration",
-      "Modernization",
-      "Opinion",
-      "Thought leadership"
-    ],
-    "description": "<p>How to read this article This article is a reflection based on hands-on experience and is written for engineers and technical leaders who are facing a new application modernization effort and want to build a realistic mental model before reaching for tools. If you are new to application modernization, I recommend reading the article end to end. [&#8230;]</p>\n<p>The post <a href=\"https://devblogs.microsoft.com/all-things-azure/the-realities-of-application-modernization-with-agentic-ai-early-2026/\">The Realities of Application Modernization with Agentic AI (Early 2026)</a> appeared first on <a href=\"https://devblogs.microsoft.com/all-things-azure\">All things Azure</a>.</p>"
   }
 ]
