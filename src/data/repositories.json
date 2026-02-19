@@ -6,7 +6,7 @@
     "isFork": false,
     "languages": [
       {
-        "size": 134009,
+        "size": 150149,
         "node": {
           "name": "Go"
         }
@@ -38,7 +38,7 @@
       }
     ],
     "stargazerCount": 0,
-    "updatedAt": "2026-02-18T17:31:33Z",
+    "updatedAt": "2026-02-18T19:14:46Z",
     "url": "https://github.com/DevExpGbb/gh-devlake",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
@@ -110,7 +110,7 @@
       }
     ],
     "stargazerCount": 3,
-    "updatedAt": "2026-02-18T08:17:35Z",
+    "updatedAt": "2026-02-18T18:19:59Z",
     "url": "https://github.com/DevExpGbb/devexpgbb.github.io",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/in/15368?v=4",
@@ -481,8 +481,8 @@
         "name": "level-up"
       }
     ],
-    "stargazerCount": 25,
-    "updatedAt": "2026-02-16T19:46:25Z",
+    "stargazerCount": 26,
+    "updatedAt": "2026-02-19T03:31:27Z",
     "url": "https://github.com/DevExpGbb/ai-native-dev-lab",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/51440732?v=4",
