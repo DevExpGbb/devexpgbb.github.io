@@ -1,12 +1,12 @@
 [
   {
     "createdAt": "2026-02-17T14:52:54Z",
-    "description": "GitHub CLI extension for deploying and configuring Apache DevLake",
+    "description": "Deploy a detailed DevEx metrics dashboards, combining DORA and AI adoption to show ROI. gh-devlake is a gitHub CLI extension for deploying and configuring Apache DevLake which is the platform that aggregates all these metrics easily",
     "isArchived": false,
     "isFork": false,
     "languages": [
       {
-        "size": 150149,
+        "size": 201374,
         "node": {
           "name": "Go"
         }
@@ -35,10 +35,16 @@
       },
       {
         "name": "gh-extension"
+      },
+      {
+        "name": "gbb-ip-atlas"
+      },
+      {
+        "name": "ghec"
       }
     ],
     "stargazerCount": 0,
-    "updatedAt": "2026-02-18T19:14:46Z",
+    "updatedAt": "2026-02-19T18:11:01Z",
     "url": "https://github.com/DevExpGbb/gh-devlake",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
@@ -47,8 +53,138 @@
     "topics": [
       "devlake",
       "dora-metrics",
-      "gh-extension"
+      "gh-extension",
+      "gbb-ip-atlas",
+      "ghec"
     ]
+  },
+  {
+    "createdAt": "2025-11-11T10:13:33Z",
+    "description": "Apache DevLake is an open-source dev data platform to ingest, analyze, and visualize the fragmented data from DevOps tools, extracting insights for engineering excellence, developer experience, and community growth.",
+    "isArchived": false,
+    "isFork": true,
+    "languages": [
+      {
+        "size": 22102,
+        "node": {
+          "name": "Shell"
+        }
+      },
+      {
+        "size": 1952,
+        "node": {
+          "name": "JavaScript"
+        }
+      },
+      {
+        "size": 175104,
+        "node": {
+          "name": "Python"
+        }
+      },
+      {
+        "size": 7375859,
+        "node": {
+          "name": "Go"
+        }
+      },
+      {
+        "size": 815449,
+        "node": {
+          "name": "TypeScript"
+        }
+      },
+      {
+        "size": 1213,
+        "node": {
+          "name": "CSS"
+        }
+      },
+      {
+        "size": 6178,
+        "node": {
+          "name": "Makefile"
+        }
+      },
+      {
+        "size": 1422,
+        "node": {
+          "name": "HTML"
+        }
+      },
+      {
+        "size": 16688,
+        "node": {
+          "name": "Dockerfile"
+        }
+      },
+      {
+        "size": 16604,
+        "node": {
+          "name": "Go Template"
+        }
+      }
+    ],
+    "name": "incubator-devlake",
+    "owner": {
+      "id": "O_kgDOCQHDPw",
+      "login": "DevExpGbb"
+    },
+    "primaryLanguage": {
+      "name": "Go"
+    },
+    "repositoryTopics": [
+      {
+        "name": "gbb-ip-atlas"
+      }
+    ],
+    "stargazerCount": 0,
+    "updatedAt": "2026-02-19T12:07:56Z",
+    "url": "https://github.com/DevExpGbb/incubator-devlake",
+    "topContributor": {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/61080?v=4",
+      "login": "klesh"
+    },
+    "topics": [
+      "gbb-ip-atlas"
+    ]
+  },
+  {
+    "createdAt": "2026-02-05T15:49:21Z",
+    "description": "GitHub Copilot CLI plugins published by the Software/DevEx GBB team",
+    "isArchived": false,
+    "isFork": false,
+    "languages": [
+      {
+        "size": 90983,
+        "node": {
+          "name": "PowerShell"
+        }
+      },
+      {
+        "size": 16677,
+        "node": {
+          "name": "Bicep"
+        }
+      }
+    ],
+    "name": "copilot-plugins",
+    "owner": {
+      "id": "O_kgDOCQHDPw",
+      "login": "DevExpGbb"
+    },
+    "primaryLanguage": {
+      "name": "PowerShell"
+    },
+    "repositoryTopics": null,
+    "stargazerCount": 0,
+    "updatedAt": "2026-02-19T11:56:26Z",
+    "url": "https://github.com/DevExpGbb/copilot-plugins",
+    "topContributor": {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
+      "login": "ewega"
+    },
+    "topics": []
   },
   {
     "createdAt": "2026-02-04T22:20:15Z",
@@ -110,7 +246,7 @@
       }
     ],
     "stargazerCount": 3,
-    "updatedAt": "2026-02-18T18:19:59Z",
+    "updatedAt": "2026-02-19T08:17:51Z",
     "url": "https://github.com/DevExpGbb/devexpgbb.github.io",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/in/15368?v=4",
@@ -120,43 +256,6 @@
       "github-platform",
       "code"
     ]
-  },
-  {
-    "createdAt": "2026-02-05T15:49:21Z",
-    "description": "GitHub Copilot CLI plugins published by the Software/DevEx GBB team",
-    "isArchived": false,
-    "isFork": false,
-    "languages": [
-      {
-        "size": 90975,
-        "node": {
-          "name": "PowerShell"
-        }
-      },
-      {
-        "size": 16677,
-        "node": {
-          "name": "Bicep"
-        }
-      }
-    ],
-    "name": "copilot-plugins",
-    "owner": {
-      "id": "O_kgDOCQHDPw",
-      "login": "DevExpGbb"
-    },
-    "primaryLanguage": {
-      "name": "PowerShell"
-    },
-    "repositoryTopics": null,
-    "stargazerCount": 0,
-    "updatedAt": "2026-02-17T14:05:40Z",
-    "url": "https://github.com/DevExpGbb/copilot-plugins",
-    "topContributor": {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
-      "login": "ewega"
-    },
-    "topics": []
   },
   {
     "createdAt": "2026-01-26T17:40:23Z",
@@ -481,8 +580,8 @@
         "name": "level-up"
       }
     ],
-    "stargazerCount": 26,
-    "updatedAt": "2026-02-19T03:31:27Z",
+    "stargazerCount": 27,
+    "updatedAt": "2026-02-19T13:11:31Z",
     "url": "https://github.com/DevExpGbb/ai-native-dev-lab",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/51440732?v=4",
