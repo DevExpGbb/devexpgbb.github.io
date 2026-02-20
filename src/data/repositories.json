@@ -6,7 +6,7 @@
     "isFork": false,
     "languages": [
       {
-        "size": 201374,
+        "size": 209282,
         "node": {
           "name": "Go"
         }
@@ -44,7 +44,7 @@
       }
     ],
     "stargazerCount": 0,
-    "updatedAt": "2026-02-19T18:11:01Z",
+    "updatedAt": "2026-02-19T20:40:01Z",
     "url": "https://github.com/DevExpGbb/gh-devlake",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
