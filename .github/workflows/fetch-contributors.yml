@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           # Important: fetch the latest from main (in case refresh-data.yml just pushed)
           ref: main
