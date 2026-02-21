@@ -1,17 +1,18 @@
 [
   {
     "source": "returngis",
-    "title": "Mi configuración de Dev Container para Spring Boot",
-    "url": "https://www.returngis.net/2026/02/mi-configuracion-de-dev-container-para-spring-boot/",
-    "date": "2026-02-16T11:42:53+00:00",
+    "title": "Desarrollando con Quarkus en VS Code usando Dev Containers",
+    "url": "https://www.returngis.net/2026/02/desarrollando-con-quarkus-en-vs-code-usando-dev-containers/",
+    "date": "2026-02-21T07:34:47+00:00",
     "author": "Gisela Torres",
     "categories": [
       "Contenedores",
       "Dev Containers",
       "Java",
-      "Spring Boot"
+      "Quarkus",
+      "Visual Studio Code"
     ],
-    "description": "<p>¡Hola developer 👋🏻! Uno de los vídeos que más ha gustado de mi canal de YouTube es el que habla sobre Dev Containers y cómo pueden hacernos la vida mucho más sencilla. La idea es clara: contenerizar todo nuestro entorno de desarrollo y olvidarnos, de una vez por todas, del caos de tecnologías, lenguajes, versiones y dependencias con el que convivimos hoy en día. Si... </p>\n<p class=\"more\"><a class=\"more-link\" href=\"https://www.returngis.net/2026/02/mi-configuracion-de-dev-container-para-spring-boot/\">Leer</a></p>\n<p>La entrada <a href=\"https://www.returngis.net/2026/02/mi-configuracion-de-dev-container-para-spring-boot/\">Mi configuración de Dev Container para Spring Boot</a> se publicó primero en <a href=\"https://www.returngis.net\">return(GiS);</a>.</p>"
+    "description": "<p>¡Hola developer 👋🏻!A principios de semana te contaba cómo estoy desarrollando actualmente mis aplicaciones con Spring Boot en Visual Studio Code gracias a Dev Containers, y todo lo que podemos configurar como parte del entorno de desarrollo. Pero… ¿y si tu framework preferido no es Spring Boot sino Quarkus?Entonces este artículo es para ti 😉 En esta ocasión quiero compartir la configuración de Dev Container... </p>\n<p class=\"more\"><a class=\"more-link\" href=\"https://www.returngis.net/2026/02/desarrollando-con-quarkus-en-vs-code-usando-dev-containers/\">Leer</a></p>\n<p>La entrada <a href=\"https://www.returngis.net/2026/02/desarrollando-con-quarkus-en-vs-code-usando-dev-containers/\">Desarrollando con Quarkus en VS Code usando Dev Containers</a> se publicó primero en <a href=\"https://www.returngis.net\">return(GiS);</a>.</p>"
   },
   {
     "source": "all-things-azure",
