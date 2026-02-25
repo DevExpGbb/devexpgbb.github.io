@@ -6,7 +6,7 @@
     "isFork": false,
     "languages": [
       {
-        "size": 210951,
+        "size": 216995,
         "node": {
           "name": "Go"
         }
@@ -44,7 +44,7 @@
       }
     ],
     "stargazerCount": 0,
-    "updatedAt": "2026-02-24T09:57:08Z",
+    "updatedAt": "2026-02-24T20:49:27Z",
     "url": "https://github.com/DevExpGbb/gh-devlake",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/26189114?v=4",
@@ -118,7 +118,7 @@
       }
     ],
     "stargazerCount": 3,
-    "updatedAt": "2026-02-24T08:16:43Z",
+    "updatedAt": "2026-02-24T18:22:35Z",
     "url": "https://github.com/DevExpGbb/devexpgbb.github.io",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/in/15368?v=4",
@@ -304,8 +304,8 @@
         "name": "demo-deployable"
       }
     ],
-    "stargazerCount": 5,
-    "updatedAt": "2026-02-12T03:56:40Z",
+    "stargazerCount": 8,
+    "updatedAt": "2026-02-25T01:54:24Z",
     "url": "https://github.com/DevExpGbb/agentic-platform-engineering",
     "topContributor": {
       "avatarUrl": "https://avatars.githubusercontent.com/u/3240777?v=4",
